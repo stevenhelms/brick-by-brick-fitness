@@ -1,39 +1,25 @@
+const config = require("./config")
+
 module.exports = {
   siteMetadata: {
-    title: `Bear State Nutrition`,
-    description: `Bear State Winter 2021 Nutrition Challenge.`,
-    author: `@stevenhelms`,
+    title: config.siteTitle,
+    description: config.siteDescription,
+    author: config.author,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `bear-state-winter-2021`,
-        short_name: `BearState`,
-        start_url: `/`,
-        background_color: `#e25a2d`,
-        theme_color: `#e25a2d`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        name: config.manifestName,
+        short_name: config.manifestShortName,
+        start_url: config.pathPrefix || config.manifestStartUrl,
+        background_color: config.manifestBackgroundColor,
+        theme_color: config.manifestThemeColor,
+        display: config.manifestDisplay,
+        icon: config.manifestIcon, // This path is relative to the root of the site.
       },
     },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `src`,
-    //     path: `${__dirname}/src/`,
-    //   },
-    // },
     {
       resolve: "gatsby-plugin-firebase",
       options: {
@@ -48,15 +34,14 @@ module.exports = {
         },
       },
     },
-    // `gatsby-transformer-remark`,
     `gatsby-plugin-netlify`,
     `gatsby-plugin-emotion`,
-    // {
-    //   resolve: `gatsby-plugin-typography`,
-    //   options: {
-    //     pathToConfigModule: `src/utils/typography`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    },
     // `gatsby-plugin-netlify-identity-widget`,
     // {
     //   resolve: `gatsby-plugin-netlify-functions`,
@@ -72,8 +57,6 @@ module.exports = {
         trackingId: "255929633",
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
   ],
 }
