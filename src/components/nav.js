@@ -58,6 +58,7 @@ export default function Nav() {
                                 >
                                     Logout
                                 </Link>
+                                <div data-netlify-identity-button>Logout w/ Netlify</div>
                             </Li>
                         </>
                     ) : (

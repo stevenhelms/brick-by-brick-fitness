@@ -8,7 +8,7 @@ module.exports = {
     manifestThemeColor: '#e25a2d',
     manifestDisplay: 'standalone', // or minimal-ui
     manifestIcon: 'src/images/bear-state-logo-Sept2020.png',
-    pathPrefix: `/`, // This path is subpath of your hosting https://domain/portfolio
+    pathPrefix: '/', // This path is subpath of your hosting https://domain/portfolio
     author: 'Steve Helms',
     heading: 'Bear State Gym',
     subHeading: 'Fitness and Nutrition',
