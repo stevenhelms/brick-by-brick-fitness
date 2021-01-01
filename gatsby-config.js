@@ -1,4 +1,7 @@
 const config = require('./config')
+require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
     siteMetadata: {
@@ -12,7 +15,6 @@ module.exports = {
         `gatsby-plugin-emotion`,
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
-        `gatsby-plugin-netlify-identity-widget`,
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
@@ -22,20 +24,21 @@ module.exports = {
                 background_color: config.manifestBackgroundColor,
                 theme_color: config.manifestThemeColor,
                 display: config.manifestDisplay,
-                icon: config.manifestIcon, // This path is relative to the root of the site.
+                // icon: config.manifestIcon, // This path is relative to the root of the site.
             },
         },
         {
             resolve: 'gatsby-plugin-firebase',
             options: {
                 credentials: {
-                    apiKey: 'AIzaSyDG8hWYg4s108RqGhTSUKxb57cJv8ffjUc',
-                    authDomain: '<YOUR_FIREBASE_AUTH_DOMAIN>',
-                    databaseURL: '<YOUR_FIREBASE_DATABASE_URL>',
-                    projectId: 'bear-state',
-                    storageBucket: 'bear-state.appspot.com',
-                    messagingSenderId: '<YOUR_FIREBASE_MESSAGING_SENDER_ID>',
-                    appId: '<YOUR_FIREBASE_APP_ID>',
+                    apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+                    authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+                    databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
+                    projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
+                    storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
+                    messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
+                    appId: process.env.GATSBY_FIREBASE_APP_ID,
+                    measurementId: process.env.GATSBY_FIREBASE_MEASUREMENT_ID,
                 },
             },
         },
@@ -51,13 +54,17 @@ module.exports = {
                 pathToConfigModule: `src/utils/typography`,
             },
         },
-        // {
-        //   resolve: `gatsby-plugin-netlify-functions`,
-        //   options: {
-        //     functionsSrc: `${__dirname}/src/functions`,
-        //     functionsOutput: `${__dirname}/functions`,
-        //   },
-        // },
+        {
+            resolve: `gatsby-source-firestore-easy`,
+            options: {
+                adminCredential: {
+                    // credential: process.env.FIREBASE_CREDENTIAL, //See details for this option
+                    credential: require('./bear-state-firebase-adminsdk-vn52x-085d830399.json'),
+                    databaseURL: 'https://bear-state-default-rtdb.firebaseio.com',
+                },
+                collections: ['users', 'winter21'],
+            },
+        },
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {

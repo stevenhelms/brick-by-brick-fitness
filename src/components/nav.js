@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link, navigate } from 'gatsby'
-import { isLoggedIn, logout } from '../services/auth-fake'
+import firebase from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
+import { isLoggedIn, logout } from '../services/auth-firebase'
 
 const StyledNav = styled.nav`
     display: flex;
@@ -53,12 +54,11 @@ export default function Nav() {
                                     to="/"
                                     onClick={event => {
                                         event.preventDefault()
-                                        logout(() => navigate(`/app/login`))
+                                        logout(firebase).then(() => navigate(`/`))
                                     }}
                                 >
                                     Logout
                                 </Link>
-                                <div data-netlify-identity-button>Logout w/ Netlify</div>
                             </Li>
                         </>
                     ) : (

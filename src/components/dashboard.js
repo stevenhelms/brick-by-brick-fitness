@@ -59,7 +59,7 @@ const handleSubmit = event => {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData).toString(),
     })
-        .then(() => navigate('/dashboard/'))
+        .then(() => navigate('/app/dashboard/'))
         .catch(error => alert(error))
 }
 
@@ -75,32 +75,32 @@ const JournalForm = () => {
         >
             <input type="hidden" name="form-name" value="Daily Log" />
             <FormField>
-                <FormLabel htmlFor="goal-workout">Workout today:</FormLabel>
+                <FormLabel htmlFor="goal-workout">Workout Today?</FormLabel>
                 <input style={{ transform: 'scale(1.5,1.5)' }} type="checkbox" name="goal-workout" />
                 {/* <input type="radio" name="goal-workout" value="0" /> No */}
             </FormField>
             <FormField>
-                <FormLabel htmlFor="goal-water">Ounces of Water:</FormLabel>
+                <FormLabel htmlFor="goal-water">Water Intake (in ounces)</FormLabel>
                 <FormInput type="text" name="goal-water" />
             </FormField>
             <FormField>
-                <FormLabel htmlFor="goal-protein">Servings of Protein:</FormLabel>
+                <FormLabel htmlFor="goal-protein">Protein Servings</FormLabel>
                 <FormInput type="text" name="goal-protein" />
             </FormField>
             <FormField>
-                <FormLabel htmlFor="goal-veggies">Servings of Veggies:</FormLabel>
+                <FormLabel htmlFor="goal-veggies">Veggie Servings</FormLabel>
                 <FormInput type="text" name="goal-veggies" />
             </FormField>
             <FormField>
-                <FormLabel htmlFor="goal-carbs">Servings of Carbs:</FormLabel>
+                <FormLabel htmlFor="goal-carbs">Carbs Servings</FormLabel>
                 <FormInput type="text" name="goal-carbs" />
             </FormField>
             <FormField>
-                <FormLabel htmlFor="goal-sleep">Hours of Sleep:</FormLabel>
+                <FormLabel htmlFor="goal-sleep">Sleep (in hours)</FormLabel>
                 <FormInput type="text" name="goal-sleep" />
             </FormField>
             <FormField>
-                <FormLabel htmlFor="goal-eatslow">Ate Slowly:</FormLabel>
+                <FormLabel htmlFor="goal-eatslow">Ate Slowly</FormLabel>
                 <FormInput type="text" name="goal-eatslow" />
             </FormField>
             <FormField>
@@ -116,7 +116,7 @@ const JournalForm = () => {
                 <input css={inputMargin} type="radio" name="data-recovery" value="5" />
                 Fully
                 <FormSubText>
-                    How do you feel your recovery was this morning? Recovering from the previous day's activities is
+                    How did you feel your recovery was this morning? Recovering from the previous day's activities is
                     important.
                 </FormSubText>
             </FormField>
@@ -133,7 +133,7 @@ const JournalForm = () => {
                 <input css={inputMargin} type="radio" name="data-stress" value="5" />
                 Crazy
                 <FormSubText>
-                    How stressed are you feeling? Stress can inhibit weight loss and reduce your overall health.
+                    How stressed are you feeling today? Stress can inhibit weight loss and reduce your overall health.
                 </FormSubText>
             </FormField>
             <FormField style={{ textAlign: 'center' }}>
