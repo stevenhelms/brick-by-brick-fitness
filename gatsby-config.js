@@ -8,6 +8,11 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify`,
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-netlify-identity-widget`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -34,15 +39,18 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-netlify`,
-    `gatsby-plugin-emotion`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images/`,
+      },
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    // `gatsby-plugin-netlify-identity-widget`,
     // {
     //   resolve: `gatsby-plugin-netlify-functions`,
     //   options: {

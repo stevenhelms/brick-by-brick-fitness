@@ -5,55 +5,49 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { useStaticQuery, graphql } from 'gatsby'
+import styled from '@emotion/styled'
 
-import Header from "./header"
+import Header from './header'
+import Footer from './footer'
 // import "./layout.css"
 
 const Body = styled.div`
-  margin: 3rem auto;
-  max-width: 960px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #1f1f1f;
-`
-const footer = css`
-  margin-top: 2rem;
+    margin: 3rem auto 0 auto;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #1f1f1f;
 `
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+const Layout = ({ children, fullMenu }) => {
+    const data = useStaticQuery(graphql`
+        query SiteTitleQuery {
+            site {
+                siteMetadata {
+                    title
+                }
+            }
         }
-      }
-    }
-  `)
+    `)
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <Body>
-        <main>{children}</main>
-        <footer css={footer}>
-          © {new Date().getFullYear()}{" "}
-          <a href="https://www.bearstategym.com">Bear State Gym</a>
-        </footer>
-      </Body>
-    </>
-  )
+    return (
+        <>
+            <Header siteTitle={data.site.siteMetadata?.title || `Title`} fullMenu={fullMenu} />
+            <Body>
+                <main>{children}</main>
+            </Body>
+            <Footer />
+        </>
+    )
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 }
 
 export default Layout
