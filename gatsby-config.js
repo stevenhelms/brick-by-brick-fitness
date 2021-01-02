@@ -24,12 +24,23 @@ module.exports = {
                 background_color: config.manifestBackgroundColor,
                 theme_color: config.manifestThemeColor,
                 display: config.manifestDisplay,
-                // icon: config.manifestIcon, // This path is relative to the root of the site.
+                icon: config.manifestIcon, // This path is relative to the root of the site.
             },
         },
         {
+            resolve: `gatsby-plugin-create-client-paths`,
+            options: { prefixes: [`/app/*`] },
+        },
+
+        {
             resolve: 'gatsby-plugin-firebase',
             options: {
+                features: {
+                    auth: true,
+                    database: true,
+                    firestore: false,
+                    functions: true,
+                },
                 credentials: {
                     apiKey: process.env.GATSBY_FIREBASE_API_KEY,
                     authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,

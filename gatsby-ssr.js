@@ -6,5 +6,6 @@
 
 // You can delete this file if you're not using it
 import 'firebase/auth'
-import 'firebase/firestore'
+import 'firebase/database'
+// import 'firebase/firestore'
 import 'firebase/functions'

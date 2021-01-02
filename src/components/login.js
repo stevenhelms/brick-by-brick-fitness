@@ -1,13 +1,15 @@
 import React from 'react'
 import { navigate } from 'gatsby'
-// import { handleLogin, isLoggedIn } from '../services/auth-fake'
-
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'gatsby-plugin-firebase'
+import { useAppContext } from '../services/context'
 
+// import { handleLogin, isLoggedIn } from '../services/auth-fake'
 import { setUser, isLoggedIn, getUser } from '../services/auth-firebase'
 
 const Login = () => {
+    const { dispatch } = useAppContext()
+
     // const [auth, setAuth] = useState({ username: '', password: '' })
 
     // const handleUpdate = event => {
@@ -37,7 +39,8 @@ const Login = () => {
                 signInSuccessWithAuthResult: result => {
                     console.log(result)
                     setUser(result.user)
-                    navigate('/app/dashboard')
+                    dispatch({ type: 'SET_USER', value: result.user })
+                    navigate('/app/')
                 },
             },
         }
@@ -45,7 +48,7 @@ const Login = () => {
 
     if (isLoggedIn()) {
         console.log(getUser())
-        navigate(`/app/dashboard`)
+        navigate(`/app/`)
     }
 
     return (
@@ -55,7 +58,7 @@ const Login = () => {
                 method="post"
                 onSubmit={event => {
                     handleSubmit(event)
-                    navigate(`/app/dashboard`)
+                    navigate(`/app/`)
                 }}
             >
                 <label>

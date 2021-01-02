@@ -37,3 +37,48 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 ## 💫 Deploy
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+
+## Data Structures
+
+### Users
+
+```
+{
+  id: String
+  age: Number
+  createdAt: Timestamp
+  email: String
+  first: String
+  gender: String
+  goal_carbs: Number
+  goal_protein: Number
+  goal_veggies: Number
+  goal_weight: Number
+  height: Number
+  last: String
+  pbf_end: Number
+  pbf_start: Number
+  updatedAt: Timestamp
+  weight: Number
+  journal: Array
+}
+```
+
+### Journal Array Objects
+
+```
+{
+  id: String
+  carbs: Number
+  eat_slowly: Number
+  protein: Number
+  recovery: Number
+  sleep: Number
+  stress: Number
+  total_points: Number
+  user_id: String
+  veggies: Number
+  water: Number
+  workout: Boolean
+}
+```

@@ -44,8 +44,13 @@ export default function Nav() {
                     {isLoggedIn() ? (
                         <>
                             <Li>
-                                <Link css={whiteA} to="/app/dashboard">
+                                <Link css={whiteA} to="/app/">
                                     Dashboard
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link css={whiteA} to="/app/journal">
+                                    Journal
                                 </Link>
                             </Li>
                             <Li>

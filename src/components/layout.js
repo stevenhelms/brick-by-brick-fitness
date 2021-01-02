@@ -9,10 +9,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
+import { useAppContext } from '../services/context'
 
 import Header from './header'
 import Footer from './footer'
-// import "./layout.css"
+import { getUser } from '../services/auth-firebase'
 
 const Body = styled.div`
     margin: 3rem auto 0 auto;
@@ -25,6 +28,12 @@ const Body = styled.div`
 `
 
 const Layout = ({ children, fullMenu }) => {
+    const { state, dispatch } = useAppContext()
+
+    if (!state.user) {
+        dispatch({ type: 'SET_USER', value: getUser() })
+    }
+
     const data = useStaticQuery(graphql`
         query SiteTitleQuery {
             site {
@@ -42,6 +51,7 @@ const Layout = ({ children, fullMenu }) => {
                 <main>{children}</main>
             </Body>
             <Footer />
+            <ToastContainer />
         </>
     )
 }

@@ -1,23 +1,38 @@
 import React from 'react'
 import { Router } from '@reach/router'
+import { navigate } from 'gatsby'
+import { isLoggedIn } from '../services/auth-firebase'
 
+import { AppProvider } from '../services/context'
 import Layout from '../components/layout'
 import Dashboard from '../components/dashboard'
+import Journal from '../components/journal'
 import Login from '../components/login'
-import Home from '../components/home'
-import PrivateRoute from '../components/PrivateRoute'
-import SEO from '../components/seo'
+import Profile from '../components/profile'
+import CreateJournal from '../components/createjournal'
+import TestData from '../components/testdata'
 
-const App = () => {
+// import PrivateRoute from '../components/PrivateRoute'
+
+const App = ({ location }) => {
+    if (!isLoggedIn() && location.pathname !== `/app/login`) {
+        navigate('/app/login', { replace: true })
+        return null
+    }
+
     return (
-        <Layout>
-            <SEO title="Home" />
-            <Router basepath="/">
-                <PrivateRoute path="/app/dashboard" component={Dashboard} />
-                <Login path="/app/login" />
-                <Home path="/" />
-            </Router>
-        </Layout>
+        <AppProvider>
+            <Layout>
+                <Router basepath="/app">
+                    <Dashboard path="/" />
+                    <Journal path="journal" />
+                    <CreateJournal path="create" />
+                    <Profile path="profile" />
+                    <Login path="login" />
+                    <TestData path="testdata" />
+                </Router>
+            </Layout>
+        </AppProvider>
     )
 }
 
