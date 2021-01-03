@@ -7,6 +7,7 @@ import { useAppContext } from '../services/context'
 import Journal from './journal'
 import Profile from './profile'
 import { BorderDiv, Button } from '../utils/styles'
+import Loading from './loading'
 
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
@@ -22,6 +23,10 @@ const Dashboard = () => {
             setIsReady(true)
         })
     }, [user.email, dispatch])
+
+    if (!isReady) {
+        return <Loading displayText="Loading..." />
+    }
 
     return (
         <BorderDiv>

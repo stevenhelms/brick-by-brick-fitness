@@ -11,6 +11,7 @@ import Login from '../components/login'
 import Profile from '../components/profile'
 import CreateJournal from '../components/createjournal'
 import TestData from '../components/testdata'
+import Registration from '../components/registration'
 
 // import PrivateRoute from '../components/PrivateRoute'
 
@@ -28,6 +29,7 @@ const App = ({ location }) => {
                     <Journal path="journal" />
                     <CreateJournal path="create" />
                     <Profile path="profile" />
+                    <Registration path="registration" />
                     <Login path="login" />
                     <TestData path="testdata" />
                 </Router>

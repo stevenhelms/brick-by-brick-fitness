@@ -12,8 +12,19 @@ export const Container = styled.div`
     margin-bottom: 20px;
 `
 
+export const H1 = styled.h1`
+    margin-top: 0;
+    color: ${colors.primaryOrange};
+`
+
 export const H2 = styled.h2`
     margin-top: 0;
+    color: ${colors.primaryOrange};
+`
+
+export const H3 = styled.h3`
+    margin-top: 0;
+    color: ${colors.primaryOrange};
 `
 
 export const Ul = styled.ul`

@@ -10,22 +10,6 @@ import { setUser, isLoggedIn, getUser } from '../services/auth-firebase'
 const Login = () => {
     const { dispatch } = useAppContext()
 
-    // const [auth, setAuth] = useState({ username: '', password: '' })
-
-    // const handleUpdate = event => {
-    //     console.log(event.target)
-    //     setAuth({
-    //         ...auth,
-    //         [event.target.name]: event.target.value,
-    //     })
-    // }
-
-    // const handleSubmit = event => {
-    //     event.preventDefault()
-    //     console.log(auth)
-    //     handleLogin(auth)
-    // }
-
     const getUiConfig = auth => {
         return {
             signInFlow: 'popup',
@@ -34,7 +18,6 @@ const Login = () => {
                 auth.GoogleAuthProvider.PROVIDER_ID,
                 auth.FacebookAuthProvider.PROVIDER_ID,
             ],
-            // signInSuccessUrl: '/app/profile',
             callbacks: {
                 signInSuccessWithAuthResult: result => {
                     console.log(result)

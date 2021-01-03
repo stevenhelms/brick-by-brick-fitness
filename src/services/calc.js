@@ -80,3 +80,14 @@ export const calculatePoints = (items, user) => {
     console.log(`calculatePoints = ${points}`)
     return points
 }
+
+export const feetToInches = (feet, inches) => {
+    console.log(`feetToInches ${feet} ${inches}`)
+    return feet * 12 + inches
+}
+
+export const inchesToFeet = inches => {
+    const f = Math.floor(inches / 12)
+    const i = inches - f * 12
+    return [f, i]
+}

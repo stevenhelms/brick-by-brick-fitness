@@ -3,6 +3,7 @@ import { navigate } from 'gatsby'
 import firebase from 'gatsby-plugin-firebase'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
+import { toast } from 'react-toastify'
 
 import { utcToLocal } from '../utils/datetime'
 import { calculatePoints } from '../services/calc'
@@ -20,7 +21,6 @@ import {
 } from '../utils/styles'
 import { emailToKey, getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-import { toast } from 'react-toastify'
 
 // const handleSubmitNetlify = event => {
 //     console.log(event.target)
@@ -63,7 +63,7 @@ const JournalForm = () => {
                     // force refresh of local user object
                     getProfile(state.user.email).then(profile => {
                         dispatch({ type: 'SET_PROFILE', value: profile })
-                        // navigate('/app/journal')
+                        navigate('/app/')
                     })
                 }
             })
