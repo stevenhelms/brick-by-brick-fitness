@@ -14,12 +14,21 @@ const footerStyle = css`
 `
 const ulStyle = css`
     list-style: none;
+    @media screen and (max-width: 480px) {
+        margin-left: 0;
+    }
 `
 const liStyle = css`
     display: inline;
     margin-right: 40px;
     :last-child() {
         margin-right: 0;
+    }
+    @media screen and (max-width: 480px) {
+        display: block;
+        text-align: center;
+        float: none;
+        margin-right: 10px;
     }
 `
 const aStyle = css`
