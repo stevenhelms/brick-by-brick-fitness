@@ -6,18 +6,32 @@ import { css } from '@emotion/react'
 import { isLoggedIn, logout } from '../services/auth-firebase'
 
 const StyledNav = styled.nav`
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
+    // display: flex;
+    // flex: 1;
+    // justify-content: flex-end;
     // align-items: baseline;
     color: #ffffff;
+    float: right;
+    @media screen and (max-width: 480px) {
+        float: none;
+        margin-top: 20px;
+    }
 `
 const Ul = styled.ul`
     list-style: none;
+    @media screen and (max-width: 480px) {
+        margin-left: 0;
+    }
 `
 const Li = styled.li`
     display: inline;
     margin-right: 30px;
+    @media screen and (max-width: 480px) {
+        // display: block;
+        text-align: left;
+        float: none;
+        margin-right: 10px;
+    }
 `
 const whiteA = css`
     color: #ffffff;

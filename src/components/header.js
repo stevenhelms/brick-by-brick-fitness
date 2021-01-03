@@ -8,16 +8,25 @@ import Img from 'gatsby-image'
 const StyledHeader = styled.header`
     background: #222222;
     margin-bottom: 40px;
+    overflow: hidden;
+    padding: 1rem;
+    @media screen and (max-width: 480px) {
+        padding-bottom: 0;
+    }
 `
 
 const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+    float: left;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // padding: 1rem;
+    @media screen and (max-width: 480px) {
+        float: none;
+    }
 `
 const H1 = styled.h1`
-    flex: 1;
+    // flex: 1;
 `
 
 const Header = ({ siteTitle }) => {
@@ -26,6 +35,13 @@ const Header = ({ siteTitle }) => {
             logoImage: file(relativePath: { eq: "bear-state-logo-Sept2020-white.png" }) {
                 childImageSharp {
                     fixed(width: 80, height: 80) {
+                        ...GatsbyImageSharpFixed
+                    }
+                }
+            }
+            mobileImage: file(relativePath: { eq: "bear-state-logo-Sept2020-white.png" }) {
+                childImageSharp {
+                    fixed(width: 40, height: 40) {
                         ...GatsbyImageSharpFixed
                     }
                 }
@@ -49,8 +65,8 @@ const Header = ({ siteTitle }) => {
                         {siteTitle}
                     </Link>
                 </H1>
-                <Nav />
             </Container>
+            <Nav />
         </StyledHeader>
     )
 }
