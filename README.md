@@ -50,17 +50,18 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
   email: String
   first: String
   gender: String
+  goal_calories: Number
   goal_carbs: Number
   goal_protein: Number
   goal_veggies: Number
   goal_weight: Number
   height: Number
+  journal: Array
   last: String
   pbf_end: Number
   pbf_start: Number
   updatedAt: Timestamp
   weight: Number
-  journal: Array
 }
 ```
 
@@ -68,17 +69,18 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 ```
 {
-  id: String
   carbs: Number
   eat_slowly: Number
+  journalDate: Date
   protein: Number
   recovery: Number
   sleep: Number
   stress: Number
-  total_points: Number
-  user_id: String
   veggies: Number
   water: Number
   workout: Boolean
+  total_points: Number
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 ```

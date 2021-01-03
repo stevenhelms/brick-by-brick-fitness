@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import firebase from 'gatsby-plugin-firebase'
-import { emailToKey } from '../utils/firebase'
+import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 
 import { H2 } from '../utils/styles'
@@ -15,19 +14,11 @@ const Profile = ({ user, profile }) => {
     }
 
     useEffect(() => {
-        // console.log(localProfile)
-        // if (!localProfile) {
-        const userId = emailToKey(user.email)
-        firebase
-            .database()
-            .ref('/users/' + userId)
-            .get()
-            .then(snapshot => {
-                setLocalProfile(snapshot.val())
-                dispatch({ type: 'SET_PROFILE', value: snapshot.val() })
-                setIsReady(true)
-            })
-        // }
+        getProfile(user.email).then(profile => {
+            setLocalProfile(profile)
+            dispatch({ type: 'SET_PROFILE', value: profile })
+            setIsReady(true)
+        })
     }, [user.email, dispatch])
 
     return (

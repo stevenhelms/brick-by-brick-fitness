@@ -41,13 +41,17 @@ export const BorderDiv = styled.div`
     width: 100%;
 `
 
+export const Error = styled.div`
+    color: red;
+`
+
 export const Form = styled.form``
 
 export const FormInput = styled.input`
     border-radius: 3px;
 `
 
-export const FormField = styled.div`
+export const FormGroup = styled.div`
   margin: 10px 0;
   padding-bottom: 5px;
   display: block;

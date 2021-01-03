@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { getUser } from '../services/auth-firebase'
+// import { getUser } from '../services/auth-firebase'
 import { Link } from 'gatsby'
-import firebase from 'gatsby-plugin-firebase'
-import { emailToKey } from '../utils/firebase'
+import { getProfile } from '../utils/firebase'
+import { useAppContext } from '../services/context'
 
 import Journal from './journal'
 import Profile from './profile'
 import { BorderDiv, Button } from '../utils/styles'
 
 const Dashboard = () => {
-    const [user] = useState(getUser())
+    const { state, dispatch } = useAppContext()
+    // const [user] = useState(getUser())
+    const { user } = state
     const [profile, setProfile] = useState([])
     const [isReady, setIsReady] = useState(false)
 
     useEffect(() => {
-        const userId = emailToKey(user.email)
-
-        firebase
-            .database()
-            .ref('/users/' + userId)
-            .get()
-            .then(snapshot => {
-                // const items = []
-                // snapshot.forEach(item => {
-                //     console.log(item.val())
-                //     items.push(item.val())
-                // })
-                console.log('--- setProfile ---')
-                console.log(snapshot.val())
-                setProfile(snapshot.val())
-                setIsReady(true)
-            })
-    }, [user.email])
+        getProfile(user.email).then(profile => {
+            setProfile(profile)
+            dispatch({ type: 'SET_PROFILE', value: profile })
+            setIsReady(true)
+        })
+    }, [user.email, dispatch])
 
     return (
         <BorderDiv>
