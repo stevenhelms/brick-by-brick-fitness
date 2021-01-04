@@ -106,14 +106,16 @@ const Journal = ({ user, location }) => {
                     </Link>
                 </p>
             ) : null}
-            {isReady ? (
+            {!isReady ? (
+                <p>Loading...</p>
+            ) : journal.length > 0 ? (
                 <>
                     {journal.map((j, i) => (
                         <JournalRow data={j} key={i} />
                     ))}
                 </>
             ) : (
-                <p>Loading...</p>
+                <p>No journal entries yet.</p>
             )}
         </>
     )

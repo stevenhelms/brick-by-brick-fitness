@@ -8,6 +8,7 @@ import Journal from './journal'
 import Profile from './profile'
 import { BorderDiv, Button } from '../utils/styles'
 import Loading from './loading'
+import Goals from './goals'
 
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
@@ -30,12 +31,26 @@ const Dashboard = () => {
 
     return (
         <BorderDiv>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                <div style={{ flex: 1 }}>
-                    <img src={user.photoURL} alt={user.displayName} />
-                </div>
-                <div style={{ flex: 1 }}>
-                    <p>{user.displayName}</p>
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                    borderBottom: '1px solid #aeaeae',
+                    marginBottom: '20px',
+                }}
+            >
+                {user.photoURL ? (
+                    <div style={{ flex: 1 }}>
+                        <img src={user.photoURL} alt={user.displayName} />
+                    </div>
+                ) : null}
+                <div style={{ flex: user.photoURL ? 1 : 2 }}>
+                    <p>
+                        {user.displayName}
+                        <br />
+                        {user.email}
+                    </p>
                     <p>
                         <Link to="/app/profile">Profile</Link>
                     </p>
@@ -52,8 +67,9 @@ const Dashboard = () => {
 
             {isReady ? (
                 <>
+                    <Goals user={user} profile={profile} />
                     <Journal user={user} />
-                    <Profile user={user} profile={profile} />
+                    {/* <Profile user={user} profile={profile} /> */}
                 </>
             ) : (
                 <p>Loading...</p>
