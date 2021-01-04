@@ -12,6 +12,7 @@ import styled from '@emotion/styled'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { useAppContext } from '../services/context'
+import { isBrowser } from '../utils/browser'
 
 import Header from './header'
 import Footer from './footer'
@@ -30,7 +31,7 @@ const Body = styled.div`
 const Layout = ({ children, fullMenu }) => {
     const { state, dispatch } = useAppContext()
 
-    if (!state.user) {
+    if (isBrowser() && !state?.user) {
         dispatch({ type: 'SET_USER', value: getUser() })
     }
 

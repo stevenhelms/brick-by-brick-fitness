@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router } from '@reach/router'
 import { navigate } from 'gatsby'
-import { isLoggedIn } from '../services/auth-firebase'
+import { isLoggedIn, isBrowser } from '../services/auth-firebase'
 
 import { AppProvider } from '../services/context'
 import Layout from '../components/layout'
@@ -16,7 +16,7 @@ import Registration from '../components/registration'
 // import PrivateRoute from '../components/PrivateRoute'
 
 const App = ({ location }) => {
-    if (!isLoggedIn() && location.pathname !== `/app/login`) {
+    if (!isLoggedIn() && isBrowser() && location.pathname !== `/app/login`) {
         navigate('/app/login', { replace: true })
         return null
     }
