@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react'
 
+export const isBrowser = () => typeof window !== 'undefined'
+
 export const appState = {
     release: 'release',
     loading: false,
@@ -34,10 +36,10 @@ const reducer = (current, action) => {
             break
     }
 
-    localStorage.setItem('state', JSON.stringify(newState))
+    isBrowser() && window.localStorage.setItem('state', JSON.stringify(newState))
     return newState
 }
-const existingState = JSON.parse(localStorage.getItem('state'))
+const existingState = isBrowser() ? JSON.parse(window.localStorage.getItem('state')) : {}
 const currentState = { ...appState, ...existingState }
 // console.log(currentState)
 const AppContext = createContext(currentState)

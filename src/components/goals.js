@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 
-import { H2, H3, Li, Ul } from '../utils/styles'
+import { H3, Li, Ul } from '../utils/styles'
 
 const Goals = ({ user, profile }) => {
     const { state, dispatch } = useAppContext()

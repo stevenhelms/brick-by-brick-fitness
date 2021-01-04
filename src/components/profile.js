@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 
-import { H2, H3 } from '../utils/styles'
+import { H2 } from '../utils/styles'
 import { navigate } from 'gatsby'
 
 const Profile = ({ user, profile }) => {

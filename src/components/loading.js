@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
-import { Loader } from 'react-feather'
 import { colors } from '../utils/styles'
 
 const LoadingWrapper = styled.div`

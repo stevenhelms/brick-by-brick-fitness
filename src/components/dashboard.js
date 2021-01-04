@@ -5,7 +5,6 @@ import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 
 import Journal from './journal'
-import Profile from './profile'
 import { BorderDiv, Button } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
@@ -69,7 +68,6 @@ const Dashboard = () => {
                 <>
                     <Goals user={user} profile={profile} />
                     <Journal user={user} />
-                    {/* <Profile user={user} profile={profile} /> */}
                 </>
             ) : (
                 <p>Loading...</p>

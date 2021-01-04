@@ -7,18 +7,7 @@ import { toast } from 'react-toastify'
 import { useAppContext } from '../services/context'
 import { emailToKey, getProfile } from '../utils/firebase'
 
-import {
-    BorderDiv,
-    BodyText,
-    FormGroup,
-    FormLabel,
-    FormSubText,
-    italics,
-    inputMargin,
-    Button,
-    Error,
-    H1,
-} from '../utils/styles'
+import { BorderDiv, BodyText, FormGroup, FormLabel, italics, Button, Error, H1 } from '../utils/styles'
 import { feetToInches, inchesToFeet } from '../services/calc'
 import { navigate } from 'gatsby'
 
@@ -147,7 +136,7 @@ const RegistrationForm = () => {
 }
 
 const Registration = () => {
-    const { state, dispatch } = useAppContext()
+    const { state } = useAppContext()
 
     if (state.profile) {
         console.log('Profile exists... redirecting')
