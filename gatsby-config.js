@@ -66,17 +66,6 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-firestore-easy`,
-            options: {
-                adminCredential: {
-                    // credential: process.env.FIREBASE_CREDENTIAL, //See details for this option
-                    credential: require('./bear-state-firebase-adminsdk-vn52x-085d830399.json'),
-                    databaseURL: 'https://bear-state-default-rtdb.firebaseio.com',
-                },
-                collections: ['users', 'winter21'],
-            },
-        },
-        {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
                 // The property ID; the tracking code won't be generated without it
