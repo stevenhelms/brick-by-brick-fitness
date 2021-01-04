@@ -16,7 +16,7 @@ const Goals = ({ user, profile }) => {
     useEffect(() => {
         getProfile(user.email).then(profile => {
             if (!profile) {
-                console.log('no profile')
+                // console.log('no profile')
                 return null
             } else {
                 setLocalProfile(profile)

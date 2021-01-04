@@ -1,23 +1,3 @@
-/**
- *
- *
- * @param {object} data
- */
-export const makeUserList = data => {
-    let users = []
-    data.users.edges.forEach(user => {
-        users.push(user.node)
-    })
-
-    return users
-}
-
-export const calcIndividualPoints = data => {
-    // let results
-    const users = makeUserList(data)
-    console.log(users)
-}
-
 const calcWaterPoints = (actual, weight) => {
     const p = (actual / (weight / 2)) * 100
 
@@ -82,7 +62,7 @@ export const calculatePoints = (items, user) => {
 }
 
 export const feetToInches = (feet, inches) => {
-    console.log(`feetToInches ${feet} ${inches}`)
+    // console.log(`feetToInches ${feet} ${inches}`)
     return feet * 12 + inches
 }
 

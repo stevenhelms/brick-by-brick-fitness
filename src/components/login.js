@@ -20,7 +20,7 @@ const Login = () => {
             ],
             callbacks: {
                 signInSuccessWithAuthResult: result => {
-                    console.log(result)
+                    // console.log(result)
                     setUser(result.user)
                     dispatch({ type: 'SET_USER', value: result.user })
                     navigate('/app/')
@@ -30,7 +30,7 @@ const Login = () => {
     }
 
     if (isLoggedIn()) {
-        console.log(getUser())
+        // console.log(getUser())
         navigate(`/app/`)
     }
 

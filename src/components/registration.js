@@ -16,9 +16,9 @@ const RegistrationForm = () => {
 
     const handleSubmit = values => {
         const inches = feetToInches(values.height_feet, values.height_inches)
-        console.log(`inches ${inches}`)
+        // console.log(`inches ${inches}`)
         const fi = inchesToFeet(inches)
-        console.log(`inchesToFeet ${fi} ${fi[0]} ${fi[1]}`)
+        // console.log(`inchesToFeet ${fi} ${fi[0]} ${fi[1]}`)
 
         values.height = inches
         delete values.height_feet
@@ -29,7 +29,7 @@ const RegistrationForm = () => {
         values.role = ['participant']
         values.updatedAt = new Date().toISOString()
         values.createdAt = new Date().toISOString()
-        console.log(values)
+        // console.log(values)
 
         const userId = emailToKey(state.user.email)
         firebase
@@ -37,10 +37,10 @@ const RegistrationForm = () => {
             .ref('users/' + userId)
             .set(values, error => {
                 if (error) {
-                    console.log(error)
+                    console.error(error)
                     toast.error('Whoops. Something went wrong. Please try again.')
                 } else {
-                    console.log('handleSubmit - success')
+                    // console.log('handleSubmit - success')
                     // force refresh of local user object
                     getProfile(state.user.email).then(profile => {
                         dispatch({ type: 'SET_PROFILE', value: profile })
@@ -139,7 +139,7 @@ const Registration = () => {
     const { state } = useAppContext()
 
     if (state.profile) {
-        console.log('Profile exists... redirecting')
+        // console.log('Profile exists... redirecting')
         navigate('/app/')
     }
 

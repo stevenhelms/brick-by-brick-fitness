@@ -27,7 +27,7 @@ const Players = () => {
             .then(snapshot => {
                 const p = []
                 snapshot.forEach(item => {
-                    console.log(item.val())
+                    // console.log(item.val())
                     p.push(item.val())
                 })
                 setPlayers(p)

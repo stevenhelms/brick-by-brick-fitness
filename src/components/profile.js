@@ -17,7 +17,6 @@ const Profile = ({ user, profile }) => {
     useEffect(() => {
         getProfile(user.email).then(profile => {
             if (!profile) {
-                console.log('no profile')
                 navigate('/app/registration')
                 return null
             } else {

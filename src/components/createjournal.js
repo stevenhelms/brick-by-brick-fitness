@@ -43,13 +43,12 @@ const JournalForm = () => {
 
         // Let's keep our key date in our local timezone for readability and quick reuse
         const journalDate = values.journalDate || utcToLocal(new Date()).toISOString().substr(0, 10)
-        console.log(journalDate)
 
         values.total_points = calculatePoints(values, state.user)
         values.journalDate = journalDate
         values.updatedAt = new Date().toISOString()
         values.createdAt = new Date().toISOString()
-        console.log(values)
+        // console.log(values)
 
         firebase
             .database()
@@ -59,7 +58,7 @@ const JournalForm = () => {
                     console.log(error)
                     toast.error('Whoops. Something went wrong. Please try again.')
                 } else {
-                    console.log('handleSubmit - success')
+                    // console.log('handleSubmit - success')
                     // force refresh of local user object
                     getProfile(state.user.email).then(profile => {
                         dispatch({ type: 'SET_PROFILE', value: profile })
