@@ -55,7 +55,7 @@ const JournalForm = () => {
             .ref('users/' + userId + '/journal/' + journalDate)
             .set(values, error => {
                 if (error) {
-                    console.log(error)
+                    console.error(error)
                     toast.error('Whoops. Something went wrong. Please try again.')
                 } else {
                     // console.log('handleSubmit - success')

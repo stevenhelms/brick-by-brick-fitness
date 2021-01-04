@@ -37,7 +37,7 @@ const Players = () => {
 
     return (
         <Container>
-            <H2>Players</H2>
+            <H2>Participants</H2>
             <Ul>
                 {isReady ? (
                     <>

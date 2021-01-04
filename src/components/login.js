@@ -15,8 +15,8 @@ const Login = () => {
             signInFlow: 'popup',
             signInOptions: [
                 auth.EmailAuthProvider.PROVIDER_ID,
-                auth.GoogleAuthProvider.PROVIDER_ID,
-                auth.FacebookAuthProvider.PROVIDER_ID,
+                // auth.GoogleAuthProvider.PROVIDER_ID,
+                // auth.FacebookAuthProvider.PROVIDER_ID,
             ],
             callbacks: {
                 signInSuccessWithAuthResult: result => {
