@@ -60,6 +60,7 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
   last: String
   pbf_end: Number
   pbf_start: Number
+  total_points: Number
   updatedAt: Timestamp
   weight: Number
 }

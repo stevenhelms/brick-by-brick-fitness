@@ -11,7 +11,6 @@ module.exports = {
     },
     plugins: [
         `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-netlify`,
         `gatsby-plugin-emotion`,
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,

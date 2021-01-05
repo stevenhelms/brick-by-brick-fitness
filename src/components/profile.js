@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
+import { navigate } from 'gatsby'
 
 import { H2 } from '../utils/styles'
-import { navigate } from 'gatsby'
 
 const Profile = ({ user, profile }) => {
     const { state, dispatch } = useAppContext()

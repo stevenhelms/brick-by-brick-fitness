@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-// import { getUser } from '../services/auth-firebase'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
+
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-
 import Journal from './journal'
 import { BorderDiv, Button } from '../utils/styles'
 import Loading from './loading'
@@ -18,9 +17,14 @@ const Dashboard = () => {
 
     useEffect(() => {
         getProfile(user.email).then(profile => {
-            setProfile(profile)
-            dispatch({ type: 'SET_PROFILE', value: profile })
-            setIsReady(true)
+            if (!profile) {
+                navigate('/app/registration')
+                return null
+            } else {
+                setProfile(profile)
+                dispatch({ type: 'SET_PROFILE', value: profile })
+                setIsReady(true)
+            }
         })
     }, [user.email, dispatch])
 
