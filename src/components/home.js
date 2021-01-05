@@ -9,7 +9,7 @@ const Leaders = () => {
         <Container>
             <H2>Leaders</H2>
             <Ul>
-                <Li>None</Li>
+                <Li>Coming soon...</Li>
             </Ul>
         </Container>
     )

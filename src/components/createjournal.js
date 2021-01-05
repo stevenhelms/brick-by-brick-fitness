@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 
 import { utcToLocal } from '../utils/datetime'
 import { calculatePoints } from '../services/calc'
+import config from '../../config'
 
 import {
     BorderDiv,
@@ -153,26 +154,14 @@ const JournalForm = () => {
                         <FormGroup>
                             <div id="recovery-group">Physical Recovery</div>
                             <div role="group" aria-labelledby="recovery-group">
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="recovery" value="none" />
-                                    None
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="recovery" value="minimal" />
-                                    Minimal
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="recovery" value="somewhat" />
-                                    Somewhat
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="recovery" value="mostly" />
-                                    Mostly
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="recovery" value="fully" />
-                                    Fully
-                                </FormLabel>
+                                {Object.keys(config.recoveryScale).map(key => {
+                                    return (
+                                        <FormLabel>
+                                            <Field css={inputMargin} type="radio" name="recovery" value={key} />
+                                            {config.recoveryScale[key]}
+                                        </FormLabel>
+                                    )
+                                })}
                             </div>
                             <ErrorMessage component={Error} name="recovery" />
                             <FormSubText>
@@ -183,26 +172,14 @@ const JournalForm = () => {
                         <FormGroup>
                             <div id="stress-group">Stress Level</div>
                             <div role="group" aria-labelledby="stress-group">
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="stress" value="none" />
-                                    None
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="stress" value="minimal" />
-                                    Minimal
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="stress" value="normal" />
-                                    Normal
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="stress" value="manageable" />
-                                    Manageable
-                                </FormLabel>
-                                <FormLabel>
-                                    <Field css={inputMargin} type="radio" name="stress" value="crazy" />
-                                    Crazy
-                                </FormLabel>
+                                {Object.keys(config.stressScale).map(key => {
+                                    return (
+                                        <FormLabel>
+                                            <Field css={inputMargin} type="radio" name="stress" value={key} />
+                                            {config.stressScale[key]}
+                                        </FormLabel>
+                                    )
+                                })}
                             </div>
                             <ErrorMessage component={Error} name="stress" />
                             <FormSubText>

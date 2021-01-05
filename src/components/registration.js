@@ -3,13 +3,15 @@ import firebase from 'gatsby-plugin-firebase'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import { toast } from 'react-toastify'
+import { navigate } from 'gatsby'
 
 import { useAppContext } from '../services/context'
 import { emailToKey, getProfile } from '../utils/firebase'
 
 import { BorderDiv, BodyText, FormGroup, FormLabel, italics, Button, Error, H1 } from '../utils/styles'
-import { feetToInches, inchesToFeet } from '../services/calc'
-import { navigate } from 'gatsby'
+import { feetToInches } from '../services/calc'
+import { toTitleCase } from '../utils/strings'
+import config from '../../config'
 
 const RegistrationForm = () => {
     const { state, dispatch } = useAppContext()
@@ -17,7 +19,7 @@ const RegistrationForm = () => {
     const handleSubmit = values => {
         const inches = feetToInches(values.height_feet, values.height_inches)
         // console.log(`inches ${inches}`)
-        const fi = inchesToFeet(inches)
+        // const fi = inchesToFeet(inches)
         // console.log(`inchesToFeet ${fi} ${fi[0]} ${fi[1]}`)
 
         values.height = inches
@@ -58,6 +60,7 @@ const RegistrationForm = () => {
                 height_inches: 0,
                 goal_weight: 0,
                 gender: 'male',
+                level_method: 0,
             }}
             validationSchema={yup.object().shape({
                 age: yup.number().required().positive().integer(),
@@ -122,6 +125,14 @@ const RegistrationForm = () => {
                             <FormLabel htmlFor="goal_weight">Goal Weight</FormLabel>
                             <Field name="goal_weight" type="number" />
                             <ErrorMessage component={Error} name="goal_weight" />
+                        </FormGroup>
+                        <FormGroup>
+                            <FormLabel htmlFor="level_method">Overall Level Method Level</FormLabel>
+                            <select name="levelMethod">
+                                {Object.keys(config.levelMethod).map(index => {
+                                    return <option value={index}>{toTitleCase(config.levelMethod[index])}</option>
+                                })}
+                            </select>
                         </FormGroup>
                         <FormGroup style={{ textAlign: 'center' }}>
                             <Button type="submit" disabled={false}>

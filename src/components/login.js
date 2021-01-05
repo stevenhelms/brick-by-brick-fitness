@@ -5,7 +5,7 @@ import firebase from 'gatsby-plugin-firebase'
 import { useAppContext } from '../services/context'
 
 // import { handleLogin, isLoggedIn } from '../services/auth-fake'
-import { setUser, isLoggedIn, getUser } from '../services/auth-firebase'
+import { setUser, isLoggedIn } from '../services/auth-firebase'
 
 const Login = () => {
     const { dispatch } = useAppContext()
