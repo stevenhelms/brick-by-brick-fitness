@@ -81,14 +81,14 @@ const JournalForm = () => {
                 workout: false,
             }}
             validationSchema={yup.object().shape({
-                carbs: yup.number().required().positive().integer(),
-                eat_slowly: yup.number().required().positive().integer(),
-                protein: yup.number().required().positive().integer(),
+                carbs: yup.number().required().integer(),
+                eat_slowly: yup.number().required().integer(),
+                protein: yup.number().required().integer(),
                 recovery: yup.string().required(),
                 sleep: yup.number().required().positive().integer(),
                 stress: yup.string().required(),
-                veggies: yup.number().required().positive().integer(),
-                water: yup.number().required().positive().integer(),
+                veggies: yup.number().required().integer(),
+                water: yup.number().required().integer(),
                 workout: yup.bool(),
             })}
             onSubmit={values => {
