@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         getProfile(user.email).then(profile => {
-            if (!profile) {
+            if (!profile && isReady) {
                 navigate('/app/registration')
                 return null
             } else {
@@ -26,7 +26,7 @@ const Dashboard = () => {
                 setIsReady(true)
             }
         })
-    }, [user.email, dispatch])
+    }, [user.email, dispatch, isReady])
 
     if (!isReady) {
         return <Loading displayText="Loading..." />
