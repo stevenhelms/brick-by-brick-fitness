@@ -34,11 +34,7 @@
     "react-toastify": "^6.2.0",
     "react-typography": "^0.16.19",
     "typography": "^0.16.19",
-    "typography-theme-grand-view": "^0.16.19",
-    "typography-theme-lawton": "^0.16.19",
-    "typography-theme-ocean-beach": "^0.16.19",
-    "typography-theme-parnassus": "^0.16.19",
-    "typography-theme-sutro": "^0.16.19",
+    "typography-theme-noriega": "^0.16.19",
     "yup": "^0.32.8"
   },
   "devDependencies": {
@@ -55,7 +51,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "firebase": "firebase emulators:start"
   },
   "prettier": {
     "trailingComma": "es5",

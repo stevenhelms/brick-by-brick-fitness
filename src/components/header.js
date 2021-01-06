@@ -7,7 +7,7 @@ import Img from 'gatsby-image'
 
 const StyledHeader = styled.header`
     background: #222222;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     overflow: hidden;
     padding: 1rem;
     @media screen and (max-width: 480px) {

@@ -5,6 +5,8 @@ export const colors = {
     primaryOrange: '#e25a2d',
 }
 
+export const Div = styled.div``
+
 export const Container = styled.div`
     border: 1px solid #aeaeae;
     border-radius: 3px;

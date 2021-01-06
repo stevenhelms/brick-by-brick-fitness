@@ -19,6 +19,7 @@ import {
     inputMargin,
     Button,
     Error,
+    Div,
 } from '../utils/styles'
 import { emailToKey, getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
@@ -113,29 +114,32 @@ const JournalForm = () => {
                             <Field style={{ transform: 'scale(1.5,1.5)' }} type="checkbox" name="workout" />
                             <ErrorMessage component={Error} name="workout" />
                         </FormGroup>
-
                         <FormGroup>
-                            <FormLabel htmlFor="water">Water Intake (in ounces)</FormLabel>
+                            <FormLabel htmlFor="water">Water</FormLabel>
                             <Field name="water" type="number" />
                             <ErrorMessage component={Error} name="water" />
+                            <FormSubText>Enter ounces of water consumed today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
-                            <FormLabel htmlFor="protein">Protein Servings</FormLabel>
+                            <FormLabel htmlFor="protein">Protein</FormLabel>
                             <Field name="protein" type="number" />
                             <ErrorMessage component={Error} name="protein" />
+                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
-                            <FormLabel htmlFor="veggies">Veggie Servings</FormLabel>
+                            <FormLabel htmlFor="veggies">Veggies</FormLabel>
                             <Field type="number" name="veggies" />
                             <ErrorMessage component={Error} name="veggies" />
+                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
-                            <FormLabel htmlFor="carbs">Carbs Servings</FormLabel>
+                            <FormLabel htmlFor="carbs">Carbs</FormLabel>
                             <Field type="number" name="carbs" />
                             <ErrorMessage component={Error} name="carbs" />
+                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
-                            <FormLabel htmlFor="sleep">Sleep (in hours)</FormLabel>
+                            <FormLabel htmlFor="sleep">Hours Sleep</FormLabel>
                             <Field type="number" name="sleep" />
                             <ErrorMessage component={Error} name="sleep" />
                             <FormSubText>
@@ -156,7 +160,7 @@ const JournalForm = () => {
                             <div role="group" aria-labelledby="recovery-group">
                                 {Object.keys(config.recoveryScale).map(key => {
                                     return (
-                                        <FormLabel>
+                                        <FormLabel key={key}>
                                             <Field css={inputMargin} type="radio" name="recovery" value={key} />
                                             {config.recoveryScale[key]}
                                         </FormLabel>
@@ -174,7 +178,7 @@ const JournalForm = () => {
                             <div role="group" aria-labelledby="stress-group">
                                 {Object.keys(config.stressScale).map(key => {
                                     return (
-                                        <FormLabel>
+                                        <FormLabel key={key}>
                                             <Field css={inputMargin} type="radio" name="stress" value={key} />
                                             {config.stressScale[key]}
                                         </FormLabel>
@@ -200,12 +204,14 @@ const JournalForm = () => {
 }
 
 const CreateJournal = () => (
-    <BorderDiv>
-        <BodyText css={italics}>
+    <Div>
+        <BodyText css={italics} style={{ padding: '0 10px' }}>
             Each day you should submit a log of your progress. Only submitted data will count towards the challenge.
         </BodyText>
-        <JournalForm />
-    </BorderDiv>
+        <BorderDiv>
+            <JournalForm />
+        </BorderDiv>
+    </Div>
 )
 
 export default CreateJournal
