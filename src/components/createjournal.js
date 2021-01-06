@@ -46,11 +46,12 @@ const JournalForm = () => {
         // Let's keep our key date in our local timezone for readability and quick reuse
         const journalDate = values.journalDate || utcToLocal(new Date()).toISOString().substr(0, 10)
 
-        values.total_points = calculatePoints(values, state.user)
+        values.total_points = calculatePoints(values, state.profile)
         values.journalDate = journalDate
         values.updatedAt = new Date().toISOString()
         values.createdAt = new Date().toISOString()
-        // console.log(values)
+        console.log(values)
+        console.log(state.profile)
 
         firebase
             .database()

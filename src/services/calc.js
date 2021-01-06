@@ -17,6 +17,8 @@ export const calcWaterPoints = (actual, weight) => {
 }
 
 export const calcFoodPoints = (actual, goal) => {
+    if (!goal) return 0
+
     const p = (actual / goal) * 100
 
     if (p <= 25) {
@@ -45,7 +47,7 @@ export const calcSleepPoints = actual => {
 }
 
 export const calculateEatSlowlyPoints = num => {
-    return num >= 3 ? 3 : num == 2 ? 2 : num == 1 ? 1 : 0
+    return num >= 3 ? 3 : num === 2 ? 2 : num === 1 ? 1 : 0
 }
 
 export const calculatePoints = (items, user) => {
@@ -65,12 +67,11 @@ export const calculatePoints = (items, user) => {
 
     points += calculateEatSlowlyPoints(items?.eat_slowly)
 
-    console.log(`calculatePoints = ${points}`)
+    console.log(`Calculated points: ${points}`)
     return points
 }
 
 export const feetToInches = (feet, inches) => {
-    // console.log(`feetToInches ${feet} ${inches}`)
     return feet * 12 + inches
 }
 

@@ -17,6 +17,10 @@ const ItemRow = styled.div`
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid #eeeeee;
+    @media screen and (max-width: 480px) {
+        display: block;
+        padding-left: 30px;
+    }
 `
 
 const JournalRow = ({ data }) => {
@@ -24,14 +28,14 @@ const JournalRow = ({ data }) => {
         <ItemContainer>
             <ItemHeader>{data.journalDate}</ItemHeader>
             <ItemRow>
-                <div>Protein: {data.protein || 0} servings</div>
-                <div>Carbs: {data.carbs || 0} servings</div>
-                <div>Veggies: {data.veggies || 0} servings</div>
+                <div>Protein: {data.protein || 0}</div>
+                <div>Carbs: {data.carbs || 0}</div>
+                <div>Veggies: {data.veggies || 0}</div>
             </ItemRow>
             <ItemRow>
-                <div>Water: {data.water || 0} ounces</div>
-                <div>Sleep: {data.sleep || 0} hours</div>
-                <div>Eating Slowly: {data.eat_slowly || 0} times</div>
+                <div>Water: {data.water || 0}</div>
+                <div>Sleep: {data.sleep || 0}</div>
+                <div>Eating Slowly: {data.eat_slowly || 0}</div>
             </ItemRow>
             <ItemRow>
                 <div>Workout: {data.workout ? 'Yes' : 'No'}</div>

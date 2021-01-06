@@ -4,7 +4,7 @@ import { Link, navigate } from 'gatsby'
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 import Journal from './journal'
-import { BorderDiv, Button } from '../utils/styles'
+import { BorderDiv, Button, Div } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 
@@ -14,6 +14,7 @@ const Dashboard = () => {
     const { user } = state
     const [profile, setProfile] = useState([])
     const [isReady, setIsReady] = useState(false)
+    const [greeting, setGreeting] = useState(undefined)
 
     useEffect(() => {
         getProfile(user.email).then(profile => {
@@ -28,55 +29,41 @@ const Dashboard = () => {
         })
     }, [user.email, dispatch, isReady])
 
+    useEffect(() => {
+        if (profile.first) {
+            setGreeting(`, ${profile.first}`)
+        } else if (user.displayName) {
+            setGreeting(`, ${user.displayName}`)
+        }
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
     if (!isReady) {
         return <Loading displayText="Loading..." />
     }
 
     return (
-        <BorderDiv>
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                    borderBottom: '1px solid #aeaeae',
-                    marginBottom: '20px',
-                }}
-            >
-                {user.photoURL ? (
-                    <div style={{ flex: 1 }}>
-                        <img src={user.photoURL} alt={user.displayName} />
-                    </div>
-                ) : null}
-                <div style={{ flex: user.photoURL ? 1 : 2 }}>
-                    <p>
-                        {user.displayName}
-                        <br />
-                        {user.email}
-                    </p>
-                    <p>
-                        <Link to="/app/profile">Profile</Link>
-                    </p>
-                </div>
-                <div style={{ flex: 4 }}>
-                    <p>
-                        Don't forget to create your challenge journal entry today.
-                        <Link to="/app/create">
-                            <Button>Create Journal</Button>
-                        </Link>
-                    </p>
-                </div>
+        <Div style={{ width: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <h4>Welcome back{greeting}!</h4>
+                <Link to="/app/profile" style={{ fontSize: 'smaller', color: '#999999' }}>
+                    Profile
+                </Link>
+                <Link to="/app/create">
+                    <Button>Create Journal</Button>
+                </Link>
             </div>
 
-            {isReady ? (
-                <>
-                    <Goals user={user} profile={profile} />
-                    <Journal user={user} />
-                </>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </BorderDiv>
+            <BorderDiv>
+                {isReady ? (
+                    <>
+                        <Goals user={user} profile={profile} />
+                        <Journal user={user} />
+                    </>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </BorderDiv>
+        </Div>
     )
 }
 

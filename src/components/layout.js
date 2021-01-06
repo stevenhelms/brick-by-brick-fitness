@@ -21,11 +21,11 @@ import { getUser } from '../services/auth-firebase'
 const Body = styled.div`
     margin: 3rem auto 0 auto;
     max-width: 960px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #1f1f1f;
+    width: 80%;
 `
 
 const Layout = ({ children, fullMenu }) => {
