@@ -5,6 +5,7 @@ import { useAppContext } from '../services/context'
 import { emailToKey } from '../utils/firebase'
 import { Button, H2 } from '../utils/styles'
 import styled from '@emotion/styled'
+import config from '../../config'
 
 const ItemContainer = styled.div`
     margin-bottom: 20px;
@@ -18,32 +19,70 @@ const ItemRow = styled.div`
     justify-content: space-around;
     border-bottom: 1px solid #eeeeee;
     @media screen and (max-width: 480px) {
-        display: block;
-        padding-left: 30px;
+        // display: inline-block;
+        padding-left: 10px;
+        flex-direction: column;
     }
 `
-
+const ItemGroup = styled.div`
+    flex: 1;
+    display: flex;
+`
+const ItemLabel = styled.div`
+    flex: 1;
+`
+const ItemValue = styled.div`
+    flex: 2;
+`
 const JournalRow = ({ data }) => {
     return (
         <ItemContainer>
             <ItemHeader>{data.journalDate}</ItemHeader>
             <ItemRow>
-                <div>Protein: {data.protein || 0}</div>
-                <div>Carbs: {data.carbs || 0}</div>
-                <div>Veggies: {data.veggies || 0}</div>
+                <ItemGroup>
+                    <ItemLabel>Protein:</ItemLabel>
+                    <ItemValue>{data.protein || 0}</ItemValue>
+                </ItemGroup>
+                <ItemGroup>
+                    <ItemLabel>Carbs:</ItemLabel>
+                    <ItemValue>{data.carbs || 0}</ItemValue>
+                </ItemGroup>
+                <ItemGroup>
+                    <ItemLabel>Veggies:</ItemLabel>
+                    <ItemValue>{data.veggies || 0}</ItemValue>
+                </ItemGroup>
+                <ItemGroup>
+                    <ItemLabel>Fats:</ItemLabel>
+                    <ItemValue>{data.fats || 0}</ItemValue>
+                </ItemGroup>
             </ItemRow>
             <ItemRow>
-                <div>Water: {data.water || 0}</div>
-                <div>Sleep: {data.sleep || 0}</div>
-                <div>Eating Slowly: {data.eat_slowly || 0}</div>
+                <ItemGroup>
+                    <ItemLabel>Water:</ItemLabel>
+                    <ItemValue>{data.water || 0}</ItemValue>
+                </ItemGroup>
+                <ItemGroup>
+                    <ItemLabel>Sleep:</ItemLabel>
+                    <ItemValue>{data.sleep || 0}</ItemValue>
+                </ItemGroup>
+                <ItemGroup>
+                    <ItemLabel>Eating Slowly:</ItemLabel>
+                    <ItemValue>{data.eat_slowly || 0}</ItemValue>
+                </ItemGroup>
+                <ItemGroup>
+                    <ItemLabel>Workout:</ItemLabel>
+                    <ItemValue>{data.workout ? 'Yes' : 'No'}</ItemValue>
+                </ItemGroup>
             </ItemRow>
             <ItemRow>
-                <div>Workout: {data.workout ? 'Yes' : 'No'}</div>
-            </ItemRow>
-            <ItemRow>
-                <div>Extras:</div>
-                <div>Recovery: {data.recovery || 'n/a'}</div>
-                <div>Stress: {data.stress || 'n/a'}</div>
+                <ItemGroup>
+                    <ItemLabel>Recovery:</ItemLabel>
+                    <ItemValue>{config.recoveryScale[data.recovery] || 'n/a'}</ItemValue>
+                </ItemGroup>
+                <ItemGroup>
+                    <ItemLabel>Stress:</ItemLabel>
+                    <ItemValue>{config.stressScale[data.stress] || 'n/a'}</ItemValue>
+                </ItemGroup>
             </ItemRow>
         </ItemContainer>
     )

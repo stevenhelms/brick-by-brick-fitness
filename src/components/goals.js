@@ -52,7 +52,7 @@ const Goals = ({ user, profile }) => {
     return (
         <div style={{ marginBottom: '20px' }}>
             <H3>Daily Goals</H3>
-            <div style={{ display: 'flex', marginBottom: '12px' }}>
+            <div style={{ display: 'flex' }}>
                 <div css={goalcss}>
                     <GoalLabel>Protein:</GoalLabel>
                     <GoalItem>{localProfile.goal_protein || 'X'} servings</GoalItem>
@@ -68,9 +68,16 @@ const Goals = ({ user, profile }) => {
                     <GoalItem>{localProfile.goal_carbs || 'X'} servings</GoalItem>
                 </div>
                 <div css={goalcss}>
+                    <GoalLabel>Fats:</GoalLabel>
+                    <GoalItem>{localProfile.goal_fats || 'X'} servings</GoalItem>
+                </div>
+            </div>
+            <div style={{ display: 'flex', marginBottom: '12px' }}>
+                <div css={goalcss}>
                     <GoalLabel>Water:</GoalLabel>
                     <GoalItem>{localProfile.weight / 2 || '0'} oz.</GoalItem>
                 </div>
+                <div css={goalcss}>&nbsp;</div>
             </div>
         </div>
     )

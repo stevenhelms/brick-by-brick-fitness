@@ -76,6 +76,7 @@ const JournalForm = () => {
             initialValues={{
                 carbs: 0,
                 eat_slowly: 0,
+                fats: 0,
                 protein: 0,
                 sleep: 0,
                 veggies: 0,
@@ -85,9 +86,10 @@ const JournalForm = () => {
             validationSchema={yup.object().shape({
                 carbs: yup.number().required().integer(),
                 eat_slowly: yup.number().required().integer(),
+                fats: yup.number().required().integer(),
                 protein: yup.number().required().integer(),
                 recovery: yup.string().required(),
-                sleep: yup.number().required().positive().integer(),
+                sleep: yup.number().required().integer(),
                 stress: yup.string().required(),
                 veggies: yup.number().required().integer(),
                 water: yup.number().required().integer(),
@@ -140,6 +142,12 @@ const JournalForm = () => {
                             <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
+                            <FormLabel htmlFor="fats">Fats</FormLabel>
+                            <Field type="number" name="fats" />
+                            <ErrorMessage component={Error} name="fats" />
+                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
+                        </FormGroup>
+                        <FormGroup>
                             <FormLabel htmlFor="sleep">Hours Sleep</FormLabel>
                             <Field type="number" name="sleep" />
                             <ErrorMessage component={Error} name="sleep" />
@@ -154,6 +162,13 @@ const JournalForm = () => {
                             <ErrorMessage component={Error} name="eat_slowly" />
                             <FormSubText>
                                 By eating slowly you will feel full faster and as a result you will eat less food.
+                            </FormSubText>
+                        </FormGroup>
+                        <FormGroup>
+                            <FormSubText style={{ marginTop: '30px', fontSize: 'inherit' }}>
+                                The following items will not be part of the challenge scoring, but should create
+                                insights that you may find useful as your journey continues long after the challenge is
+                                complete.
                             </FormSubText>
                         </FormGroup>
                         <FormGroup>
