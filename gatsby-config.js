@@ -42,8 +42,9 @@ module.exports = {
                 },
                 credentials: {
                     apiKey: 'AIzaSyCziiAM1cDeMGws0hd4xDbe9mDBh-CzC6E',
-                    authDomain: 'bear-state.firebaseapp.com',
-                    databaseURL: 'https://bear-state-default-rtdb.firebaseio.com',
+                    authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN || 'bear-state.firebaseapp.com',
+                    databaseURL:
+                        process.env.GATSBY_FIREBASE_DATABASE_URL || 'https://bear-state-default-rtdb.firebaseio.com',
                     projectId: 'bear-state',
                     storageBucket: 'bear-state.appspot.com',
                     messagingSenderId: '383638739474',
