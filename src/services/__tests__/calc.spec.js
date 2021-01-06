@@ -46,9 +46,14 @@ describe('Calc Functions', () => {
         expect(returned).toEqual(3)
     })
 
-    test('calcFoodPoints >75% goal', () => {
+    test('calcFoodPoints <= 100% goal', () => {
         const returned = calcFoodPoints(7, 8)
         expect(returned).toEqual(4)
+    })
+
+    test('calcFoodPoints too much', () => {
+        const returned = calcFoodPoints(9, 8)
+        expect(returned).toEqual(2)
     })
 
     test('calcWaterPoints invalid weight', () => {
@@ -97,6 +102,7 @@ describe('Calc Functions', () => {
             protein: 0,
             veggies: 0,
             carbs: 0,
+            fats: 0,
             water: 0,
             workout: false,
             sleep: 1,
@@ -106,6 +112,7 @@ describe('Calc Functions', () => {
             goal_carbs: 5,
             goal_protein: 8,
             goal_veggies: 12,
+            goals_fats: 4,
             water: 75,
             weight: 150,
         }
@@ -115,9 +122,10 @@ describe('Calc Functions', () => {
 
     test('calculatePoints maximum possible', () => {
         const items = {
+            carbs: 5,
             protein: 8,
             veggies: 12,
-            carbs: 5,
+            fats: 4,
             water: 100,
             workout: true,
             sleep: 10,
@@ -127,6 +135,7 @@ describe('Calc Functions', () => {
             goal_carbs: 5,
             goal_protein: 8,
             goal_veggies: 12,
+            goals_fats: 4,
             water: 75,
             weight: 150,
         }

@@ -27,8 +27,10 @@ export const calcFoodPoints = (actual, goal) => {
         return 2
     } else if (p <= 75) {
         return 3
-    } else {
+    } else if (p <= 100) {
         return 4
+    } else {
+        return 2
     }
 }
 
