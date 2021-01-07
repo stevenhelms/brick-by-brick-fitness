@@ -1,6 +1,6 @@
 const functions = require('firebase-functions')
-const firebase = require('firebase/app')
-require('firebase/database')
+const firebase = require('firebase')
+// require('firebase/database')
 
 firebase.initializeApp({
     apiKey: 'AIzaSyCziiAM1cDeMGws0hd4xDbe9mDBh-CzC6E',
@@ -25,7 +25,7 @@ admin.initializeApp()
 //   response.send("Hello from Firebase!");
 // });
 
-exports.calcTotalPoints = functions.database.ref('/users/{userId}/journal/{entry}').onWrite((change, context) => {
+exports.calcTotalUserPoints = functions.database.ref('/users/{userId}/journal/{entry}').onWrite((change, context) => {
     // console.log(change)
     // console.log(context)
 
@@ -43,11 +43,16 @@ exports.calcTotalPoints = functions.database.ref('/users/{userId}/journal/{entry
     console.log('calcTotalPoints', userId, original)
 
     const updateTotal = total => {
+        console.log(`updateTotal to ${total}`)
         firebase
             .database()
             .ref('users/' + userId)
             .update({ total_points: total })
-        return
+            .catch(error => {
+                console.log(error)
+                return error
+            })
+        return total
     }
 
     firebase
@@ -62,15 +67,18 @@ exports.calcTotalPoints = functions.database.ref('/users/{userId}/journal/{entry
                 // console.log(key)
                 // console.log(data[key])
                 sum += Number(data[key].total_points) || 0
-                console.log(`sum ${sum}`)
+                // console.log(`sum ${sum}`)
                 // return sum
             })
-            console.log(`sum sum ${sum}`)
+            // console.log(`sum sum ${sum}`)
             updateTotal(sum)
             return sum
         })
         .catch(() => {
-            console.log(`Failed to retrieve users/${userId}/journal`)
+            const msg = `Failed to retrieve users/${userId}/journal`
+            console.log(msg)
+            return msg
         })
+
     return 0
 })
