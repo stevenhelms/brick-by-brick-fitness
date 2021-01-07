@@ -18,9 +18,6 @@ const RegistrationForm = () => {
 
     const handleSubmit = values => {
         const inches = feetToInches(values.height_feet, values.height_inches)
-        // console.log(`inches ${inches}`)
-        // const fi = inchesToFeet(inches)
-        // console.log(`inchesToFeet ${fi} ${fi[0]} ${fi[1]}`)
 
         values.height = inches
         delete values.height_feet
@@ -31,7 +28,7 @@ const RegistrationForm = () => {
         values.role = ['participant']
         values.updatedAt = new Date().toISOString()
         values.createdAt = new Date().toISOString()
-        // console.log(values)
+        console.log(values)
 
         const userId = emailToKey(state.user.email)
         firebase

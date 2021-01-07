@@ -4,6 +4,7 @@ import { useAppContext } from '../services/context'
 import { navigate } from 'gatsby'
 
 import { H2 } from '../utils/styles'
+import config from '../../config'
 
 const Profile = ({ user, profile }) => {
     const { state, dispatch } = useAppContext()
@@ -44,12 +45,8 @@ const Profile = ({ user, profile }) => {
                     <hr />
                     <div>Starting Percent Body Fat: {localProfile.pbf_start || 'unset'}</div>
                     <div>End Percent Body Fat: {localProfile.pbf_end || 'unset'}</div>
-                    {/* <hr />
-                    <H3>Daily Goals</H3>
-                    <div>Daily Protein Servings: {localProfile.goal_protein || 'unset'}</div>
-                    <div>Daily Veggie Servings: {localProfile.goal_veggies || 'unset'}</div>
-                    <div>Daily Carbs Servings: {localProfile.goal_carbs || 'unset'}</div>
-                    <div>Daily Water Goal: {localProfile.weight / 2 || 'unset'}</div> */}
+                    <hr />
+                    <div>Overall Level Method Level: {config.levelMethod[localProfile.level_method]}</div>
                 </>
             ) : null}
         </>
