@@ -161,7 +161,8 @@ const JournalForm = () => {
                             <Field type="number" name="eat_slowly" />
                             <ErrorMessage component={Error} name="eat_slowly" />
                             <FormSubText>
-                                By eating slowly you will feel full faster and as a result you will eat less food.
+                                By eating slowly to 80% full, you will feel full faster and as a result you will eat
+                                less food.
                             </FormSubText>
                         </FormGroup>
                         <FormGroup>
@@ -186,7 +187,7 @@ const JournalForm = () => {
                             <ErrorMessage component={Error} name="recovery" />
                             <FormSubText>
                                 How did you feel your recovery was this morning? Recovering from the previous day's
-                                activities is important.
+                                activities is important mentally and physically.
                             </FormSubText>
                         </FormGroup>
                         <FormGroup>
@@ -211,6 +212,10 @@ const JournalForm = () => {
                             <Button type="submit" disabled={false}>
                                 Submit
                             </Button>
+                            <FormSubText>
+                                Should you make a mistake, simply submit this form again on the same day and the
+                                incorrect entry will be replaced with the newest information.
+                            </FormSubText>
                         </FormGroup>
                     </Form>
                 </>

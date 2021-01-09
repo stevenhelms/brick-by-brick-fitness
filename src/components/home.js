@@ -2,10 +2,22 @@ import React, { useState, useEffect } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
 
-import { H2, Ul, Li, Heading, H3, H4, H1 } from '../utils/styles'
+import { H2, Ul, Li, Heading, H3, H4, H1, Button, colors } from '../utils/styles'
+import { Link } from 'gatsby'
 
 const MyContainer = styled.div`
-    flex: 1;
+    flex: 4;
+    @media screen and (max-width: 480px) {
+        margin-top: 30px;
+    }
+`
+const RegisterTodayContainer = styled.div`
+    flex: 2;
+    margin-left: 40px;
+    border: 1px solid ${colors.primaryOrange};
+    border-radius: 3px;
+    padding: 20px;
+    text-align: center;
     @media screen and (max-width: 480px) {
         margin-top: 30px;
     }
@@ -53,16 +65,25 @@ const Players = () => {
 
 const Home = () => (
     <>
-        <H1>Welcome to the Bear State Winter 2021 Nutrition Challenge.</H1>
-        <Players />
-
+        <H1>Bear State Winter 2021 Nutrition Challenge</H1>
+        <div style={{ display: 'flex' }}>
+            <Players />
+            <RegisterTodayContainer>
+                <Link to="/app/login">
+                    <Button>Register Today</Button>
+                </Link>
+                <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>
+                    Registration ends Jan-23-2021.
+                </div>
+            </RegisterTodayContainer>
+        </div>
         <div style={{ marginTop: '30px' }}>
             <H3>Overview</H3>
             <p>
-                2020 left many people disconnected from friends and family, depressed, and full of anxiety, long work
-                hours from home or no work at all. Some may have discovered the "COVID 15" and found an extra 15 lbs.
-                With 2021 full of some of the same uncertanties, it's time to find better healthy habits that will carry
-                us through the year.
+                Welcome! 2020 left many people disconnected from friends and family, depressed, full of anxiety, and
+                with long work hours from home or no work at all. Some may have discovered the "COVID 15" and found an
+                extra 15 lbs they didn't have a year ago. With 2021 full of some of the same uncertanties, it's time to
+                find better healthy habits that will carry us through the year.
             </p>
             <p>
                 Our challenge this year involves adding to your lifestyle, and not restricting. By finding sustainable
@@ -98,10 +119,16 @@ const Home = () => (
             </ul>
             <H4>Challenge Details</H4>
             <ul>
-                <li>The challenge runs from Sunday, January 24, 2021 to Saturday, February 20, 2020.</li>
-                <li>Participants are expected to enter their progress daily into the journal for maximum points.</li>
+                <li>Registration is from Monday, January 11, 2021 to Saturday, January 23, 2021</li>
+                <li>
+                    There will be a kick-off meeting (live and via Zoom) on Saturday, January 23, 2021 at 11:30 a.m.
+                </li>
+                <li>The challenge runs from Sunday, January 24, 2021 to Saturday, February 20, 2021.</li>
+                <li>Participants are expected to enter their daily progress into the journal for maximum points.</li>
                 <li>The calculations supporting the point system will not be made available.</li>
                 <li>Multiple prizes will be awarded at the end of the challenge.</li>
+                <li>Not all prizes will be points based.</li>
+                <li>Prizes will be revealed at the kick-off meeting.</li>
             </ul>
         </div>
     </>
