@@ -3,15 +3,25 @@ import { css } from '@emotion/react'
 
 export const colors = {
     primaryOrange: '#e25a2d',
+    typography: '4E4E4E',
+    typographyGrayed: '#4E4E4E90',
+    lightGray: '#aeaeae',
 }
 
 export const Div = styled.div``
 
 export const Container = styled.div`
-    border: 1px solid #aeaeae;
-    border-radius: 3px;
-    padding: 20px;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    // border: 1px solid ${colors.lightGray};
+    // border-radius: 3px;
+    // padding: 20px;
+    // margin-bottom: 20px;
+`
+
+export const Heading = styled.div`
+    border-bottom: 1px solid ${colors.lightGray};
 `
 
 export const H1 = styled.h1`
@@ -20,7 +30,7 @@ export const H1 = styled.h1`
 `
 
 export const H2 = styled.h2`
-    margin-top: 0;
+    margin: 0 auto;
     color: ${colors.primaryOrange};
 `
 
@@ -52,7 +62,7 @@ export const BodyText = styled.div`
 `
 
 export const BorderDiv = styled.div`
-    border: 1px solid #aeaeae;
+    border: 1px solid ${colors.lightGray};
     border-radius: 3px;
     padding: 20px;
     margin: 20px 0;
@@ -61,6 +71,12 @@ export const BorderDiv = styled.div`
 
 export const Error = styled.div`
     color: red;
+`
+
+export const FlexRow = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 `
 
 export const Form = styled.form``
@@ -73,27 +89,30 @@ export const FormGroup = styled.div`
   margin: 10px 0;
   padding-bottom: 5px;
   display: block;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid ${colors.lightGray};
   :last-child {
     border-bottom: none;
   }
 }
 `
+
 export const FormLabel = styled.label`
     display: inline-block;
     width: 100%;
     padding: 0;
 `
+
 export const FormSubText = styled.div`
     width: 100%;
     padding: 0;
-    color: #999999;
+    color: ${colors.typographyGrayed};
     font-size: 80%;
 `
 
 export const italics = css`
     font-style: italic;
 `
+
 export const inputMargin = css`
     margin: 0 5px 0 10px;
 `

@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Link, navigate } from 'gatsby'
+import styled from '@emotion/styled'
 
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 import Journal from './journal'
-import { BorderDiv, Button, Div } from '../utils/styles'
+import { BorderDiv, Button, Div, Container } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
+import Leaders from './leaders'
+
+const LeaderGoalDiv = styled.div`
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    @media screen and (max-width: 480px) {
+        display: block;
+        // padding-left: 30px;
+    }
+`
 
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
@@ -53,16 +65,26 @@ const Dashboard = () => {
                 </Link>
             </div>
 
-            <BorderDiv>
+            <LeaderGoalDiv>
                 {isReady ? (
                     <>
+                        <Leaders />
                         <Goals user={user} profile={profile} />
-                        <Journal user={user} />
                     </>
                 ) : (
                     <p>Loading...</p>
                 )}
-            </BorderDiv>
+            </LeaderGoalDiv>
+            <Container style={{ display: 'block' }}>
+                {isReady ? (
+                    <>
+                        {/* <Goals user={user} profile={profile} /> */}
+                        <Journal user={user} style={{ flex: 1, flexDirection: 'column' }} />
+                    </>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </Container>
         </Div>
     )
 }

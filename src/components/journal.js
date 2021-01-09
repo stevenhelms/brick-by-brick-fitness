@@ -3,15 +3,18 @@ import { Link } from 'gatsby'
 import firebase from 'gatsby-plugin-firebase'
 import { useAppContext } from '../services/context'
 import { emailToKey } from '../utils/firebase'
-import { Button, H2 } from '../utils/styles'
+import { Button, H2, colors, Heading } from '../utils/styles'
 import styled from '@emotion/styled'
 import config from '../../config'
 
 const ItemContainer = styled.div`
+    flex: 1;
     margin-bottom: 20px;
-    border-bottom: 1px solid #aeaeae;
+    border-bottom: 1px solid ${colors.lightGray};
 `
 const ItemHeader = styled.div`
+    color: ${colors.typographyGrayed};
+
     font-weight: 700;
 `
 const ItemRow = styled.div`
@@ -88,7 +91,7 @@ const JournalRow = ({ data }) => {
     )
 }
 
-const Journal = ({ user, location }) => {
+const Journal = ({ user, location, limit = 50 }) => {
     const { state } = useAppContext()
     const [journal, setJournal] = useState([])
     const [isReady, setIsReady] = useState(false)
@@ -100,16 +103,14 @@ const Journal = ({ user, location }) => {
         firebase
             .database()
             .ref('/users/' + userId + '/journal')
+            .orderByKey()
             .get()
             .then(snapshot => {
                 const items = []
                 snapshot.forEach(item => {
-                    // console.log('+++ adding journal item +++')
-                    // console.log(item.val())
                     items.push(item.val())
                 })
-                // console.log('--- setJournal ---')
-                // console.log(items)
+                items.sort((a, b) => b - a) // Sort decending by date
                 setJournal(items)
                 setIsReady(true)
             })
@@ -125,6 +126,7 @@ const Journal = ({ user, location }) => {
             Object.values(state.profile.journal).forEach(entry => {
                 items.push(entry)
             })
+            items.sort((a, b) => b - a) // Sort decending by date
             setJournal(items)
             setIsReady(true)
         } else {
@@ -140,7 +142,9 @@ const Journal = ({ user, location }) => {
 
     return (
         <>
-            <H2>Journal</H2>
+            <Heading>
+                <H2>Journal</H2>
+            </Heading>
 
             {fullPage ? (
                 <p>

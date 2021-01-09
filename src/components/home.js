@@ -4,17 +4,6 @@ import firebase from 'gatsby-plugin-firebase'
 
 import { Container, H2, Ul, Li } from '../utils/styles'
 
-const Leaders = () => {
-    return (
-        <Container>
-            <H2>Leaders</H2>
-            <Ul>
-                <Li>Coming soon...</Li>
-            </Ul>
-        </Container>
-    )
-}
-
 const Players = () => {
     const [players, setPlayers] = useState([])
     const [isReady, setIsReady] = useState(false)
@@ -56,7 +45,7 @@ const Players = () => {
 const Home = () => (
     <>
         <H2>Welcome to the Bear State Winter 2021 Nutrition Challenge.</H2>
-        <Leaders />
+        {/* <Leaders /> */}
         <Players />
     </>
 )
