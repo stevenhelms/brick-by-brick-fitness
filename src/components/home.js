@@ -5,12 +5,21 @@ import styled from '@emotion/styled'
 import { H2, Ul, Li, Heading, H3, H4, H1, Button, colors } from '../utils/styles'
 import { Link } from 'gatsby'
 
-const MyContainer = styled.div`
+const TopBlock = styled.div`
+    display: flex;
+    @media screen and (max-width: 480px) {
+        display: block;
+    }
+`
+
+const PlayerContainer = styled.div`
     flex: 4;
     @media screen and (max-width: 480px) {
         margin-top: 30px;
+        margin-bottom: 30px;
     }
 `
+
 const RegisterTodayContainer = styled.div`
     flex: 2;
     margin-left: 40px;
@@ -20,6 +29,17 @@ const RegisterTodayContainer = styled.div`
     text-align: center;
     @media screen and (max-width: 480px) {
         margin-top: 30px;
+        margin-left: 0;
+    }
+`
+
+const PlayerList = styled.div`
+    margin-bottom: 30px;
+    padding: 20px 0;
+
+    @media screen and (max-width: 480px) {
+        display: block;
+        margin-left: 0;
     }
 `
 
@@ -44,11 +64,11 @@ const Players = () => {
     }, [])
 
     return (
-        <MyContainer>
+        <PlayerContainer>
             <Heading>
                 <H2>Participants</H2>
             </Heading>
-            <Ul>
+            {/* <Ul>
                 {isReady ? (
                     <>
                         {players.map((player, i) => (
@@ -58,25 +78,40 @@ const Players = () => {
                 ) : (
                     <p>Loading...</p>
                 )}
-            </Ul>
-        </MyContainer>
+                </Ul> */}
+            <PlayerList>
+                {isReady ? (
+                    <>
+                        {players.map((player, i) => (
+                            <div style={{ display: 'block', float: 'left', marginRight: '10px' }} key={i}>
+                                {player.first}
+                            </div>
+                        ))}
+                    </>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </PlayerList>
+        </PlayerContainer>
     )
 }
+
+const RegisterToday = () => (
+    <RegisterTodayContainer>
+        <Link to="/app/login">
+            <Button>Register Today</Button>
+        </Link>
+        <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>Registration ends Jan-23-2021.</div>
+    </RegisterTodayContainer>
+)
 
 const Home = () => (
     <>
         <H1>Bear State Winter 2021 Nutrition Challenge</H1>
-        <div style={{ display: 'flex' }}>
+        <TopBlock>
             <Players />
-            <RegisterTodayContainer>
-                <Link to="/app/login">
-                    <Button>Register Today</Button>
-                </Link>
-                <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>
-                    Registration ends Jan-23-2021.
-                </div>
-            </RegisterTodayContainer>
-        </div>
+            <RegisterToday />
+        </TopBlock>
         <div style={{ marginTop: '30px' }}>
             <H3>Overview</H3>
             <p>
@@ -131,6 +166,7 @@ const Home = () => (
                 <li>Prizes will be revealed at the kick-off meeting.</li>
             </ul>
         </div>
+        <RegisterToday />
     </>
 )
 
