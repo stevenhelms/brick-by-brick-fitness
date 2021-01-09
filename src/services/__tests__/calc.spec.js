@@ -3,32 +3,32 @@ import { calcSleepPoints, feetToInches, inchesToFeet, calcWaterPoints, calcFoodP
 describe('Calc Functions', () => {
     test('calcSleepPoints 1 hour', () => {
         const returned = calcSleepPoints(1)
-        expect(returned).toEqual(1)
+        expect(returned).toEqual(0)
     })
 
     test('calcSleepPoints 5 hours', () => {
         const returned = calcSleepPoints(5)
+        expect(returned).toEqual(0)
+    })
+
+    test('calcSleepPoints 5.5 hours', () => {
+        const returned = calcSleepPoints(5.5)
         expect(returned).toEqual(1)
     })
 
-    test('calcSleepPoints 6 hours', () => {
-        const returned = calcSleepPoints(6)
+    test('calcSleepPoints 6.5 hours', () => {
+        const returned = calcSleepPoints(6.5)
         expect(returned).toEqual(2)
-    })
-
-    test('calcSleepPoints 7 hours', () => {
-        const returned = calcSleepPoints(7)
-        expect(returned).toEqual(3)
     })
 
     test('calcSleepPoints 8 hours', () => {
         const returned = calcSleepPoints(8)
-        expect(returned).toEqual(4)
+        expect(returned).toEqual(5)
     })
 
     test('calcSleepPoints 10 hours', () => {
         const returned = calcSleepPoints(10)
-        expect(returned).toEqual(5)
+        expect(returned).toEqual(4)
     })
 
     test('calcFoodPoints 25% goal', () => {
@@ -105,7 +105,7 @@ describe('Calc Functions', () => {
             fats: 0,
             water: 0,
             workout: false,
-            sleep: 1,
+            sleep: 0,
             eat_slowly: 0,
         }
         const user = {
@@ -117,7 +117,7 @@ describe('Calc Functions', () => {
             weight: 150,
         }
         const points = calculatePoints(items, user)
-        expect(points).toEqual(5)
+        expect(points).toEqual(4)
     })
 
     test('calculatePoints maximum possible', () => {
@@ -128,7 +128,7 @@ describe('Calc Functions', () => {
             fats: 4,
             water: 100,
             workout: true,
-            sleep: 10,
+            sleep: 8,
             eat_slowly: 4,
         }
         const user = {

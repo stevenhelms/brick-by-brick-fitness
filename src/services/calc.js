@@ -30,21 +30,24 @@ export const calcFoodPoints = (actual, goal) => {
     } else if (p <= 100) {
         return 4
     } else {
+        // Penalty for exceeding recommended
         return 2
     }
 }
 
 export const calcSleepPoints = actual => {
     if (actual <= 5) {
-        return 1
+        // No points for minimal sleep.
+        return 0
     } else if (actual <= 6) {
+        return 1
+    } else if (actual < 7) {
         return 2
-    } else if (actual <= 7) {
-        return 3
-    } else if (actual <= 8) {
-        return 4
-    } else {
+    } else if (actual >= 7 && actual <= 9) {
+        // 7-9 hours is ideal
         return 5
+    } else {
+        return 4 // more than 9 hours
     }
 }
 
