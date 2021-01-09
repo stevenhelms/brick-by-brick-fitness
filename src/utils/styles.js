@@ -39,6 +39,11 @@ export const H3 = styled.h3`
     margin-bottom: 10px;
     color: ${colors.primaryOrange};
 `
+export const H4 = styled.h4`
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: ${colors.typographyGrayed};
+`
 
 export const Ul = styled.ul`
     list-style: none;
