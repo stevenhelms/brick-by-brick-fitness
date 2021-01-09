@@ -9,23 +9,26 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.min.css'
+import { css } from '@emotion/react'
+
 import { useAppContext } from '../services/context'
 import { isBrowser } from '../utils/browser'
-
+import { colors } from '../utils/styles'
 import Header from './header'
 import Footer from './footer'
 import { getUser } from '../services/auth-firebase'
 
-const Body = styled.div`
-    margin: 3rem auto 0 auto;
-    max-width: 960px;
+const bodycss = css`
+    display: flex;
+    min-height: 100vh;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #1f1f1f;
+    color: ${colors.typography};
+`
+const maincss = css`
+    flex: 1;
     width: 80%;
+    margin: 3rem auto 0 auto;
+    align-items: center;
 `
 
 const Layout = ({ children, fullMenu }) => {
@@ -46,14 +49,11 @@ const Layout = ({ children, fullMenu }) => {
     `)
 
     return (
-        <>
+        <body css={bodycss}>
             <Header siteTitle={data.site.siteMetadata?.title || `Title`} fullMenu={fullMenu} />
-            <Body>
-                <main>{children}</main>
-            </Body>
+            <main css={maincss}>{children}</main>
             <Footer />
-            <ToastContainer />
-        </>
+        </body>
     )
 }
 

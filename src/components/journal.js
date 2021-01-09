@@ -147,7 +147,7 @@ const Journal = ({ user, location, limit = 50 }) => {
             </Heading>
 
             {fullPage ? (
-                <p>
+                <p style={{ paddingTop: '10px' }}>
                     <Link to="/app/create">
                         <Button>Create Journal</Button>
                     </Link>
