@@ -151,6 +151,14 @@ const Home = () => (
                 <li>Receive custom nutrition goals (with macros).</li>
                 <li>Have full access to the challenge application, personal journal.</li>
                 <li>Have access to a nutrition coach for questions along the way.</li>
+                <li>Learn better habits by completing the various challenges.</li>
+                <li>Be able to utilize hand portions for meals and understand appropriate portions of food.</li>
+                <li>Start at the same place as others. There is no advantage given to anyone.</li>
+                <li>
+                    Track different aspects of their day and enter them into the challenge app (this site) each day.
+                    Participants may track them on paper and enter them later, but online entry is a requirement to
+                    participate.
+                </li>
             </ul>
             <H4>Challenge Details</H4>
             <ul>
