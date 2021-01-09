@@ -4,13 +4,14 @@ const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 admin.initializeApp()
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const calcTotals = (data, field) => {
+    let sum = 0
+    Object.keys(data).forEach(key => {
+        sum += Number(data[key][field]) || 0
+    })
+    console.log(`calcTotals(${field}): ${sum}`)
+    return sum
+}
 
 exports.calcTotalUserPoints = functions.database.ref('/users/{userId}/journal/{entry}').onWrite((change, context) => {
     const userId = context.params.userId
@@ -31,17 +32,34 @@ exports.calcTotalUserPoints = functions.database.ref('/users/{userId}/journal/{e
         .then(snap => {
             const data = snap.val()
             // console.log(data)
-            let sum = 0
-            Object.keys(data).forEach(key => {
-                // console.log(key)
-                // console.log(data[key])
-                sum += Number(data[key].total_points) || 0
-                // console.log(`sum ${sum}`)
-                // return sum
-            })
-            console.log(`calculated sum: ${sum}`)
-            change.after.ref.parent.parent.child('total_points').set(sum)
-            return sum
+
+            // Capture total points achieved
+            let points = calcTotals(data, 'total_points')
+            change.after.ref.parent.parent.child('totals/points').set(points)
+            change.after.ref.parent.parent.child('totals_points').set(points) // legacy
+
+            points = calcTotals(data, 'protein')
+            change.after.ref.parent.parent.child('totals/protein').set(points)
+
+            points = calcTotals(data, 'carbs')
+            change.after.ref.parent.parent.child('totals/carbs').set(points)
+
+            points = calcTotals(data, 'fats')
+            change.after.ref.parent.parent.child('totals/fats').set(points)
+
+            points = calcTotals(data, 'veggies')
+            change.after.ref.parent.parent.child('totals/veggies').set(points)
+
+            points = calcTotals(data, 'water')
+            change.after.ref.parent.parent.child('totals/water').set(points)
+
+            points = calcTotals(data, 'sleep')
+            change.after.ref.parent.parent.child('totals/sleep').set(points)
+
+            points = calcTotals(data, 'eat_slowly')
+            change.after.ref.parent.parent.child('totals/eat_slowly').set(points)
+
+            return 0
         })
         .catch(err => {
             const msg = `Failed to retrieve /users/${userId}/journal`
