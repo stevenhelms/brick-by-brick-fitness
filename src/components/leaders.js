@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
-// import LineChart from './linechart'
 
 import { H2, Ul, Li, Heading, FlexRow, Container } from '../utils/styles'
 

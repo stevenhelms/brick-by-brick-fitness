@@ -82,3 +82,12 @@ export const inchesToFeet = inches => {
     const i = inches - f * 12
     return [f, i]
 }
+
+export const calcTotalPointsByDay = users => {
+    return [
+        { x: '2021-01-01', y: 3 },
+        { x: '2021-01-02', y: 5 },
+        { x: '2021-01-03', y: 15 },
+        { x: '2021-01-04', y: 12 },
+    ]
+}

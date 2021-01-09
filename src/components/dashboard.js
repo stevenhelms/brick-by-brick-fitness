@@ -5,11 +5,22 @@ import styled from '@emotion/styled'
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 import Journal from './journal'
-import { BorderDiv, Button, Div, Container } from '../utils/styles'
+import { Button, Div, Container, colors } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
 
+const DailyTipsContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    border: 1px solid ${colors.primaryOrange};
+    border-radius: 3px;
+    padding: 20px;
+    @media screen and (max-width: 480px) {
+        margin-left: 0;
+    }
+`
 const LeaderGoalDiv = styled.div`
     display: flex;
     justify-content: space-around;
@@ -20,6 +31,20 @@ const LeaderGoalDiv = styled.div`
     }
 `
 
+const DailyTips = () => {
+    const [todaysTips, setTodaysTips] = useState(undefined)
+
+    useEffect(() => {
+        // Add logic for tips display
+        setTodaysTips('Tips')
+    }, [])
+
+    if (!todaysTips) {
+        return null
+    }
+
+    return <DailyTipsContainer>{todaysTips} </DailyTipsContainer>
+}
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
     // const [user] = useState(getUser())
@@ -57,7 +82,7 @@ const Dashboard = () => {
         <Div style={{ width: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <h4>Welcome back{greeting}!</h4>
-                <Link to="/app/profile" style={{ fontSize: 'smaller', color: '#999999' }}>
+                <Link to="/app/profile" style={{ fontSize: 'smaller', color: '#999999', margin: '5px' }}>
                     Profile
                 </Link>
                 <Link to="/app/create">
@@ -65,6 +90,7 @@ const Dashboard = () => {
                 </Link>
             </div>
 
+            <DailyTips />
             <LeaderGoalDiv>
                 {isReady ? (
                     <>
