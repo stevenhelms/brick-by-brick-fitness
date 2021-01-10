@@ -47,6 +47,19 @@ module.exports = {
         4: 'Mostly',
         5: 'Full',
     },
+    challengeGoal: [
+        { short: 'Lose Weight', long: 'Want to lose at least 10-15 pounds (or more).' },
+        { short: 'Body Recomposition', long: 'Want to lose less than 10-15 pounds while building muscle.' },
+        {
+            short: 'Improve Health',
+            long: 'Want to improve nutrition and overall health while maintaining current weight.',
+        },
+        { short: 'Build Muscle', long: 'Want to build muscle and increase overall body weight.' },
+        {
+            short: 'Athletic Performance',
+            long: 'Want optimal nutrition to support long and intense athletic training.',
+        },
+    ],
     levelMethod: [
         'white',
         'white 1',

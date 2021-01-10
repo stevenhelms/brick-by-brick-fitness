@@ -8,7 +8,7 @@ import { navigate } from 'gatsby'
 import { useAppContext } from '../services/context'
 import { emailToKey, getProfile } from '../utils/firebase'
 
-import { BorderDiv, BodyText, FormGroup, FormLabel, italics, Button, Error, H1 } from '../utils/styles'
+import { BorderDiv, BodyText, FormGroup, FormLabel, italics, Button, Error, H1, colors } from '../utils/styles'
 import { feetToInches } from '../services/calc'
 import { toTitleCase } from '../utils/strings'
 import config from '../../config'
@@ -92,7 +92,7 @@ const RegistrationForm = () => {
                             <Field name="first" type="text" />
                             <ErrorMessage component={Error} name="first" />
                         </FormGroup>
-                        <FormGroup>
+                        <FormGroup borderBottom>
                             <FormLabel htmlFor="last">Last Name</FormLabel>
                             <Field name="last" type="text" />
                             <ErrorMessage component={Error} name="last" />
@@ -118,18 +118,38 @@ const RegistrationForm = () => {
                             <ErrorMessage component={Error} name="height_feet" />
                             <ErrorMessage component={Error} name="height_inches" />
                         </FormGroup>
-                        <FormGroup>
+                        <FormGroup borderBottom>
                             <FormLabel htmlFor="goal_weight">Goal Weight</FormLabel>
                             <Field name="goal_weight" type="number" />
                             <ErrorMessage component={Error} name="goal_weight" />
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="level_method">Overall Level Method Level</FormLabel>
-                            <select name="levelMethod">
+                            <Field as="select" name="level_method">
                                 {Object.keys(config.levelMethod).map(index => {
                                     return <option value={index}>{toTitleCase(config.levelMethod[index])}</option>
                                 })}
-                            </select>
+                            </Field>
+                        </FormGroup>
+                        <FormGroup>
+                            <FormLabel htmlFor="goal_challenge">What is your Goal?</FormLabel>
+                            <Field as="select" name="goal_challenge">
+                                {Object.keys(config.challengeGoal).map(index => {
+                                    return (
+                                        <option value={config.challengeGoal[index].short}>
+                                            {toTitleCase(config.challengeGoal[index].short)}
+                                        </option>
+                                    )
+                                })}
+                            </Field>
+                            {Object.keys(config.challengeGoal).map(index => {
+                                return (
+                                    <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>
+                                        <strong>{config.challengeGoal[index].short}</strong> -{' '}
+                                        {config.challengeGoal[index].long}
+                                    </div>
+                                )
+                            })}
                         </FormGroup>
                         <FormGroup style={{ textAlign: 'center' }}>
                             <Button type="submit" disabled={false}>

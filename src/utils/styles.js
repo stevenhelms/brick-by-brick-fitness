@@ -97,7 +97,7 @@ export const FormGroup = styled.div`
   margin: 10px 0;
   padding-bottom: 5px;
   display: block;
-  border-bottom: 1px solid ${colors.lightGray};
+  ${({ borderBottom }) => borderBottom && 'border-bottom: 1px solid ' + colors.lightGray + ';'}
   :last-child {
     border-bottom: none;
   }
@@ -115,6 +115,41 @@ export const FormSubText = styled.div`
     padding: 0;
     color: ${colors.typographyGrayed};
     font-size: 80%;
+`
+
+export const ItemContainer = styled.div`
+    flex: 1;
+    margin-bottom: 20px;
+    border-bottom: 1px solid ${colors.veryLightGray};
+`
+export const ItemHeader = styled.div`
+    color: ${colors.typographyGrayed};
+    font-weight: 700;
+`
+export const ItemRow = styled.div`
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid ${colors.veryLightGray};
+    font-size: smaller;
+    ${({ extraSpace }) => extraSpace && 'padding: 8px 0;'}
+
+    @media screen and (max-width: 480px) {
+        // display: inline-block;
+        padding-left: 10px;
+        flex-direction: column;
+    }
+`
+export const ItemGroup = styled.div`
+    flex: 1;
+    display: flex;
+`
+export const ItemLabel = styled.div`
+    color: ${colors.typographyGrayed};
+    font-weight: 700;
+    flex: 2;
+`
+export const ItemValue = styled.div`
+    flex: 3;
 `
 
 export const italics = css`

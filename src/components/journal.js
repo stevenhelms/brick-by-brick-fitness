@@ -3,42 +3,21 @@ import { Link } from 'gatsby'
 import firebase from 'gatsby-plugin-firebase'
 import { useAppContext } from '../services/context'
 import { emailToKey } from '../utils/firebase'
-import { Button, H2, colors, Heading } from '../utils/styles'
+import {
+    Button,
+    H2,
+    colors,
+    Heading,
+    ItemContainer,
+    ItemGroup,
+    ItemHeader,
+    ItemRow,
+    ItemLabel,
+    ItemValue,
+} from '../utils/styles'
 import styled from '@emotion/styled'
 import config from '../../config'
 
-const ItemContainer = styled.div`
-    flex: 1;
-    margin-bottom: 20px;
-    border-bottom: 1px solid ${colors.veryLightGray};
-`
-const ItemHeader = styled.div`
-    color: ${colors.typographyGrayed};
-    font-weight: 700;
-`
-const ItemRow = styled.div`
-    display: flex;
-    justify-content: space-around;
-    border-bottom: 1px solid ${colors.veryLightGray};
-    font-size: smaller;
-    @media screen and (max-width: 480px) {
-        // display: inline-block;
-        padding-left: 10px;
-        flex-direction: column;
-    }
-`
-const ItemGroup = styled.div`
-    flex: 1;
-    display: flex;
-`
-const ItemLabel = styled.div`
-    color: ${colors.typographyGrayed};
-    font-weight: 700;
-    flex: 2;
-`
-const ItemValue = styled.div`
-    flex: 3;
-`
 const JournalRow = ({ data }) => {
     return (
         <ItemContainer>

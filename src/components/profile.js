@@ -3,8 +3,9 @@ import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 import { navigate } from 'gatsby'
 
-import { H2 } from '../utils/styles'
+import { H2, ItemContainer, ItemGroup, ItemHeader, ItemRow, ItemLabel, ItemValue } from '../utils/styles'
 import config from '../../config'
+import { toTitleCase } from '../utils/strings'
 
 const Profile = ({ user, profile }) => {
     const { state, dispatch } = useAppContext()
@@ -32,22 +33,60 @@ const Profile = ({ user, profile }) => {
         <>
             <H2>Profile</H2>
             {isReady ? (
-                <>
-                    <div>Email: {localProfile.email}</div>
-                    <div>
-                        Name: {localProfile.first} {localProfile.last}
-                    </div>
-                    <div>Age: {localProfile.age}</div>
-                    <div>Gender: {localProfile.gender}</div>
+                <ItemContainer>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Email:</ItemLabel>
+                        <ItemValue>{localProfile.email}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Name:</ItemLabel>
+                        <ItemValue>
+                            {localProfile.first} {localProfile.last}
+                        </ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Age:</ItemLabel>
+                        <ItemValue>{localProfile.age}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Gender:</ItemLabel>
+                        <ItemValue>{localProfile.gender}</ItemValue>
+                    </ItemRow>
+
                     <hr />
-                    <div>Starting Weight: {localProfile.weight || 'unset'}</div>
-                    <div>Goal Weight: {localProfile.goal_weight}</div>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Starting Weight:</ItemLabel>
+                        <ItemValue>{localProfile.weight}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Goal Weight:</ItemLabel>
+                        <ItemValue>{localProfile.goal_weight}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>End Weight:</ItemLabel>
+                        <ItemValue>{localProfile.weight_end}</ItemValue>
+                    </ItemRow>
+
                     <hr />
-                    <div>Starting Percent Body Fat: {localProfile.pbf_start || 'unset'}</div>
-                    <div>End Percent Body Fat: {localProfile.pbf_end || 'unset'}</div>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Starting Percent Body Fat:</ItemLabel>
+                        <ItemValue>{localProfile.pbf_start}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>End Percent Body Fat:</ItemLabel>
+                        <ItemValue>{localProfile.pbf_end}</ItemValue>
+                    </ItemRow>
+
                     <hr />
-                    <div>Overall Level Method Level: {config.levelMethod[localProfile.level_method]}</div>
-                </>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Overall Level Method Level:</ItemLabel>
+                        <ItemValue>{toTitleCase(config.levelMethod[localProfile.level_method])}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Challenge Goal:</ItemLabel>
+                        <ItemValue>{localProfile.goal_challenge}</ItemValue>
+                    </ItemRow>
+                </ItemContainer>
             ) : null}
         </>
     )
