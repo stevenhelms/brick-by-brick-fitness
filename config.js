@@ -32,6 +32,12 @@ module.exports = {
             name: 'Email',
             url: 'mailto:bearstatecf@gmail.com',
         },
+        {
+            style: 'solid',
+            icon: 'fa-envelope',
+            name: 'Website',
+            url: 'https://bearstategym.com',
+        },
     ],
     stressScale: {
         1: 'None',

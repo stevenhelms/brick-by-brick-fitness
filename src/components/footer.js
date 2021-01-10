@@ -1,6 +1,6 @@
 import React from 'react'
 import config from '../../config'
-import { Instagram, Facebook, Mail } from 'react-feather'
+import { Instagram, Facebook, Mail, Globe } from 'react-feather'
 import { css } from '@emotion/react'
 import { colors } from '../utils/styles'
 
@@ -14,13 +14,14 @@ const footerStyle = css`
 `
 const ulStyle = css`
     list-style: none;
+
     @media screen and (max-width: 480px) {
         margin-left: 0;
     }
 `
 const liStyle = css`
     display: inline;
-    margin-right: 40px;
+    margin: 0 20px;
     :last-child() {
         margin-right: 0;
     }
@@ -28,11 +29,14 @@ const liStyle = css`
         display: block;
         text-align: center;
         float: none;
-        margin-right: 10px;
+        margin: 0 5px;
     }
 `
 const aStyle = css`
     color: white;
+`
+const grayStyle = css`
+    color: ${colors.lightGray};
 `
 
 const Footer = () => {
@@ -43,14 +47,16 @@ const Footer = () => {
                     const { name, url } = social
                     return (
                         <li css={liStyle} key={url}>
-                            <a href={url} css={aStyle}>
+                            <a target="_blank" href={url} css={aStyle}>
                                 <span className="label">
                                     {name === 'Instagram' ? (
                                         <Instagram />
                                     ) : name === 'Facebook' ? (
                                         <Facebook />
-                                    ) : (
+                                    ) : name === 'Email' ? (
                                         <Mail />
+                                    ) : (
+                                        <Globe />
                                     )}{' '}
                                     {name}
                                 </span>
@@ -60,8 +66,11 @@ const Footer = () => {
                 })}
             </ul>
             <ul css={ulStyle}>
-                <li css={liStyle}>
-                    &copy;{new Date().getFullYear()} <a href="https://www.bearstategym.com">Bear State Gym</a>
+                <li css={grayStyle}>
+                    &copy; {new Date().getFullYear()}{' '}
+                    <a css={grayStyle} target="_blank" href="https://shelms.dev/Nutrition">
+                        Steve Helms
+                    </a>
                 </li>
             </ul>
         </footer>
