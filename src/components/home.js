@@ -122,7 +122,7 @@ const Home = () => (
             </p>
             <p>
                 Our challenge this year involves adding to your lifestyle, and not restricting. By finding sustainable
-                habits you can lose the weight you found last year and be armed with the tools to keep it of.
+                habits you can lose the weight you found last year and be armed with the tools to keep it off.
             </p>
             <p>
                 Each participant will be given a unique set of goals to meet. Progress will be measured by meeting those
