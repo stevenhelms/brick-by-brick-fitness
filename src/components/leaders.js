@@ -11,6 +11,15 @@ const MyContainer = styled.div`
         margin-right: 0px;
     }
 `
+const sortByTotalPoints = (a, b) => {
+    if (a.totals?.points && b.totals?.points) {
+        return b.totals.points - a.totals.points
+    } else if (!a.totals?.points) {
+        return -1
+    } else {
+        return 1
+    }
+}
 
 const Leaders = ({ ...rest }) => {
     const [leaders, setLeaders] = useState([])
@@ -20,7 +29,6 @@ const Leaders = ({ ...rest }) => {
         firebase
             .database()
             .ref('/users')
-            // .orderByChild('total_points')
             .get()
             .then(snapshot => {
                 const items = []
@@ -28,7 +36,7 @@ const Leaders = ({ ...rest }) => {
                     // console.log(item.val())
                     items.push(item.val())
                 })
-                items.sort((a, b) => b.total_points - a.total_points) // Sort decending
+                items.sort((a, b) => sortByTotalPoints(a, b)) // Sort decending
                 setLeaders(items.slice(0, 5)) // Only the Top 5
                 setIsReady(true)
             })
@@ -39,15 +47,20 @@ const Leaders = ({ ...rest }) => {
             <Heading>
                 <H2>Leaders</H2>
             </Heading>
-            {/* <LineChart /> */}
             <Container style={{ flexDirection: 'column', padding: '0 20px' }}>
                 {isReady ? (
-                    leaders.map((leader, i) => (
-                        <FlexRow key={i} style={{ borderBottom: '1px solid ' + colors.veryLightGray }}>
-                            <div style={{ flex: 1 }}>{leader.first}</div>
-                            <div style={{ flex: 1 }}>{leader.total_points || 0}</div>
-                        </FlexRow>
-                    ))
+                    leaders.map((leader, i) => {
+                        if (!leader.totals) {
+                            // No journal entries yet which builds totals
+                            return null
+                        }
+                        return (
+                            <FlexRow key={i} style={{ borderBottom: '1px solid ' + colors.veryLightGray }}>
+                                <div style={{ flex: 1 }}>{leader.first}</div>
+                                <div style={{ flex: 1 }}>{leader?.totals.points || 0}</div>
+                            </FlexRow>
+                        )
+                    })
                 ) : (
                     <p>Loading...</p>
                 )}
