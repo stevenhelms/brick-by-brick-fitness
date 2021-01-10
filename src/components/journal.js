@@ -21,6 +21,7 @@ const ItemRow = styled.div`
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid #eeeeee;
+    font-size: smaller;
     @media screen and (max-width: 480px) {
         // display: inline-block;
         padding-left: 10px;
@@ -32,10 +33,12 @@ const ItemGroup = styled.div`
     display: flex;
 `
 const ItemLabel = styled.div`
-    flex: 1;
+    color: ${colors.typographyGrayed};
+    font-weight: 700;
+    flex: 2;
 `
 const ItemValue = styled.div`
-    flex: 2;
+    flex: 3;
 `
 const JournalRow = ({ data }) => {
     return (
@@ -86,6 +89,8 @@ const JournalRow = ({ data }) => {
                     <ItemLabel>Stress:</ItemLabel>
                     <ItemValue>{config.stressScale[data.stress] || 'n/a'}</ItemValue>
                 </ItemGroup>
+                <ItemGroup></ItemGroup>
+                <ItemGroup></ItemGroup>
             </ItemRow>
         </ItemContainer>
     )
