@@ -58,12 +58,13 @@ const RegistrationForm = () => {
                 goal_weight: 0,
                 gender: 'male',
                 level_method: 0,
+                goal_challenge: 'Lose Weight',
             }}
             validationSchema={yup.object().shape({
-                age: yup.number().required().positive().integer(),
-                height_feet: yup.number().required().positive().integer(),
+                age: yup.number().required().positive().min(10).max(99).integer(),
+                height_feet: yup.number().required().min(3).max(7).integer(),
                 height_inches: yup.number().required().min(0).max(11).integer(),
-                goal_weight: yup.number().required().positive().integer(),
+                goal_weight: yup.number().required().integer(),
                 gender: yup.string().required(),
                 first: yup.string().required(),
                 last: yup.string().required(),
