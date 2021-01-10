@@ -30,6 +30,7 @@ const liStyle = css`
         text-align: center;
         float: none;
         margin: 0 5px;
+        padding: 5px 0;
     }
 `
 const aStyle = css`
