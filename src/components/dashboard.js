@@ -82,7 +82,7 @@ const Dashboard = () => {
         <Div style={{ width: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <h4>Welcome back{greeting}!</h4>
-                <Link to="/app/profile" style={{ fontSize: 'smaller', color: '#999999', margin: '5px' }}>
+                <Link to="/app/profile" style={{ fontSize: 'smaller', color: colors.typographyGrayed, margin: '5px' }}>
                     Profile
                 </Link>
                 <Link to="/app/create">

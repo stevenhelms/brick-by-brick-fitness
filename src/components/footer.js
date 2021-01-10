@@ -1,12 +1,12 @@
 import React from 'react'
 import config from '../../config'
 import { Instagram, Facebook, Mail } from 'react-feather'
-// import styled from "@emotion/styled"
 import { css } from '@emotion/react'
+import { colors } from '../utils/styles'
 
 const footerStyle = css`
     margin: 40px auto 0 auto;
-    background-color: #171717;
+    background: ${colors.background};
     color: #ffffff;
     width: 100%;
     text-align: center;

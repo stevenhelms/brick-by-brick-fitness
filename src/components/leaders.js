@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
 
-import { H2, Ul, Li, Heading, FlexRow, Container } from '../utils/styles'
+import { H2, Ul, Li, Heading, FlexRow, Container, colors } from '../utils/styles'
 
 const MyContainer = styled.div`
     flex: 1;
@@ -43,7 +43,7 @@ const Leaders = ({ ...rest }) => {
             <Container style={{ flexDirection: 'column', padding: '0 20px' }}>
                 {isReady ? (
                     leaders.map((leader, i) => (
-                        <FlexRow key={i} style={{ borderBottom: '1px solid #dedede' }}>
+                        <FlexRow key={i} style={{ borderBottom: '1px solid ' + colors.veryLightGray }}>
                             <div style={{ flex: 1 }}>{leader.first}</div>
                             <div style={{ flex: 1 }}>{leader.total_points || 0}</div>
                         </FlexRow>

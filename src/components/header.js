@@ -5,8 +5,10 @@ import Nav from './nav'
 import styled from '@emotion/styled'
 import Img from 'gatsby-image'
 
+import { colors } from '../utils/styles'
+
 const StyledHeader = styled.header`
-    background: #222222;
+    background: ${colors.background};
     margin-bottom: 10px;
     overflow: hidden;
     padding: 1rem;

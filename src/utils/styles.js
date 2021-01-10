@@ -3,9 +3,12 @@ import { css } from '@emotion/react'
 
 export const colors = {
     primaryOrange: '#e25a2d',
-    typography: '4E4E4E',
+    typography: '#4E4E4E',
     typographyGrayed: '#4E4E4E90',
+    typographyGrayed2: '#4E4E4E98',
     lightGray: '#aeaeae',
+    veryLightGray: '#eeeeee',
+    background: '#171717',
 }
 
 export const Div = styled.div``

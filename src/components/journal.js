@@ -10,17 +10,16 @@ import config from '../../config'
 const ItemContainer = styled.div`
     flex: 1;
     margin-bottom: 20px;
-    border-bottom: 1px solid ${colors.lightGray};
+    border-bottom: 1px solid ${colors.veryLightGray};
 `
 const ItemHeader = styled.div`
     color: ${colors.typographyGrayed};
-
     font-weight: 700;
 `
 const ItemRow = styled.div`
     display: flex;
     justify-content: space-around;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid ${colors.veryLightGray};
     font-size: smaller;
     @media screen and (max-width: 480px) {
         // display: inline-block;
