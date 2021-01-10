@@ -3,7 +3,7 @@ import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 import { navigate } from 'gatsby'
 
-import { H2, ItemContainer, ItemGroup, ItemHeader, ItemRow, ItemLabel, ItemValue } from '../utils/styles'
+import { H2, ItemContainer, ItemRow, ItemLabel, ItemValue } from '../utils/styles'
 import config from '../../config'
 import { toTitleCase } from '../utils/strings'
 

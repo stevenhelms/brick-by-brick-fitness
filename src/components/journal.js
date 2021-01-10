@@ -6,7 +6,6 @@ import { emailToKey } from '../utils/firebase'
 import {
     Button,
     H2,
-    colors,
     Heading,
     ItemContainer,
     ItemGroup,
@@ -15,7 +14,6 @@ import {
     ItemLabel,
     ItemValue,
 } from '../utils/styles'
-import styled from '@emotion/styled'
 import config from '../../config'
 
 const JournalRow = ({ data }) => {

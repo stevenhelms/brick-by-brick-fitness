@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
 
-import { H2, Ul, Li, Heading, H3, H4, H1, Button, colors } from '../utils/styles'
+import { H2, Heading, H3, H4, H1, Button, colors } from '../utils/styles'
 import { Link } from 'gatsby'
 
 const TopBlock = styled.div`

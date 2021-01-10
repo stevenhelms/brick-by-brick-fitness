@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import firebase from 'gatsby-plugin-firebase'
-import { useAppContext } from '../services/context'
+// import { useAppContext } from '../services/context'
 
 import { H2 } from '../utils/styles'
-import config from '../../config'
 import LineChart from './linechart'
 import { calcTotalPointsByDay } from '../services/calc'
 
 const Stats = () => {
-    const { state, dispatch } = useAppContext()
+    // const { state, dispatch } = useAppContext()
     const [isReady, setIsReady] = useState(false)
     const seriesData = {}
 
@@ -29,7 +28,7 @@ const Stats = () => {
                 seriesData['totalPointsByDay'] = calcTotalPointsByDay(items)
                 setIsReady(true)
             })
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     seriesData['demo'] = [
         { x: 1, y: 3 },
