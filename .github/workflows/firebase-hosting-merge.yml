@@ -12,8 +12,6 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - run: npm ci && npm run build && npm test
-            - name: DefenseCode ThunderScan Action
-              uses: defensecode/thunderscan-action@v1.0
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -22,10 +20,14 @@ jobs:
                   projectId: bear-state
               env:
                   FIREBASE_CLI_PREVIEWS: hostingchannels
-            # Deploying the functions to firebase
-            - name: Deploy to Firebase
-              uses: w9jds/firebase-action@master
-              with:
-                  args: deploy --only functions
+            - name: Deploy to Firebase Function
+              uses: Winter-wub/deploy-firebase-functions@1.0.1
               env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BEAR_STATE }}
+            # Deploying the functions to firebase
+            #- name: Deploy to Firebase
+            #  uses: w9jds/firebase-action@master
+            #  with:
+            #      args: deploy --only functions
+            #  env:
+            #      FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BEAR_STATE }}
