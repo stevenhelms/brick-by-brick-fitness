@@ -15,4 +15,7 @@ export const getProfile = email => {
         .then(snapshot => {
             return snapshot.val()
         })
+        .catch(err => {
+            return err
+        })
 }
