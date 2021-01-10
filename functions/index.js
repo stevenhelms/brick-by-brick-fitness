@@ -36,7 +36,7 @@ exports.calcTotalUserPoints = functions.database.ref('/users/{userId}/journal/{e
             // Capture total points achieved
             let points = calcTotals(data, 'total_points')
             change.after.ref.parent.parent.child('totals/points').set(points)
-            change.after.ref.parent.parent.child('totals_points').set(points) // legacy
+            // change.after.ref.parent.parent.child('totals_points').set(points) // legacy
 
             points = calcTotals(data, 'protein')
             change.after.ref.parent.parent.child('totals/protein').set(points)
