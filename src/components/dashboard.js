@@ -36,7 +36,7 @@ const DailyTips = () => {
 
     useEffect(() => {
         // Add logic for tips display
-        setTodaysTips('Tips')
+        // setTodaysTips('Tips')
     }, [])
 
     if (!todaysTips) {
