@@ -80,11 +80,11 @@ const Profile = ({ user, profile }) => {
                     <hr />
                     <ItemRow extraSpace>
                         <ItemLabel>Overall Level Method Level:</ItemLabel>
-                        <ItemValue>{toTitleCase(config.levelMethod[localProfile.level_method])}</ItemValue>
+                        <ItemValue>{toTitleCase(config.levelMethod[localProfile.level_method || 0])}</ItemValue>
                     </ItemRow>
                     <ItemRow extraSpace>
                         <ItemLabel>Challenge Goal:</ItemLabel>
-                        <ItemValue>{localProfile.goal_challenge}</ItemValue>
+                        <ItemValue>{localProfile.goal_challenge || ''}</ItemValue>
                     </ItemRow>
                 </ItemContainer>
             ) : null}
