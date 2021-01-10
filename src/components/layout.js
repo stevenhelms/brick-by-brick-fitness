@@ -48,11 +48,11 @@ const Layout = ({ children, fullMenu }) => {
     `)
 
     return (
-        <body css={bodycss}>
+        <div css={bodycss}>
             <Header siteTitle={data.site.siteMetadata?.title || `Title`} fullMenu={fullMenu} />
             <main css={maincss}>{children}</main>
             <Footer />
-        </body>
+        </div>
     )
 }
 
