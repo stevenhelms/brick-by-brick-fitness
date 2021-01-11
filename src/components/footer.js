@@ -48,7 +48,7 @@ const Footer = () => {
                     const { name, url } = social
                     return (
                         <li css={liStyle} key={url}>
-                            <a target="_blank" href={url} css={aStyle}>
+                            <a target="_blank" rel="noreferrer" href={url} css={aStyle}>
                                 <span className="label">
                                     {name === 'Instagram' ? (
                                         <Instagram />
@@ -69,7 +69,7 @@ const Footer = () => {
             <ul css={ulStyle}>
                 <li css={grayStyle}>
                     &copy; {new Date().getFullYear()}{' '}
-                    <a css={grayStyle} target="_blank" href="https://shelms.dev/Nutrition">
+                    <a css={grayStyle} target="_blank" rel="noreferrer" href="https://shelms.dev/Nutrition">
                         Steve Helms
                     </a>
                 </li>
