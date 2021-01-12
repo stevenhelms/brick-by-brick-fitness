@@ -127,7 +127,7 @@ const Home = () => (
             <p>
                 Each participant will be given a unique set of goals to meet. Progress will be measured by meeting those
                 daily goals. Participants will keep a daily journal of their habits and points will be assigned to each
-                days journal entry. The journal will be kept online in this application and available at all times.
+                day's journal entry. The journal will be kept online in this application and available at all times.
             </p>
             <p>
                 At the end of the challenge, points will be totaled and prizes will be awarded. Additionally, various
