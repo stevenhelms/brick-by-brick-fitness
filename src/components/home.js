@@ -164,7 +164,8 @@ const Home = () => (
             <ul>
                 <li>Registration is from Monday, January 11, 2021 to Saturday, January 23, 2021</li>
                 <li>
-                    There will be a kick-off meeting (live and via Zoom) on Saturday, January 23, 2021 at 11:30 a.m.
+                    There will be a kick-off meeting (live and via Zoom) on{' '}
+                    <strong>Saturday, January 23, 2021 at 10:30 a.m.</strong>
                 </li>
                 <li>The challenge runs from Sunday, January 24, 2021 to Saturday, February 20, 2021.</li>
                 <li>Participants are expected to enter their daily progress into the journal for maximum points.</li>
