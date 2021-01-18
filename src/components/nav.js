@@ -4,6 +4,7 @@ import firebase from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import { isLoggedIn, logout } from '../services/auth-firebase'
+import { isBrowser } from '../utils/browser'
 
 const StyledNav = styled.nav`
     // display: flex;
@@ -73,7 +74,10 @@ export default function Nav() {
                                     to="/"
                                     onClick={event => {
                                         event.preventDefault()
-                                        logout(firebase).then(() => navigate(`/`))
+                                        logout(firebase).then(() => {
+                                            isBrowser() && window.localStorage.clear()
+                                            navigate(`/`)
+                                        })
                                     }}
                                 >
                                     Logout

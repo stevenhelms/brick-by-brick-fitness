@@ -13,6 +13,7 @@ import {
     ItemRow,
     ItemLabel,
     ItemValue,
+    colors,
 } from '../utils/styles'
 import config from '../../config'
 
@@ -92,6 +93,8 @@ const Journal = ({ user, location, limit = 50 }) => {
                     items.push(item.val())
                 })
                 items.sort((a, b) => b - a) // Sort decending by date
+                // console.log('getJournal', 'limiting records to', limit)
+                items.splice(limit) // limit the records
                 setJournal(items)
                 setIsReady(true)
             })
@@ -108,6 +111,9 @@ const Journal = ({ user, location, limit = 50 }) => {
                 items.push(entry)
             })
             items.sort((a, b) => b - a) // Sort decending by date
+            // console.log('useEffect', 'limiting records to', limit)
+            items.splice(limit) // limit the records
+            console.log(items)
             setJournal(items)
             setIsReady(true)
         } else {
@@ -124,7 +130,14 @@ const Journal = ({ user, location, limit = 50 }) => {
     return (
         <>
             <Heading>
-                <H2>Journal</H2>
+                <H2>
+                    Journal{' '}
+                    {limit < 10 ? (
+                        <div style={{ color: colors.typographyGrayed, fontSize: 'smaller', display: 'inline' }}>
+                            (most recent)
+                        </div>
+                    ) : null}
+                </H2>
             </Heading>
 
             {fullPage ? (

@@ -1,36 +1,42 @@
 export const calcWaterPoints = (actual, weight) => {
     if (!weight) return 0
 
+    const multipler = 1.25
     const p = (actual / (weight / 2)) * 100
 
     if (p <= 50) {
-        return 1
+        return 1 * multipler
     } else if (p <= 65) {
-        return 2
+        return 2 * multipler
     } else if (p <= 80) {
-        return 3
+        return 3 * multipler
     } else if (p <= 90) {
-        return 4
+        return 4 * multipler
     } else {
-        return 5
+        return 5 * multipler
     }
 }
 
-export const calcFoodPoints = (actual, goal) => {
+export const calcFoodPoints = (actual, goal, veggies = false) => {
     if (!goal) return 0
 
+    const vegMultiplier = veggies ? 1.25 : 1
     const p = (actual / goal) * 100
 
     if (p <= 25) {
-        return 1
+        return 1 * vegMultiplier
     } else if (p <= 50) {
-        return 2
+        return 2 * vegMultiplier
     } else if (p <= 75) {
-        return 3
+        return 3 * vegMultiplier
     } else if (p <= 100) {
-        return 4
+        return 4 * vegMultiplier
     } else {
-        // Penalty for exceeding recommended
+        if (veggies) {
+            return 5 * vegMultiplier
+        }
+
+        // Penalty for exceeding recommended of non-veg
         return 2
     }
 }
@@ -64,7 +70,7 @@ export const calculatePoints = (items, user) => {
 
     points += calcFoodPoints(items?.protein || 0, user.goal_protein)
 
-    points += calcFoodPoints(items?.veggies || 0, user.goal_veggies)
+    points += calcFoodPoints(items?.veggies || 0, user.goal_veggies, true)
 
     points += calcWaterPoints(items?.water || 0, user.weight)
 
@@ -84,13 +90,4 @@ export const inchesToFeet = inches => {
     const f = Math.floor(inches / 12)
     const i = inches - f * 12
     return [f, i]
-}
-
-export const calcTotalPointsByDay = users => {
-    return [
-        { x: '2021-01-01', y: 3 },
-        { x: '2021-01-02', y: 5 },
-        { x: '2021-01-03', y: 15 },
-        { x: '2021-01-04', y: 12 },
-    ]
 }

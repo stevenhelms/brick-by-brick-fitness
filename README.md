@@ -7,6 +7,8 @@
   Bear State Gym - Nutrition Challenge Winter 2021
 </h1>
 
+![Build Status](https://github.com/stevenhelms/bear-state-winter21/workflows/Firebase%20Hosting%20on%20merge/badge.svg)
+
 ## 🚀 Quick start
 
 1.  **Start developing.**

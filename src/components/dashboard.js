@@ -105,7 +105,7 @@ const Dashboard = () => {
                 {isReady ? (
                     <>
                         {/* <Goals user={user} profile={profile} /> */}
-                        <Journal user={user} style={{ flex: 1, flexDirection: 'column' }} />
+                        <Journal limit={5} user={user} style={{ flex: 1, flexDirection: 'column' }} />
                     </>
                 ) : (
                     <p>Loading...</p>

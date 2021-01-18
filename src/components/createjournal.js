@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { navigate } from 'gatsby'
 import firebase from 'gatsby-plugin-firebase'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import { toast } from 'react-toastify'
+import DatePicker from 'react-datepicker'
+
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { utcToLocal } from '../utils/datetime'
 import { calculatePoints } from '../services/calc'
 import config from '../../config'
-
 import {
     BorderDiv,
     BodyText,
@@ -39,12 +41,13 @@ import { useAppContext } from '../services/context'
 
 const JournalForm = () => {
     const { state, dispatch } = useAppContext()
+    const [startDate, setStartDate] = useState(new Date())
 
     const handleSubmit = values => {
         const userId = emailToKey(state.user.email)
 
         // Let's keep our key date in our local timezone for readability and quick reuse
-        const journalDate = values.journalDate || utcToLocal(new Date()).toISOString().substr(0, 10)
+        const journalDate = startDate.toISOString().substr(0, 10) || utcToLocal(new Date()).toISOString().substr(0, 10)
 
         values.total_points = calculatePoints(values, state.profile)
         values.journalDate = journalDate
@@ -112,6 +115,17 @@ const JournalForm = () => {
                         style={{ flex: 'auto' }}
                     >
                         <input type="hidden" name="form-name" value="Journal Entry" />
+                        <FormGroup>
+                            <FormLabel htmlFor="journalDate">Journal Date</FormLabel>
+
+                            <DatePicker
+                                name="journalDate"
+                                showPopperArrow={false}
+                                selected={startDate}
+                                onChange={date => setStartDate(date)}
+                            />
+                            <ErrorMessage component={Error} name="journalDate" />
+                        </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="workout">Workout Today?</FormLabel>
                             <Field style={{ transform: 'scale(1.5,1.5)' }} type="checkbox" name="workout" />
@@ -213,8 +227,8 @@ const JournalForm = () => {
                                 Submit
                             </Button>
                             <FormSubText>
-                                Should you make a mistake, simply submit this form again on the same day and the
-                                incorrect entry will be replaced with the newest information.
+                                If you make a mistake, simply submit this form again on the same day and the incorrect
+                                entry will be replaced with the newest information.
                             </FormSubText>
                         </FormGroup>
                     </Form>
