@@ -113,7 +113,6 @@ const Journal = ({ user, location, limit = 50 }) => {
             items.sort((a, b) => b - a) // Sort decending by date
             // console.log('useEffect', 'limiting records to', limit)
             items.splice(limit) // limit the records
-            console.log(items)
             setJournal(items)
             setIsReady(true)
         } else {
