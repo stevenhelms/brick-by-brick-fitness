@@ -13,7 +13,7 @@ import CreateJournal from '../components/createjournal'
 import TestData from '../components/testdata'
 import Registration from '../components/registration'
 import Stats from '../components/stats'
-// import PrivateRoute from '../components/PrivateRoute'
+import Admin from '../components/admin'
 
 const App = ({ location }) => {
     if (!isLoggedIn() && isBrowser() && location.pathname !== `/app/login`) {
@@ -33,6 +33,7 @@ const App = ({ location }) => {
                     <Login path="login" />
                     <TestData path="testdata" />
                     <Stats path="stats" />
+                    <Admin path="admin" />
                 </Router>
             </Layout>
         </AppProvider>
