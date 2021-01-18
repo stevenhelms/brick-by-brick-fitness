@@ -63,27 +63,27 @@ describe('Calc Functions', () => {
 
     test('calcWaterPoints <= 50% goal', () => {
         const returned = calcWaterPoints(30, 150)
-        expect(returned).toEqual(1)
+        expect(returned).toEqual(1.25)
     })
 
     test('calcWaterPoints <= 65% goal', () => {
         const returned = calcWaterPoints(45, 150)
-        expect(returned).toEqual(2)
+        expect(returned).toEqual(2.5)
     })
 
     test('calcWaterPoints <= 80% goal', () => {
         const returned = calcWaterPoints(50, 150)
-        expect(returned).toEqual(3)
+        expect(returned).toEqual(3.75)
     })
 
     test('calcWaterPoints <= 90% goal', () => {
         const returned = calcWaterPoints(65, 150)
-        expect(returned).toEqual(4)
+        expect(returned).toEqual(5)
     })
 
     test('calcWaterPoints >90% goal', () => {
         const returned = calcWaterPoints(70, 150)
-        expect(returned).toEqual(5)
+        expect(returned).toEqual(6.25)
     })
 
     test('feetToInches', () => {
@@ -117,7 +117,7 @@ describe('Calc Functions', () => {
             weight: 150,
         }
         const points = calculatePoints(items, user)
-        expect(points).toEqual(4)
+        expect(points).toEqual(4.5)
     })
 
     test('calculatePoints maximum possible', () => {
@@ -140,6 +140,6 @@ describe('Calc Functions', () => {
             weight: 150,
         }
         const points = calculatePoints(items, user)
-        expect(points).toEqual(26)
+        expect(points).toEqual(28.25)
     })
 })
