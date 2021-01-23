@@ -9,10 +9,6 @@ import { useAppContext } from '../services/context'
 import { isAdmin } from '../utils/auth'
 
 const StyledNav = styled.nav`
-    // display: flex;
-    // flex: 1;
-    // justify-content: flex-end;
-    // align-items: baseline;
     color: #ffffff;
     float: right;
     @media screen and (max-width: 480px) {
@@ -30,7 +26,6 @@ const Li = styled.li`
     display: inline;
     margin-right: 30px;
     @media screen and (max-width: 480px) {
-        // display: block;
         text-align: left;
         float: none;
         margin-right: 10px;
@@ -39,17 +34,11 @@ const Li = styled.li`
 const whiteA = css`
     color: #ffffff;
 `
-// const Anchor = styled.a`
-//   color: #ffffff;
-// `
 
 export default function Nav() {
     const { state } = useAppContext()
 
-    // const greetingMessage = isLoggedIn()
-    //   ? `Hello ${getUser().name}`
-    //   : "You are not logged in."
-    const routes = (
+    const routes = isLoggedIn() ? (
         <>
             <Li>
                 <Link css={whiteA} to="/app/">
@@ -62,19 +51,19 @@ export default function Nav() {
                 </Link>
             </Li>
         </>
-    )
-
-    const adminRoutes = isAdmin(state.profile?.role) ? (
-        <Li>
-            <Link css={whiteA} to="/app/admin">
-                Admin
-            </Link>
-        </Li>
     ) : null
+
+    const adminRoutes =
+        state?.profile && isAdmin(state.profile?.role) ? (
+            <Li>
+                <Link css={whiteA} to="/app/admin">
+                    Admin
+                </Link>
+            </Li>
+        ) : null
 
     return (
         <>
-            {/* <span>{greetingMessage}</span> */}
             <StyledNav id="nav">
                 <Ul>
                     <Li>

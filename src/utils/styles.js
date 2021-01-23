@@ -57,7 +57,8 @@ export const Li = styled.li`
 `
 
 export const Button = styled.button`
-    background-color: #e25a2d;
+    ${({ disabled }) =>
+        disabled ? 'background-color: ' + colors.typographyGrayed + ';' : 'background-color: #e25a2d;'}
     border: 0;
     color: #ffffff;
     border-radius: 3px;

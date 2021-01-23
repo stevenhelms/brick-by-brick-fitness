@@ -1,5 +1,5 @@
 export const isAdmin = role => {
-    if (role.includes('admin')) {
+    if (typeof role !== 'undefined' && role.includes('admin')) {
         return true
     }
     return false
