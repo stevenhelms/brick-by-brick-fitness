@@ -5,6 +5,8 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import { isLoggedIn, logout } from '../services/auth-firebase'
 import { isBrowser } from '../utils/browser'
+import { useAppContext } from '../services/context'
+import { isAdmin } from '../utils/auth'
 
 const StyledNav = styled.nav`
     // display: flex;
@@ -42,9 +44,33 @@ const whiteA = css`
 // `
 
 export default function Nav() {
+    const { state } = useAppContext()
+
     // const greetingMessage = isLoggedIn()
     //   ? `Hello ${getUser().name}`
     //   : "You are not logged in."
+    const routes = (
+        <>
+            <Li>
+                <Link css={whiteA} to="/app/">
+                    Dashboard
+                </Link>
+            </Li>
+            <Li>
+                <Link css={whiteA} to="/app/journal">
+                    Journal
+                </Link>
+            </Li>
+        </>
+    )
+
+    const adminRoutes = isAdmin(state.profile?.role) ? (
+        <Li>
+            <Link css={whiteA} to="/app/admin">
+                Admin
+            </Link>
+        </Li>
+    ) : null
 
     return (
         <>
@@ -56,34 +82,24 @@ export default function Nav() {
                             Home
                         </Link>
                     </Li>
+                    {routes}
+                    {adminRoutes}
                     {isLoggedIn() ? (
-                        <>
-                            <Li>
-                                <Link css={whiteA} to="/app/">
-                                    Dashboard
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link css={whiteA} to="/app/journal">
-                                    Journal
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link
-                                    css={whiteA}
-                                    to="/"
-                                    onClick={event => {
-                                        event.preventDefault()
-                                        logout(firebase).then(() => {
-                                            isBrowser() && window.localStorage.clear()
-                                            navigate(`/`)
-                                        })
-                                    }}
-                                >
-                                    Logout
-                                </Link>
-                            </Li>
-                        </>
+                        <Li>
+                            <Link
+                                css={whiteA}
+                                to="/"
+                                onClick={event => {
+                                    event.preventDefault()
+                                    logout(firebase).then(() => {
+                                        isBrowser() && window.localStorage.clear()
+                                        navigate(`/`)
+                                    })
+                                }}
+                            >
+                                Logout
+                            </Link>
+                        </Li>
                     ) : (
                         <Li>
                             <Link css={whiteA} to="/app/login">

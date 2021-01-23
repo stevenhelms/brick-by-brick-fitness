@@ -32,15 +32,31 @@ const DownloadParticipants = ({ list }) => {
     }, [list]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <a
-            style={{ color: colors.typography, margin: '5px' }}
-            // this attribute sets the filename
-            download="participants.csv"
-            // link to the download URL
-            href={downloadLink}
-        >
-            Download Participant List (csv)
-        </a>
+        <div>
+            <div style={{ marginBottom: '30px' }}>
+                <h2>Download a list of participants</h2>
+                <a
+                    style={{ color: colors.typography, margin: '5px' }}
+                    // this attribute sets the filename
+                    download="participants.csv"
+                    // link to the download URL
+                    href={downloadLink}
+                >
+                    Download Participant List (csv)
+                </a>
+            </div>
+            <div>
+                <h2>Email Addresses</h2>
+                <div style={{ marginBottom: '20px' }}>
+                    Copy the entire list below, and paste it into the an email to contact everyone in the challenge.
+                </div>
+                <div style={{ borderTop: `1px solid ${colors.lightGray}` }}>
+                    {list.map(item => (
+                        <span>{item[2]}; </span>
+                    ))}
+                </div>
+            </div>
+        </div>
     )
 }
 
