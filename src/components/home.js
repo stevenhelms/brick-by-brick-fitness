@@ -98,10 +98,16 @@ const Players = () => {
 
 const RegisterToday = () => (
     <RegisterTodayContainer>
-        <Link to="/app/login">
-            <Button>Register Today</Button>
+        {/*<Link to="/app/login">
+        <Button disabled={true}>Register Today</Button>
         </Link>
-        <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>Registration ends Jan-23-2021.</div>
+        <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>Registration ends Jan-23-2021.</div>*/}
+        <Link to="/app/login">
+            <Button>Login</Button>
+        </Link>
+        <div style={{ fontSize: 'smaller', color: colors.typographyGrayed, marginBottom: 0 }}>
+            Login to track your progress.
+        </div>
     </RegisterTodayContainer>
 )
 
