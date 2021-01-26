@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
 
+import { useAppContext } from '../services/context'
 import { H2, Heading, FlexRow, Container, colors } from '../utils/styles'
 
 const MyContainer = styled.div`
@@ -22,6 +23,7 @@ const sortByTotalPoints = (a, b) => {
 }
 
 const Leaders = ({ ...rest }) => {
+    const { state } = useAppContext()
     const [leaders, setLeaders] = useState([])
     const [isReady, setIsReady] = useState(false)
 
@@ -33,11 +35,15 @@ const Leaders = ({ ...rest }) => {
             .then(snapshot => {
                 const items = []
                 snapshot.forEach(item => {
-                    // console.log(item.val())
-                    items.push(item.val())
+                    const person = item.val()
+                    if (person?.totals?.points) {
+                        items.push(person)
+                    }
                 })
+                // console.log(items)
                 items.sort((a, b) => sortByTotalPoints(a, b)) // Sort decending
                 setLeaders(items.slice(0, 5)) // Only the Top 5
+                // console.log(leaders)
                 setIsReady(true)
             })
     }, [])
@@ -64,6 +70,12 @@ const Leaders = ({ ...rest }) => {
                 ) : (
                     <p>Loading...</p>
                 )}
+                {state.profile?.totals?.points ? (
+                    <FlexRow style={{ borderBottom: '1px solid ' + colors.veryLightGray, paddingTop: '20px' }}>
+                        <div style={{ flex: 1 }}>My Points</div>
+                        <div style={{ flex: 1 }}>{state.profile?.totals.points}</div>
+                    </FlexRow>
+                ) : null}
             </Container>
         </MyContainer>
     )
