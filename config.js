@@ -4,7 +4,7 @@ module.exports = {
     manifestName: 'bear-state-gym-winter21',
     manifestShortName: 'BearStateGym', // max 12 characters
     manifestStartUrl: '/',
-    manifestBackgroundColor: '#e25a2d',
+    manifestBackgroundColor: '#aeaeae',
     manifestThemeColor: '#e25a2d',
     manifestDisplay: 'standalone', // or minimal-ui
     manifestIcon: 'src/images/bear-state-logo-Sept2020.png',
