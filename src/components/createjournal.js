@@ -47,7 +47,8 @@ const JournalForm = () => {
         const userId = emailToKey(state.user.email)
 
         // Let's keep our key date in our local timezone for readability and quick reuse
-        const journalDate = startDate.toISOString().substr(0, 10) || utcToLocal(new Date()).toISOString().substr(0, 10)
+        const journalDate =
+            utcToLocal(startDate).toISOString().substr(0, 10) || utcToLocal(new Date()).toISOString().substr(0, 10)
 
         values.total_points = calculatePoints(values, state.profile)
         values.journalDate = journalDate
@@ -92,7 +93,7 @@ const JournalForm = () => {
                 fats: yup.number().required().integer(),
                 protein: yup.number().required().integer(),
                 recovery: yup.string().required(),
-                sleep: yup.number().required().integer(),
+                sleep: yup.number().required(),
                 stress: yup.string().required(),
                 veggies: yup.number().required().integer(),
                 water: yup.number().required().integer(),
@@ -167,7 +168,7 @@ const JournalForm = () => {
                             <ErrorMessage component={Error} name="sleep" />
                             <FormSubText>
                                 Sleep is critical to full recovery from the previous day. Your body does it's repair
-                                work while you sleep.
+                                work while you sleep. You may use a fractional number (e.g. 6.5, 7.75)
                             </FormSubText>
                         </FormGroup>
                         <FormGroup name="eat_slowly" type="number">
