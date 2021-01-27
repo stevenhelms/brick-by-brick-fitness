@@ -9,7 +9,7 @@ import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
 import GraphMacros from './graphmacros'
-import GraphSleep from './graphsleep'
+// import GraphSleep from './graphsleep'
 
 const DailyTipsContainer = styled.div`
     display: flex;
