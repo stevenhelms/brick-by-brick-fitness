@@ -37,6 +37,7 @@
     "react-vis": "^1.11.7",
     "typography": "^0.16.19",
     "typography-theme-noriega": "^0.16.19",
+    "victory": "^35.4.6",
     "yup": "^0.32.8"
   },
   "devDependencies": {

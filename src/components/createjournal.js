@@ -88,10 +88,10 @@ const JournalForm = () => {
                 workout: false,
             }}
             validationSchema={yup.object().shape({
-                carbs: yup.number().required().integer(),
+                carbs: yup.number().required().integer().max(15),
                 eat_slowly: yup.number().required().integer(),
-                fats: yup.number().required().integer(),
-                protein: yup.number().required().integer(),
+                fats: yup.number().required().integer().max(20),
+                protein: yup.number().required().integer().max(12),
                 recovery: yup.string().required(),
                 sleep: yup.number().required(),
                 stress: yup.string().required(),
@@ -142,25 +142,25 @@ const JournalForm = () => {
                             <FormLabel htmlFor="protein">Protein</FormLabel>
                             <Field name="protein" type="number" />
                             <ErrorMessage component={Error} name="protein" />
-                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
+                            <FormSubText>Using the hand portions guide, enter hand portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="veggies">Veggies</FormLabel>
                             <Field type="number" name="veggies" />
                             <ErrorMessage component={Error} name="veggies" />
-                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
+                            <FormSubText>Using the hand portions guide, enter hand portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="carbs">Carbs</FormLabel>
                             <Field type="number" name="carbs" />
                             <ErrorMessage component={Error} name="carbs" />
-                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
+                            <FormSubText>Using the hand portions guide, enter hand portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="fats">Fats</FormLabel>
                             <Field type="number" name="fats" />
                             <ErrorMessage component={Error} name="fats" />
-                            <FormSubText>Using the hand portions guide, enter portions eaten today.</FormSubText>
+                            <FormSubText>Using the hand portions guide, enter hand portions eaten today.</FormSubText>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="sleep">Hours Sleep</FormLabel>
@@ -176,8 +176,8 @@ const JournalForm = () => {
                             <Field type="number" name="eat_slowly" />
                             <ErrorMessage component={Error} name="eat_slowly" />
                             <FormSubText>
-                                By eating slowly to 80% full, you will feel full faster and as a result you will eat
-                                less food.
+                                Enter the number of meals it took you 20+ minutes to eat. By eating slowly to 80% full,
+                                you will feel full faster and as a result you will eat less food.
                             </FormSubText>
                         </FormGroup>
                         <FormGroup>
