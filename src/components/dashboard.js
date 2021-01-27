@@ -5,10 +5,11 @@ import styled from '@emotion/styled'
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 import Journal from './journal'
-import { Button, Div, Container, colors } from '../utils/styles'
+import { Button, Div, Container, colors, H3 } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
+import GraphMacros from './graphmacros'
 
 const DailyTipsContainer = styled.div`
     display: flex;
@@ -73,7 +74,7 @@ const Dashboard = () => {
         } else if (user.displayName) {
             setGreeting(`, ${user.displayName}`)
         }
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [profile]) // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!isReady) {
         return <Loading displayText="Loading..." />
@@ -102,15 +103,18 @@ const Dashboard = () => {
                     <p>Loading...</p>
                 )}
             </LeaderGoalDiv>
-            <Container style={{ display: 'block' }}>
+            {/* <Container style={{ display: 'block' }}>
                 {isReady ? (
                     <>
-                        {/* <Goals user={user} profile={profile} /> */}
                         <Journal limit={5} user={user} style={{ flex: 1, flexDirection: 'column' }} />
                     </>
                 ) : (
                     <p>Loading...</p>
                 )}
+            </Container> */}
+            <Container style={{ display: 'block' }}>
+                <H3>Total Hand Portions Eaten</H3>
+                <GraphMacros />
             </Container>
         </Div>
     )
