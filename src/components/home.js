@@ -12,14 +12,6 @@ const TopBlock = styled.div`
     }
 `
 
-const PlayerContainer = styled.div`
-    flex: 4;
-    @media screen and (max-width: 480px) {
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-`
-
 const RegisterTodayContainer = styled.div`
     flex: 2;
     margin-left: 40px;
@@ -28,8 +20,15 @@ const RegisterTodayContainer = styled.div`
     padding: 20px;
     text-align: center;
     @media screen and (max-width: 480px) {
-        margin-top: 30px;
+        display: inline-grid;
         margin-left: 0;
+    }
+`
+
+const PlayerContainer = styled.div`
+    flex: 4;
+    @media screen and (max-width: 480px) {
+        margin-top: 30px;
     }
 `
 
@@ -38,7 +37,7 @@ const PlayerList = styled.div`
     padding: 20px 0;
 
     @media screen and (max-width: 480px) {
-        display: block;
+        display: inline-block;
         margin-left: 0;
     }
 `
