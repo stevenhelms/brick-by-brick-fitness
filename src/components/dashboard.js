@@ -4,12 +4,12 @@ import styled from '@emotion/styled'
 
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-import Journal from './journal'
 import { Button, Div, Container, colors, H3 } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
 import GraphMacros from './graphmacros'
+// import GraphSleep from './graphsleep'
 
 const DailyTipsContainer = styled.div`
     display: flex;
@@ -69,7 +69,7 @@ const Dashboard = () => {
     }, [user.email, dispatch, isReady])
 
     useEffect(() => {
-        if (profile.first) {
+        if (profile?.first) {
             setGreeting(`, ${profile.first}`)
         } else if (user.displayName) {
             setGreeting(`, ${user.displayName}`)
@@ -116,6 +116,10 @@ const Dashboard = () => {
                 <H3>Total Hand Portions Eaten</H3>
                 <GraphMacros />
             </Container>
+            {/* <Container style={{ display: 'block' }}>
+                <H3>Total Average Hours of Sleep</H3>
+                <GraphSleep />
+            </Container> */}
         </Div>
     )
 }

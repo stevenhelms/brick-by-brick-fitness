@@ -1,7 +1,7 @@
-import React, { useEffect, useState, createRef, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel, VictoryGroup, VictoryLegend } from 'victory'
+import { VictoryBar, VictoryChart, VictoryGroup, VictoryLegend } from 'victory'
 
 const GraphMacros = ({ graph = undefined }) => {
     const [data, setData] = useState(undefined)
@@ -73,7 +73,7 @@ const GraphMacros = ({ graph = undefined }) => {
     return (
         <VictoryChart height={200} domainPadding={{ x: 60, y: 0 }}>
             <VictoryGroup
-                offset={20}
+                offset={24}
                 colorScale={['#1f1f1f', 'orange', 'tomato']}
                 style={{
                     data: { fillOpacity: 0.7 },
@@ -98,7 +98,7 @@ const GraphMacros = ({ graph = undefined }) => {
                 y={170}
                 centerTitle
                 orientation="horizontal"
-                gutter={20}
+                gutter={30}
                 style={{
                     border: { stroke: 'orange', strokeWidth: 0 },
                     title: { fontSize: 16 },
