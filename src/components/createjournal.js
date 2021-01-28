@@ -69,7 +69,7 @@ const JournalForm = () => {
                     // force refresh of local user object
                     getProfile(state.user.email).then(profile => {
                         dispatch({ type: 'SET_PROFILE', value: profile })
-                        navigate('/app/')
+                        navigate('/app/journal')
                     })
                 }
             })
