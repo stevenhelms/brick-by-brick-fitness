@@ -31,8 +31,6 @@ const GraphSleep = ({ graph = undefined }) => {
                     }
 
                     if (user?.journal[date]) {
-                        console.log(user.email)
-                        console.log(user.journal[date]?.sleep)
                         dataset.overall[graphDate]['total'] += user.journal[date]?.sleep ? user.journal[date].sleep : 0
                         dataset.overall[graphDate]['count']++
                     }
