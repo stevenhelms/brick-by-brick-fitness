@@ -86,6 +86,9 @@ export const FlexRow = styled.div`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    @media screen and (max-width: 480px) {
+        ${({ mobileColumn }) => mobileColumn && 'flex-direction: column; '}
+    }
 `
 
 export const Form = styled.form``
