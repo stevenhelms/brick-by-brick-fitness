@@ -4,12 +4,12 @@ import styled from '@emotion/styled'
 
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-import { Button, Div, Container, colors, H3 } from '../utils/styles'
+import { Button, Div, Container, colors, H3, BorderDiv, FlexRow } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
 import GraphMacros from './graphmacros'
-// import GraphSleep from './graphsleep'
+import GraphSleep from './graphsleep'
 
 const DailyTipsContainer = styled.div`
     display: flex;
@@ -112,14 +112,16 @@ const Dashboard = () => {
                     <p>Loading...</p>
                 )}
             </Container> */}
-            <Container style={{ display: 'block' }}>
-                <H3>Total Hand Portions Eaten</H3>
-                <GraphMacros />
-            </Container>
-            {/* <Container style={{ display: 'block' }}>
-                <H3>Total Average Hours of Sleep</H3>
-                <GraphSleep />
-            </Container> */}
+            <FlexRow mobileColumn>
+                <BorderDiv style={{ padding: '10px' }}>
+                    <H3>Total Hand Portions Eaten</H3>
+                    <GraphMacros />
+                </BorderDiv>
+                <BorderDiv style={{ padding: '10px' }}>
+                    <H3>Total Average Hours of Sleep</H3>
+                    <GraphSleep />
+                </BorderDiv>
+            </FlexRow>
         </Div>
     )
 }

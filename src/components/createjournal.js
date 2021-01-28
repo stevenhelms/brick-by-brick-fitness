@@ -69,7 +69,7 @@ const JournalForm = () => {
                     // force refresh of local user object
                     getProfile(state.user.email).then(profile => {
                         dispatch({ type: 'SET_PROFILE', value: profile })
-                        navigate('/app/')
+                        navigate('/app/journal')
                     })
                 }
             })
@@ -89,14 +89,14 @@ const JournalForm = () => {
             }}
             validationSchema={yup.object().shape({
                 carbs: yup.number().required().integer().max(15),
-                eat_slowly: yup.number().required().integer(),
+                eat_slowly: yup.number().required().integer().max(3),
                 fats: yup.number().required().integer().max(20),
                 protein: yup.number().required().integer().max(12),
                 recovery: yup.string().required(),
-                sleep: yup.number().required(),
+                sleep: yup.number().required().max(12),
                 stress: yup.string().required(),
-                veggies: yup.number().required().integer(),
-                water: yup.number().required().integer(),
+                veggies: yup.number().required().integer().max(10),
+                water: yup.number().required().integer().max(180),
                 workout: yup.bool(),
             })}
             onSubmit={values => {
