@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 
 import { useAppContext } from '../services/context'
 import { H2, Heading, FlexRow, Container, colors } from '../utils/styles'
+import { sortByTotalPoints } from '../services/sort'
 
 const MyContainer = styled.div`
     flex: 1;
@@ -12,15 +13,6 @@ const MyContainer = styled.div`
         margin-right: 0px;
     }
 `
-const sortByTotalPoints = (a, b) => {
-    if (a.totals?.points && b.totals?.points) {
-        return b.totals.points - a.totals.points
-    } else if (!a.totals?.points) {
-        return -1
-    } else {
-        return 1
-    }
-}
 
 const Leaders = ({ ...rest }) => {
     const { state } = useAppContext()

@@ -53,7 +53,7 @@ describe('Calc Functions', () => {
 
     test('calcFoodPoints too much', () => {
         const returned = calcFoodPoints(9, 8)
-        expect(returned).toEqual(2)
+        expect(returned).toEqual(3)
     })
 
     test('calcWaterPoints invalid weight', () => {

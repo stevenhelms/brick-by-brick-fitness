@@ -3,29 +3,24 @@ import firebase from 'gatsby-plugin-firebase'
 
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryLegend } from 'victory'
 
-const GraphMacros = ({ graph = undefined }) => {
+const GraphMacros = () => {
     const [data, setData] = useState(undefined)
     const [isReady, setIsReady] = useState(false)
 
     useEffect(() => {
-        if (typeof graph != 'undefined') {
-            setData(graph)
-            setIsReady(true)
-        } else {
-            firebase
-                .database()
-                .ref('/users')
-                .get()
-                .then(snapshot => {
-                    const p = []
-                    snapshot.forEach(item => {
-                        // console.log(item.val())
-                        p.push(item.val())
-                    })
-                    setData(p)
-                    setIsReady(true)
+        firebase
+            .database()
+            .ref('/users')
+            .get()
+            .then(snapshot => {
+                const p = []
+                snapshot.forEach(item => {
+                    // console.log(item.val())
+                    p.push(item.val())
                 })
-        }
+                setData(p)
+                setIsReady(true)
+            })
     }, [])
 
     if (!isReady) {

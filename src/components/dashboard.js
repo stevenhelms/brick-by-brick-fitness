@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-import { Button, Div, Container, colors, H3, BorderDiv, FlexRow } from '../utils/styles'
+import { Button, Div, colors, H3, BorderDiv, FlexRow } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
