@@ -37,7 +37,7 @@ export const calcFoodPoints = (actual, goal, veggies = false) => {
         }
 
         // Penalty for exceeding recommended of non-veg
-        return 2
+        return 3
     }
 }
 

@@ -1,18 +1,9 @@
-import React, { useEffect, useState, createRef, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 
-import {
-    VictoryLine,
-    VictoryChart,
-    VictoryAxis,
-    VictoryTheme,
-    VictoryLabel,
-    VictoryGroup,
-    VictoryLegend,
-} from 'victory'
+import { VictoryLine, VictoryChart } from 'victory'
 
-const GraphSleep = ({ graph = undefined }) => {
-    const [data, setData] = useState(undefined)
+const GraphSleep = () => {
     const [graphData, setGraphData] = useState(undefined)
     const [isReady, setIsReady] = useState(false)
 
@@ -50,33 +41,27 @@ const GraphSleep = ({ graph = undefined }) => {
     }
 
     useEffect(() => {
-        if (typeof graph != 'undefined') {
-            setData(graph)
-            setIsReady(true)
-        } else {
-            firebase
-                .database()
-                .ref('/users')
-                .get()
-                .then(snapshot => {
-                    const p = []
-                    snapshot.forEach(item => {
-                        // console.log(item.val())
-                        p.push(item.val())
-                    })
-                    setData(p)
-                    calculateSleep(p)
-                    setIsReady(true)
+        firebase
+            .database()
+            .ref('/users')
+            .get()
+            .then(snapshot => {
+                const p = []
+                snapshot.forEach(item => {
+                    // console.log(item.val())
+                    p.push(item.val())
                 })
-        }
-    }, [graph])
+                calculateSleep(p)
+                setIsReady(true)
+            })
+    }, [])
 
     if (!isReady) {
         return null
     }
 
     return (
-        <VictoryChart height={200} domainPadding={{ x: 60, y: 0 }} minDomain={{ y: 0 }}>
+        <VictoryChart data-testid="sleep-chart" height={200} domainPadding={{ x: 60, y: 0 }} minDomain={{ y: 0 }}>
             <VictoryLine
                 data={graphData}
                 x="date"

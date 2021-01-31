@@ -1,17 +1,11 @@
+/*
+ * Sort leader board in decending order by points.
+ */
 export const sortByTotalPoints = (a, b) => {
-    // console.log(`${a.first} vs ${b.first}`)
-    // console.log('a', a.totals?.points ? a.totals.points : 'x')
-    // console.log('b', b.totals?.points ? b.totals.points : 'y')
+    const x = a.totals?.points ? a.totals.points : 0
+    const y = b.totals?.points ? b.totals.points : 0
 
-    if (a.totals?.points && b.totals?.points) {
-        return a.totals.points - b.totals.points
-    } else if (!a.totals?.points && !b.totals?.points) {
-        return 0
-    } else if (!a.totals?.points && b.totals?.points) {
-        return -1
-    } else {
-        return 1
-    }
+    return y - x // Decending order
 }
 
 export const sortByFirst = (a, b) => {
