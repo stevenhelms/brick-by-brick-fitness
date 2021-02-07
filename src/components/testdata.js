@@ -1,12 +1,7 @@
 import React, { useEffect, useState, createRef, useRef } from 'react'
 import firebase from 'gatsby-plugin-firebase'
-
-import { emailToKey } from '../utils/firebase'
-import '../../node_modules/react-vis/dist/style.css'
-import { getInnerDimensions, DEFAULT_MARGINS } from 'react-vis/dist/utils/chart-utils'
-
-import { useRect, isBrowser } from '../utils/browser'
-import GraphMacros from './graphmacros'
+import { isBrowser } from '../utils/browser'
+import GraphLine from './graphline'
 
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory'
 
@@ -26,6 +21,7 @@ import {
     DecorativeAxis,
 } from 'react-vis'
 import { sortByTotalPoints, sortByFirst } from '../services/sort'
+import { useAppContext } from '../services/context'
 
 const useResize = myRef => {
     const [width, setWidth] = useState(0)
@@ -179,160 +175,13 @@ const LineChart2 = ({ data }) => {
     )
 }
 
-const AdyptaGoals = () => {
-    console.log('-=-=- Adypta Goals -=-=-')
-    // const componentRef = useRef(null)
-    // console.log('dimensions', props.dimensions)
-    // const { width, height } = useResize(props.ref)
-    // console.log('width', width)
-    // console.log('height', height)
-    // console.log('componentref', props.ref)
-
-    const plotHeight = 300
-    const goal = 2.9
-    const adyptationGoals = {
-        goal: goal,
-        data: [
-            // This represents a 7 day series of average goal data.
-            {
-                x: 0,
-                y: 3.12,
-            },
-            {
-                x: 1,
-                y: '3.21',
-                color: 1,
-            },
-            {
-                x: 2,
-                y: '3.03',
-                color: 2,
-            },
-            {
-                x: 3,
-                y: '2.88',
-                color: 0,
-            },
-            {
-                x: 4,
-                y: '2.85',
-                color: 0,
-            },
-            {
-                x: 5,
-                y: '2.93',
-                color: 'green',
-            },
-            {
-                x: 6,
-                y: '2.87',
-                color: 3,
-            },
-        ],
-    }
-
-    const labelData = adyptationGoals.data.map((d, idx) => ({
-        x: d.x,
-        y: Math.max(adyptationGoals.data[idx].y),
-    }))
-
-    const seriesData = adyptationGoals.data.map(item => ({
-        x: item.x,
-        y: item.y,
-        color: item.y <= adyptationGoals.goal ? 1 : 2,
-    }))
-
-    if (isBrowser()) {
-        console.log(window)
-        console.log('iHeight', window.innerHeight)
-        console.log('iWidth', window.innerWidth)
-    }
-
-    const palette = ['aqua', 'blue', 'navy']
-    // const innerDimensions = getInnerDimensions(
-    //     { width: window.innerWidth, height: window.innerHeight },
-    //     DEFAULT_MARGINS
-    // )
-    console.log(DEFAULT_MARGINS)
-    const midway = (adyptationGoals.goal / 5) * (plotHeight - DEFAULT_MARGINS.top * 3 - DEFAULT_MARGINS.bottom)
-    console.log('midway', midway)
-
-    return (
-        <div style={{ border: '1px solid orange', borderRadius: '3px' }}>
-            <FlexibleXYPlot
-                height={plotHeight}
-                yDomain={[1, 5]}
-                colorType="category"
-                colorDomain={[0, 1]}
-                colorRange={palette}
-            >
-                {/* <XAxis top={0} hideLine tickValues={[0, 1, 3, 4, 5, 6]} title="X" /> */}
-                <YAxis />
-                <VerticalBarSeries data={seriesData} />
-
-                {/* <LabelSeries data={labelData} getLabel={d => d.x} /> */}
-
-                {/* <XAxis top={midway} marginTop={0} hideTicks style={{ line: { stroke: 'orange' } }} /> */}
-            </FlexibleXYPlot>
-        </div>
-    )
-}
-
 const TestData = () => {
+    const { state } = useAppContext()
     const [data, setData] = useState(undefined)
     const [isReady, setIsReady] = useState(false)
 
     console.log('-=-=- TEST DATA -=-=-')
     const today = new Date().toISOString().substr(0, 10)
-
-    if (0) {
-        testUsers.forEach(user => {
-            const userId = emailToKey(user.email)
-            firebase
-                .database()
-                .ref('users/' + userId)
-                .set(user)
-
-            // Create a new post reference with an auto-generated id
-            // var postListRef = firebase.database().ref('users/' + userId + '/journal')
-
-            testJournalEntries.forEach(journal => {
-                var journalKey = journal.journalDate || today
-                journal.journalDate = journalKey
-                // var newPostRef = postListRef.push()
-                firebase
-                    .database()
-                    .ref('users/' + userId + '/journal/' + journalKey)
-                    .set(journal)
-            })
-            // const newJournalKey = firebase
-            //     .database()
-            //     .ref('users/' + userId)
-            //     .child('journal')
-            //     .push().key
-            // console.log(`new journal key ${newJournalKey}`)
-            // https://firebase.google.com/docs/database/web/read-and-write#update_specific_fields
-
-            const emailRef = firebase.database().ref('users/' + userId + '/email')
-            emailRef.on('value', snapshot => {
-                console.log(snapshot.val())
-            })
-        })
-    }
-
-    /* useEffect(() => {
-        // const { width, height } = useResize(appRef)
-        // console.log('width', width)
-        // console.log('height', height)
-        console.log('appref', targetRef)
-        console.log('dimensions', dimensions)
-        if (targetRef.current) {
-            setDimensions({
-                width: targetRef.current.offsetWidth,
-                height: targetRef.current.offsetHeight,
-            })
-        }
-    }, []) */
 
     useEffect(() => {
         firebase
@@ -352,14 +201,11 @@ const TestData = () => {
 
     return (
         <div>
-            <h1>Test Data Loader</h1>
-            <p style={{ color: 'orange' }}>Test Data is being loaded...</p>
-            {isReady ? <GraphMacros data={data} /> : null}
+            {isReady ? <GraphLine line1="sleep" line2="stress" /> : null}
+            {isReady ? <GraphLine line1="total_points" line1labels={false} line2="stress" /> : null}
+            {isReady ? <GraphLine line1="water" line2="recovery" /> : null}
+            {isReady ? <GraphLine line1="water" line2="stress" /> : null}
             {isReady ? <VBar data={data} /> : null}
-
-            {isReady ? <LineChart2 data={data} /> : null}
-            <AdyptaGoals />
-            {/* <LineChart /> */}
         </div>
     )
 }

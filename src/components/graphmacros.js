@@ -77,14 +77,7 @@ const GraphMacros = () => {
             >
                 {/* <VictoryAxis /> */}
                 {/* <VictoryAxis dependentAxis /> */}
-                <VictoryBar
-                    data={graphData['overall']}
-                    x="macro"
-                    y="portions"
-                    labels={({ datum }) => datum.portions}
-                    // style={{ labels: { fill: 'white' } }}
-                    // labelComponent={<VictoryLabel dy={30} />}
-                />
+                <VictoryBar data={graphData['overall']} x="macro" y="portions" labels={({ datum }) => datum.portions} />
                 <VictoryBar data={graphData['male']} x="macro" y="portions" labels={({ datum }) => datum.portions} />
                 <VictoryBar data={graphData['female']} x="macro" y="portions" labels={({ datum }) => datum.portions} />
             </VictoryGroup>
