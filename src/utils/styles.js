@@ -163,3 +163,53 @@ export const italics = css`
 export const inputMargin = css`
     margin: 0 5px 0 10px;
 `
+
+const colorScale = ['#e25a2d', '#787276']
+const baseLabelStyles = {
+    fontFamily: "'Helvetica Neue', 'Helvetica', sans-serif",
+    fontSize: 10,
+    letterSpacing: 'normal',
+    padding: 8,
+    fill: 'grey',
+    stroke: 'transparent',
+    strokeWidth: 0,
+}
+
+export const graphStyles = {
+    colorScale: colorScale, // #e25a2d, alt orange #ed7014
+    baseLabelStyles: baseLabelStyles,
+    title: {
+        fill: colorScale[0],
+        fontSize: 22,
+    },
+    axisZero: {
+        axis: { stroke: '#8d4004', strokeWidth: 1 },
+        ticks: { stroke: '#8d4004', strokeWidth: 1, size: 5 },
+        tickLabels: { ...baseLabelStyles, fill: '#8d4004' },
+    },
+    seriesOne: {
+        data: { stroke: colorScale[0], fillOpacity: 1, fill: colorScale[0], strokeWidth: 0 },
+        labels: { ...baseLabelStyles, fontSize: 10 },
+    },
+    lineOne: {
+        data: { stroke: colorScale[0], strokeWidth: 1, opacity: 0.7 },
+        labels: { ...baseLabelStyles, fill: colorScale[0], fontSize: 10 },
+    },
+    axisOne: {
+        axis: { stroke: colorScale[0], strokeWidth: 1 },
+        ticks: { stroke: colorScale[0], strokeWidth: 1, size: 5 },
+        tickLabels: { ...baseLabelStyles, fill: colorScale[0] },
+    },
+    seriesTwo: {
+        data: { stroke: colorScale[1], fillOpacity: 1, fill: colorScale[1], strokeWidth: 0 },
+        labels: { ...baseLabelStyles, fill: colorScale[1] },
+    },
+    lineTwo: {
+        data: { stroke: colorScale[1], strokeWidth: 1, opacity: 0.7 },
+        labels: { ...baseLabelStyles, fill: colorScale[1] },
+    },
+    axisTwo: {
+        ticks: { stroke: colorScale[1], strokeWidth: 1, size: 5 },
+        tickLabels: { ...baseLabelStyles, fill: colorScale[1] },
+    },
+}
