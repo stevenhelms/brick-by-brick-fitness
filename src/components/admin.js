@@ -60,7 +60,7 @@ const AdminLeaderBoard = () => {
                         //     return null
                         // }
                         const journal = leader?.journal ? leader.journal : {}
-                        console.log(Object.keys(journal).length)
+                        // console.log(Object.keys(journal).length)
                         return (
                             <FlexRow
                                 mobileColumn
@@ -162,7 +162,11 @@ const PointCalculator = () => {
                                 <FormLabel htmlFor="user_id">Select Participant:</FormLabel>
                                 <Field as="select" name="user_id">
                                     {Object.keys(users).map(index => {
-                                        return <option value={index}>{toTitleCase(users[index].email)}</option>
+                                        return (
+                                            <option value={index} key={index}>
+                                                {toTitleCase(users[index].email)}
+                                            </option>
+                                        )
                                     })}
                                 </Field>
                             </FormGroup>
@@ -226,7 +230,7 @@ const PointCalculator = () => {
 const ParticipantInfo = ({ list }) => {
     // set up local state for generating the download link
     const [downloadLink, setDownloadLink] = useState('')
-    console.log('ParticipantInfo', list)
+    // console.log('ParticipantInfo', list)
     // function for generating file and set download link
     const makeTextFile = () => {
         // This creates the file.
@@ -268,8 +272,8 @@ const ParticipantInfo = ({ list }) => {
                     Copy the entire list below, and paste it into the an email to contact everyone in the challenge.
                 </div>
                 <div style={{ borderTop: `1px solid ${colors.lightGray}` }}>
-                    {list.map(item => (
-                        <span>{item[2]}; </span>
+                    {list.map((item, i) => (
+                        <span key={i}>{item[2]}; </span>
                     ))}
                 </div>
             </div>
