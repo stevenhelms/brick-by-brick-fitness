@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    VictoryArea,
     VictoryAxis,
     VictoryLine,
     VictoryChart,
@@ -133,6 +134,25 @@ const GraphLine = ({
                     style={graphStyles.axisTwo}
                 />
             ) : null}
+
+            <VictoryGroup
+                data={plot}
+                domain={{
+                    x: [0, plot.length],
+                    y: [0, maxY1],
+                }}
+                y={d => d.y1 / maxY1}
+            >
+                <VictoryArea style={graphStyles.areaOne} interpolation={'natural'} />
+                <VictoryLine
+                    data-testid="line1"
+                    interpolation={'natural'}
+                    // labels={({ datum }) => (line1labels ? datum.y1.toFixed(0) : '')}
+                    style={graphStyles.lineOne}
+                />
+                <VictoryScatter style={graphStyles.seriesOne} size={2} />
+            </VictoryGroup>
+
             {typeof line2 !== 'undefined' ? (
                 <VictoryGroup
                     data={plot}
@@ -153,22 +173,7 @@ const GraphLine = ({
                     <VictoryScatter style={graphStyles.seriesTwo} size={2} symbol="square" />
                 </VictoryGroup>
             ) : null}
-            <VictoryGroup
-                data={plot}
-                domain={{
-                    x: [0, plot.length],
-                    y: [0, maxY1],
-                }}
-                y={d => d.y1 / maxY1}
-            >
-                <VictoryLine
-                    data-testid="line1"
-                    interpolation={'natural'}
-                    // labels={({ datum }) => (line1labels ? datum.y1.toFixed(0) : '')}
-                    style={graphStyles.lineOne}
-                />
-                <VictoryScatter style={graphStyles.seriesOne} size={2} />
-            </VictoryGroup>
+
             <VictoryLegend
                 x={40}
                 y={170}

@@ -195,7 +195,11 @@ export const graphStyles = {
         tickLabels: { ...baseLabelStyles, fill: colors.brown },
     },
     seriesOne: {
-        data: { stroke: colorScale[0], fillOpacity: 1, fill: colorScale[0], strokeWidth: 0 },
+        data: { stroke: '#ffffff', fillOpacity: 1, fill: colorScale[0], strokeWidth: 1 },
+        labels: { ...baseLabelStyles, fontSize: 10 },
+    },
+    areaOne: {
+        data: { stroke: colorScale[0], fillOpacity: 0.3, fill: colorScale[0], strokeWidth: 0 },
         labels: { ...baseLabelStyles, fontSize: 10 },
     },
     lineOne: {
@@ -208,7 +212,7 @@ export const graphStyles = {
         tickLabels: { ...baseLabelStyles, fill: colorScale[0] },
     },
     seriesTwo: {
-        data: { stroke: colorScale[1], fillOpacity: 1, fill: colorScale[1], strokeWidth: 0 },
+        data: { stroke: '#ffffff', fillOpacity: 1, fill: colorScale[1], strokeWidth: 1 },
         labels: { ...baseLabelStyles, fill: colorScale[1] },
     },
     lineTwo: {
