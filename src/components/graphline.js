@@ -53,14 +53,12 @@ const GraphLine = ({
         const graphDate = dt.toLocaleString('default', { month: 'short' }) + '-' + ('0' + jDate[2]).slice(-2)
         const dow = weekday[dt.getDay()]
         const y = methods.calculateY(profile, date, line1)
-        // const y = profile.journal[date][line1] ? profile.journal[date][line1] : 0
         const y2 =
             typeof line2 !== 'undefined' && profile.journal[date][line2] ? Number(profile.journal[date][line2]) : 0
 
         maxX = dt > maxX ? graphDate : maxX
         minX = dt < minX ? graphDate : minX
         maxY1 = y > maxY1 ? y : maxY1
-        // minY = Number(profile.journal[date][line1]) < minY ? Number(profile.journal[date][line1]) : minY
         if (typeof line2 !== 'undefined') {
             maxY2 = Number(profile.journal[date][line2]) > maxY2 ? Number(profile.journal[date][line2]) : maxY2
         }
