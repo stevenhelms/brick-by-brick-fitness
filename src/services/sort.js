@@ -17,3 +17,15 @@ export const sortByFirst = (a, b) => {
         return -1
     }
 }
+
+export const sortByDate = (a, b) => {
+    const da = a.date,
+        db = b.date
+    if (da < db) {
+        return -1
+    }
+    if (da > db) {
+        return 1
+    }
+    return 0
+}
