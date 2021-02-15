@@ -26,6 +26,9 @@ const bodycss = css`
 const maincss = css`
     flex: 1;
     width: 80%;
+    @media screen and (max-width: 480px) {
+        width: 96%;
+    }
     margin: 3rem auto 0 auto;
     align-items: center;
 `
