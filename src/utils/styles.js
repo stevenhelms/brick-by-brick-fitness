@@ -9,6 +9,9 @@ export const colors = {
     lightGray: '#aeaeae',
     veryLightGray: '#eeeeee',
     background: '#171717',
+    brown: '#8d4004',
+    gray: '#787276',
+    secondaryOrange: '#ed7014',
 }
 
 export const Div = styled.div``
@@ -164,7 +167,7 @@ export const inputMargin = css`
     margin: 0 5px 0 10px;
 `
 
-const colorScale = ['#e25a2d', '#787276']
+const colorScale = [colors.primaryOrange, colors.gray]
 const baseLabelStyles = {
     fontFamily: "'Helvetica Neue', 'Helvetica', sans-serif",
     fontSize: 10,
@@ -176,16 +179,20 @@ const baseLabelStyles = {
 }
 
 export const graphStyles = {
-    colorScale: colorScale, // #e25a2d, alt orange #ed7014
+    colorScale: colorScale,
     baseLabelStyles: baseLabelStyles,
     title: {
         fill: colorScale[0],
         fontSize: 22,
     },
+    correlation: {
+        fill: colors.lightGray,
+        fontSize: 10,
+    },
     axisZero: {
-        axis: { stroke: '#8d4004', strokeWidth: 1 },
-        ticks: { stroke: '#8d4004', strokeWidth: 1, size: 5 },
-        tickLabels: { ...baseLabelStyles, fill: '#8d4004' },
+        axis: { stroke: colors.brown, strokeWidth: 1 },
+        ticks: { stroke: colors.brown, strokeWidth: 1, size: 5 },
+        tickLabels: { ...baseLabelStyles, fill: colors.brown },
     },
     seriesOne: {
         data: { stroke: colorScale[0], fillOpacity: 1, fill: colorScale[0], strokeWidth: 0 },

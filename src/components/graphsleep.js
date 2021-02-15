@@ -69,12 +69,12 @@ const GraphSleep = ({ title = undefined }) => {
             pData.sort((a, b) => sortByDate(a, b))
             gData.sort((a, b) => sortByDate(a, b))
 
-            console.log('group data', gData)
+            // console.log('group data', gData)
             setGraphData(gData)
-            console.log('personal data', pData)
+            // console.log('personal data', pData)
             setMyData(pData)
         },
-        [profile]
+        [profile] // eslint-disable-line react-hooks/exhaustive-deps
     )
 
     useEffect(() => {

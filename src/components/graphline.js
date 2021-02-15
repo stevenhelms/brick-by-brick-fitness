@@ -12,6 +12,7 @@ import {
 import { useAppContext } from '../services/context'
 import { toTitleCase } from '../utils/strings'
 import { graphStyles } from '../utils/styles'
+import { pearsonCorrelation } from '../services/calc'
 
 /**
  * This function take a complete user object and complete
@@ -56,7 +57,7 @@ const GraphLine = ({
         return null
     }
 
-    console.log('GraphLine:', line1, line2)
+    // console.log('GraphLine:', line1, line2)
 
     const plot = []
     let minX = new Date()
@@ -88,9 +89,20 @@ const GraphLine = ({
     // console.log('GraphLine maxY1', maxY1)
     // console.log('GraphLine maxY2', maxY2)
     const xTickValues = []
+
     for (let i = 0; i < plot.length; i += 2) {
         xTickValues.push(i)
     }
+
+    // Build two arrays to calculate our correlation
+    const pX = []
+    const pY = []
+    for (let i = 0; i < plot.length; i++) {
+        pX.push(plot[i]['y1'])
+        pY.push(plot[i]['y2'])
+    }
+    const correlation = pearsonCorrelation(pX, pY)
+    // console.log('correlation', correlation)
 
     return (
         <VictoryChart
@@ -113,6 +125,14 @@ const GraphLine = ({
             {typeof title !== 'undefined' ? (
                 <VictoryLabel x={50} y={30} text={title} style={graphStyles.title} />
             ) : null}
+            <VictoryLabel
+                y={10}
+                dy={10}
+                dx={330}
+                textAnchor="end"
+                text={`${correlation.text}\nCorrelation (r): ${correlation.value.toFixed(2)}`}
+                style={graphStyles.correlation}
+            />
             <VictoryAxis
                 // fixLabelOverlap={true}
                 // scale={{ x: 'time' }}

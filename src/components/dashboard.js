@@ -214,6 +214,13 @@ const Dashboard = () => {
                             Do workouts help you sleep better or no?
                         </GraphDiv>
                     </FlexRow>
+                    <FlexRow mobileColumn>
+                        <p style={{ color: colors.lightGray, fontSize: 10, marginTop: '20px' }}>
+                            NOTICE: Correlation calculations are performed using the standard Pearson Correlation
+                            Coefficient. It's important to remember that correlation does not imply causation. Your
+                            results may vary and these numbers may or may not be helpful.
+                        </p>
+                    </FlexRow>
                 </>
             ) : null}
         </Div>
