@@ -22,15 +22,41 @@ import { toTitleCase } from '../utils/strings'
  * @param {string} line1
  * @param {string} line2
  */
-const GraphLine = ({ line1, line2 = undefined, line1labels = true, line2labels = true }) => {
+const GraphLine = ({
+    line1,
+    line2 = undefined,
+    line1labels = true,
+    line2labels = true,
+    title = undefined,
+    isReady = false,
+}) => {
     const { state } = useAppContext()
     const { profile } = state
-    // const [l1, setL1] = useState(undefined)
-    // const [myData, setMyData] = useState(undefined)
-    // const [isReady, setIsReady] = useState(false)
+    const weekday = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 
-    console.log('GraphLine line1', line1)
-    console.log('GraphLine line2', line2)
+    const calculateY = (profile, date, line1) => {
+        let y = 0
+        if (line1 === 'food') {
+            // Make an attempt to gather adherence, not points
+            const protein = profile?.journal[date]['protein'] / profile.goal_protein
+            const veggies = profile?.journal[date]['veggies'] / profile.goal_veggies
+            const carbs = profile?.journal[date]['carbs'] / profile.goal_carbs
+            const fats = profile?.journal[date]['fats'] / profile.goal_fats
+            const compliance = Math.round(((protein + veggies + carbs + fats) / 4) * 100)
+            y = compliance
+        } else if (profile.journal[date][line1]) {
+            y = profile.journal[date][line1]
+        }
+
+        return y
+    }
+
+    if (!isReady) {
+        return null
+    }
+
+    console.log('GraphLine:', line1, line2)
+
     const plot = []
     let minX = new Date()
     let maxX = new Date(2000, 1, 1)
@@ -40,45 +66,57 @@ const GraphLine = ({ line1, line2 = undefined, line1labels = true, line2labels =
         const jDate = date.split('-')
         const dt = new Date(jDate[0], jDate[1] - 1, jDate[2])
         const graphDate = dt.toLocaleString('default', { month: 'short' }) + '-' + ('0' + jDate[2]).slice(-2)
-
-        const y = profile.journal[date][line1] ? profile.journal[date][line1] : 0
+        const dow = weekday[dt.getDay()]
+        const y = calculateY(profile, date, line1)
+        // const y = profile.journal[date][line1] ? profile.journal[date][line1] : 0
         const y2 =
             typeof line2 !== 'undefined' && profile.journal[date][line2] ? Number(profile.journal[date][line2]) : 0
 
         maxX = dt > maxX ? graphDate : maxX
         minX = dt < minX ? graphDate : minX
-        maxY1 = Number(profile.journal[date][line1]) > maxY1 ? Number(profile.journal[date][line1]) : maxY1
+        maxY1 = y > maxY1 ? y : maxY1
         // minY = Number(profile.journal[date][line1]) < minY ? Number(profile.journal[date][line1]) : minY
         if (typeof line2 !== 'undefined') {
             maxY2 = Number(profile.journal[date][line2]) > maxY2 ? Number(profile.journal[date][line2]) : maxY2
         }
 
-        plot.push({ i: idx, x: graphDate, y1: y, y2: y2 })
+        plot.push({ i: idx, x: idx, y1: y, y2: y2, date: graphDate, dow: dow })
     })
 
-    console.log('GraphLine plot', plot)
-    console.log('GraphLine maxY1', maxY1)
-    console.log('GraphLine maxY2', maxY2)
+    // console.log('GraphLine plot', plot)
+    // console.log('GraphLine maxY1', maxY1)
+    // console.log('GraphLine maxY2', maxY2)
+    const xTickValues = []
+    for (let i = 0; i < plot.length; i += 2) {
+        xTickValues.push(i)
+    }
 
     return (
         <VictoryChart
-            animate={true}
-            data-testid="line-chart"
+            animate={false}
+            data-testid={`line-chart-${line1}-${line2}`}
             height={200}
-            domainPadding={{ x: 20, y: 30 }}
+            domainPadding={{ x: 0, y: 10 }}
             domain={{ y: [0, 1] }}
             // minDomain={{ y: 0 }}
-            style={{
-                parent: {
-                    border: '1px solid #ccc',
-                },
-                // background: {
-                //     fill: '#eee',
-                // },
-            }}
+            // style={{
+            // parent: {
+            //     border: '1px solid #ccc',
+            // },
+            // background: {
+            //     fill: '#eee',
+            // },
+            // }}
             theme={VictoryTheme.material}
         >
-            <VictoryAxis fixLabelOverlap={true} style={styles.axisZero} />
+            {typeof title !== 'undefined' ? <VictoryLabel x={50} y={30} text={title} style={styles.title} /> : null}
+            <VictoryAxis
+                // fixLabelOverlap={true}
+                // scale={{ x: 'time' }}
+                style={styles.axisZero}
+                tickValues={xTickValues}
+                tickLabelComponent={<VictoryLabel text={({ datum }) => plot[datum]?.dow || datum} />}
+            />
             <VictoryAxis
                 dependentAxis
                 orientation="left"
@@ -133,7 +171,7 @@ const GraphLine = ({ line1, line2 = undefined, line1labels = true, line2labels =
                 <VictoryScatter style={styles.seriesOne} size={2} />
             </VictoryGroup>
             <VictoryLegend
-                x={15}
+                x={40}
                 y={170}
                 centerTitle
                 orientation="horizontal"
@@ -156,7 +194,8 @@ const GraphLine = ({ line1, line2 = undefined, line1labels = true, line2labels =
 
 export default GraphLine
 
-const colorScale = ['#ed7014', '#787276']
+const colorScale = ['#e25a2d', '#787276']
+// e25a2d, alt orange #ed7014
 
 const baseLabelStyles = {
     fontFamily: "'Helvetica Neue', 'Helvetica', sans-serif",
@@ -169,6 +208,10 @@ const baseLabelStyles = {
 }
 
 export const styles = {
+    title: {
+        fill: colorScale[0],
+        fontSize: 22,
+    },
     axisZero: {
         axis: { stroke: '#8d4004', strokeWidth: 1 },
         ticks: { stroke: '#8d4004', strokeWidth: 1, size: 5 },
