@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 
-import { VictoryBar, VictoryChart, VictoryGroup, VictoryLegend } from 'victory'
+import { VictoryBar, VictoryChart, VictoryGroup, VictoryLabel, VictoryLegend, VictoryTheme } from 'victory'
+import { graphStyles } from '../utils/styles'
 
-const GraphMacros = () => {
+const GraphMacros = ({ title = undefined }) => {
     const [data, setData] = useState(undefined)
     const [isReady, setIsReady] = useState(false)
 
@@ -32,18 +33,21 @@ const GraphMacros = () => {
             { macro: 'protein', portions: 0 },
             { macro: 'carbs', portions: 0 },
             { macro: 'fats', portions: 0 },
+            { macro: 'veggies', portions: 0 },
         ],
 
         male: [
             { macro: 'protein', portions: 0 },
             { macro: 'carbs', portions: 0 },
             { macro: 'fats', portions: 0 },
+            { macro: 'veggies', portions: 0 },
         ],
 
         female: [
             { macro: 'protein', portions: 0 },
             { macro: 'carbs', portions: 0 },
             { macro: 'fats', portions: 0 },
+            { macro: 'veggies', portions: 0 },
         ],
     }
 
@@ -51,49 +55,64 @@ const GraphMacros = () => {
         graphData['overall'][0]['portions'] += user?.totals?.protein ? user.totals.protein : 0
         graphData['overall'][1]['portions'] += user?.totals?.carbs ? user.totals.carbs : 0
         graphData['overall'][2]['portions'] += user?.totals?.fats ? user.totals.fats : 0
+        graphData['overall'][3]['portions'] += user?.totals?.veggies ? user.totals.veggies : 0
 
         if (user.gender === 'male') {
             graphData['male'][0]['portions'] += user?.totals?.protein ? user.totals.protein : 0
             graphData['male'][1]['portions'] += user?.totals?.carbs ? user.totals.carbs : 0
             graphData['male'][2]['portions'] += user?.totals?.fats ? user.totals.fats : 0
+            graphData['male'][3]['portions'] += user?.totals?.veggies ? user.totals.veggies : 0
         }
 
         if (user.gender === 'female') {
             graphData['female'][0]['portions'] += user?.totals?.protein ? user.totals.protein : 0
             graphData['female'][1]['portions'] += user?.totals?.carbs ? user.totals.carbs : 0
             graphData['female'][2]['portions'] += user?.totals?.fats ? user.totals.fats : 0
+            graphData['female'][3]['portions'] += user?.totals?.veggies ? user.totals.veggies : 0
         }
     })
 
     return (
-        <VictoryChart height={200} domainPadding={{ x: 60, y: 0 }}>
-            <VictoryGroup
-                offset={24}
-                colorScale={['#1f1f1f', 'orange', 'tomato']}
-                style={{
-                    data: { fillOpacity: 0.7 },
-                    labels: { fontSize: 16 },
-                }}
-            >
+        <VictoryChart height={200} domainPadding={{ x: 40, y: 0 }} theme={VictoryTheme.material}>
+            {typeof title !== 'undefined' ? (
+                <VictoryLabel x={50} y={30} text={title} style={graphStyles.title} />
+            ) : null}
+            <VictoryGroup offset={18} colorScale={graphStyles.colorScale} style={graphStyles.bar}>
                 {/* <VictoryAxis /> */}
                 {/* <VictoryAxis dependentAxis /> */}
-                <VictoryBar data={graphData['overall']} x="macro" y="portions" labels={({ datum }) => datum.portions} />
-                <VictoryBar data={graphData['male']} x="macro" y="portions" labels={({ datum }) => datum.portions} />
-                <VictoryBar data={graphData['female']} x="macro" y="portions" labels={({ datum }) => datum.portions} />
+                <VictoryBar
+                    data={graphData['overall']}
+                    x="macro"
+                    y="portions"
+                    barWidth={16}
+                    labels={({ datum }) => datum.portions}
+                    labelComponent={<VictoryLabel dy={30} />}
+                />
+                <VictoryBar
+                    data={graphData['male']}
+                    x="macro"
+                    y="portions"
+                    barWidth={16}
+                    labels={({ datum }) => datum.portions}
+                    labelComponent={<VictoryLabel dy={30} />}
+                />
+                <VictoryBar
+                    data={graphData['female']}
+                    x="macro"
+                    y="portions"
+                    barWidth={16}
+                    labels={({ datum }) => datum.portions}
+                    labelComponent={<VictoryLabel dy={30} />}
+                />
             </VictoryGroup>
             <VictoryLegend
-                x={15}
+                x={40}
                 y={170}
                 centerTitle
                 orientation="horizontal"
-                gutter={30}
-                style={{
-                    border: { stroke: 'orange', strokeWidth: 0 },
-                    title: { fontSize: 16 },
-                    labels: { fontSize: 16 },
-                    data: { fillOpacity: 0.7 },
-                }}
-                colorScale={['#1f1f1f', 'orange', 'tomato']}
+                // gutter={30}
+                style={graphStyles.legend}
+                colorScale={graphStyles.colorScale}
                 data={[
                     { name: 'Overall', symbol: { type: 'square' } },
                     { name: 'Men', symbol: { type: 'square' } },

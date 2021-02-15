@@ -180,12 +180,7 @@ const GraphLine = ({
                 centerTitle
                 orientation="horizontal"
                 gutter={30}
-                style={{
-                    border: { stroke: graphStyles.colorScale[0], strokeWidth: 0 },
-                    title: { ...graphStyles.baseLabelStyles, fontSize: 14 },
-                    labels: { ...graphStyles.baseLabelStyles, fontSize: 14 },
-                    data: { fillOpacity: 1 },
-                }}
+                style={graphStyles.legend}
                 colorScale={graphStyles.colorScale}
                 data={[
                     {

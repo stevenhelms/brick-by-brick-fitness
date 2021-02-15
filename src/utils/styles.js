@@ -12,6 +12,7 @@ export const colors = {
     brown: '#8d4004',
     gray: '#787276',
     secondaryOrange: '#ed7014',
+    blue: '#00B2E3',
 }
 
 export const Div = styled.div``
@@ -167,7 +168,7 @@ export const inputMargin = css`
     margin: 0 5px 0 10px;
 `
 
-const colorScale = [colors.primaryOrange, colors.gray]
+const colorScale = [colors.primaryOrange, colors.gray, colors.blue]
 const baseLabelStyles = {
     fontFamily: "'Helvetica Neue', 'Helvetica', sans-serif",
     fontSize: 10,
@@ -183,11 +184,21 @@ export const graphStyles = {
     baseLabelStyles: baseLabelStyles,
     title: {
         fill: colorScale[0],
-        fontSize: 22,
+        fontSize: 16,
+    },
+    legend: {
+        border: { stroke: colorScale[0], strokeWidth: 0 },
+        title: { ...baseLabelStyles, fontSize: 12 },
+        labels: { ...baseLabelStyles, fontSize: 12 },
+        data: { fillOpacity: 1 },
     },
     correlation: {
         fill: colors.lightGray,
         fontSize: 10,
+    },
+    bar: {
+        data: { fillOpacity: 0.9, stroke: '#ffffff', strokeWidth: 1 },
+        labels: { ...baseLabelStyles, fill: '#ffffff', fontSize: 7 },
     },
     axisZero: {
         axis: { stroke: colors.brown, strokeWidth: 1 },

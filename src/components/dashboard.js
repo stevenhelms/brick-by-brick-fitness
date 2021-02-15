@@ -206,6 +206,10 @@ const Dashboard = () => {
                     <FlexRow style={{ display: 'inline-block' }}>
                         <hr />
                         <H1>Misc</H1>
+                        <Div>
+                            These are random graphs that didn't fit the other categories. Contact me if you want to see
+                            additional comparisons.
+                        </Div>
                     </FlexRow>
                     <FlexRow mobileColumn>
                         <GraphDiv>
@@ -214,10 +218,10 @@ const Dashboard = () => {
                         </GraphDiv>
                     </FlexRow>
                     <FlexRow mobileColumn>
-                        <p style={{ color: colors.lightGray, fontSize: 10, marginTop: '20px' }}>
+                        <p style={{ color: colors.typographyGrayed, fontSize: 12, marginTop: '20px' }}>
                             NOTICE: Correlation calculations are performed using the standard Pearson Correlation
-                            Coefficient. It's important to remember that correlation does not imply causation. Your
-                            results may vary and these numbers may or may not be helpful.
+                            Coefficient. It's important to remember that <b>correlation does not imply causation</b>.
+                            Your results may vary and these numbers may or may not be helpful.
                         </p>
                     </FlexRow>
                 </>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import firebase from 'gatsby-plugin-firebase'
 import {
+    VictoryArea,
     VictoryAxis,
     VictoryGroup,
     VictoryLine,
@@ -123,19 +124,6 @@ const GraphSleep = ({ title = undefined }) => {
             <VictoryAxis dependentAxis fixLabelOverlap={true} />
 
             <VictoryGroup
-                data={graphData}
-                x="date"
-                y="average"
-                domain={{
-                    x: [0, graphData.length],
-                    y: [0, maxY1],
-                }}
-            >
-                <VictoryLine interpolation={'natural'} style={graphStyles.lineTwo} />
-                <VictoryScatter style={graphStyles.seriesTwo} size={2} symbol="square" />
-            </VictoryGroup>
-
-            <VictoryGroup
                 data={myData}
                 x="date"
                 y="total"
@@ -145,6 +133,7 @@ const GraphSleep = ({ title = undefined }) => {
                 }}
                 // y={d => d.total / maxY1}
             >
+                <VictoryArea style={graphStyles.areaOne} interpolation={'natural'} />
                 <VictoryLine
                     style={graphStyles.lineOne}
                     interpolation={'natural'}
@@ -163,18 +152,26 @@ const GraphSleep = ({ title = undefined }) => {
                 <VictoryScatter style={graphStyles.seriesOne} size={2} symbol="circle" />
             </VictoryGroup>
 
+            <VictoryGroup
+                data={graphData}
+                x="date"
+                y="average"
+                domain={{
+                    x: [0, graphData.length],
+                    y: [0, maxY1],
+                }}
+            >
+                <VictoryLine interpolation={'natural'} style={graphStyles.lineTwo} />
+                <VictoryScatter style={graphStyles.seriesTwo} size={2} symbol="square" />
+            </VictoryGroup>
+
             <VictoryLegend
                 x={40}
                 y={170}
                 centerTitle
                 orientation="horizontal"
                 gutter={30}
-                style={{
-                    border: { stroke: graphStyles.colorScale[0], strokeWidth: 0 },
-                    title: { ...graphStyles.baseLabelStyles, fontSize: 14 },
-                    labels: { ...graphStyles.baseLabelStyles, fontSize: 14 },
-                    data: { fillOpacity: 1 },
-                }}
+                style={graphStyles.legend}
                 colorScale={graphStyles.colorScale}
                 data={[
                     { name: 'My Sleep', labels: { fill: graphStyles.colorScale[0] } },
