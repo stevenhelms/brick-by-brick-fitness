@@ -55,10 +55,6 @@ const AdminLeaderBoard = () => {
             <Container style={{ flexDirection: 'column', padding: '0 20px' }}>
                 {isReady ? (
                     users.map((leader, i) => {
-                        // if (!leader.totals) {
-                        //     // No journal entries yet which builds totals
-                        //     return null
-                        // }
                         const journal = leader?.journal ? leader.journal : {}
                         // console.log(Object.keys(journal).length)
                         return (
@@ -100,13 +96,6 @@ const PointCalculator = () => {
             .ref('/users')
             .get()
             .then(snapshot => {
-                // const items = []
-                // snapshot.forEach(item => {
-                //     // console.log(item.val())
-                //     items.push(item.val())
-                // })
-                // items.sort((a, b) => sortByTotalPoints(a, b)) // Sort decending
-                // setLeaders(items.slice(0, 5)) // Only the Top 5
                 setUsers(snapshot.val())
                 setIsReady(true)
             })

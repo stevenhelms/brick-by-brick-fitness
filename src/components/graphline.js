@@ -36,23 +36,6 @@ const GraphLine = ({
     const { profile } = state
     const weekday = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 
-    const calculateY = (profile, date, line1) => {
-        let y = 0
-        if (line1 === 'food') {
-            // Make an attempt to gather adherence, not points
-            const protein = profile?.journal[date]['protein'] / profile.goal_protein
-            const veggies = profile?.journal[date]['veggies'] / profile.goal_veggies
-            const carbs = profile?.journal[date]['carbs'] / profile.goal_carbs
-            const fats = profile?.journal[date]['fats'] / profile.goal_fats
-            const compliance = Math.round(((protein + veggies + carbs + fats) / 4) * 100)
-            y = compliance
-        } else if (profile.journal[date][line1]) {
-            y = profile.journal[date][line1]
-        }
-
-        return y
-    }
-
     if (!isReady) {
         return null
     }
@@ -69,7 +52,7 @@ const GraphLine = ({
         const dt = new Date(jDate[0], jDate[1] - 1, jDate[2])
         const graphDate = dt.toLocaleString('default', { month: 'short' }) + '-' + ('0' + jDate[2]).slice(-2)
         const dow = weekday[dt.getDay()]
-        const y = calculateY(profile, date, line1)
+        const y = methods.calculateY(profile, date, line1)
         // const y = profile.journal[date][line1] ? profile.journal[date][line1] : 0
         const y2 =
             typeof line2 !== 'undefined' && profile.journal[date][line2] ? Number(profile.journal[date][line2]) : 0
@@ -85,11 +68,7 @@ const GraphLine = ({
         plot.push({ i: idx, x: idx, y1: y, y2: y2, date: graphDate, dow: dow })
     })
 
-    // console.log('GraphLine plot', plot)
-    // console.log('GraphLine maxY1', maxY1)
-    // console.log('GraphLine maxY2', maxY2)
     const xTickValues = []
-
     for (let i = 0; i < plot.length; i += 2) {
         xTickValues.push(i)
     }
@@ -102,7 +81,6 @@ const GraphLine = ({
         pY.push(plot[i]['y2'])
     }
     const correlation = pearsonCorrelation(pX, pY)
-    // console.log('correlation', correlation)
 
     return (
         <VictoryChart
@@ -240,5 +218,21 @@ export const methods = {
         })
 
         return plot
+    },
+    calculateY: (profile, date, type) => {
+        let y = 0
+        if (type === 'food') {
+            // Make an attempt to gather adherence, not points
+            const protein = profile?.journal[date]['protein'] / profile.goal_protein
+            const veggies = profile?.journal[date]['veggies'] / profile.goal_veggies
+            const carbs = profile?.journal[date]['carbs'] / profile.goal_carbs
+            const fats = profile?.journal[date]['fats'] / profile.goal_fats
+            const compliance = Math.round(((protein + veggies + carbs + fats) / 4) * 100)
+            y = compliance
+        } else if (profile.journal[date][type]) {
+            y = profile.journal[date][type]
+        }
+
+        return y
     },
 }

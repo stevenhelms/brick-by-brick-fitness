@@ -59,7 +59,6 @@ const DailyTips = () => {
 }
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
-    // const [user] = useState(getUser())
     const { user } = state
     const [profile, setProfile] = useState([])
     const [isReady, setIsReady] = useState(false)

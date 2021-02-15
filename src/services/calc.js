@@ -58,7 +58,10 @@ export const calcSleepPoints = actual => {
 }
 
 export const calculateEatSlowlyPoints = num => {
-    return num >= 3 ? 3 : num === 2 ? 2 : num === 1 ? 1 : 0
+    if (num >= 3) {
+        return 3
+    }
+    return num >= 1 ? num : 0
 }
 
 export const calculatePoints = (items, user) => {
@@ -124,7 +127,7 @@ export const pearsonCorrelation = (x, y) => {
      */
 
     let n = x.length
-    let idx = Array.from({ length: n }, (x, i) => i)
+    let idx = Array.from({ length: n }, (z, i) => i)
 
     // Averages
     let avgX = x.reduce((a, b) => a + b) / n
