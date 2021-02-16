@@ -4,12 +4,13 @@ import styled from '@emotion/styled'
 
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-import { Button, Div, colors, H3, BorderDiv, FlexRow } from '../utils/styles'
+import { Button, Div, colors, FlexRow, H1 } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
 import GraphMacros from './graphmacros'
 import GraphSleep from './graphsleep'
+import GraphLine from './graphline'
 
 const DailyTipsContainer = styled.div`
     display: flex;
@@ -32,6 +33,15 @@ const LeaderGoalDiv = styled.div`
     }
 `
 
+const GraphDiv = styled.div`
+    width: 50%;
+    font-size: smaller;
+    color: ${colors.typography};
+    @media screen and (max-width: 480px) {
+        width: 100%;
+    }
+`
+
 const DailyTips = () => {
     const [todaysTips, setTodaysTips] = useState(undefined)
 
@@ -49,7 +59,6 @@ const DailyTips = () => {
 }
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
-    // const [user] = useState(getUser())
     const { user } = state
     const [profile, setProfile] = useState([])
     const [isReady, setIsReady] = useState(false)
@@ -112,16 +121,111 @@ const Dashboard = () => {
                     <p>Loading...</p>
                 )}
             </Container> */}
-            <FlexRow mobileColumn>
-                <BorderDiv style={{ padding: '10px' }}>
-                    <H3>Total Hand Portions Eaten</H3>
-                    <GraphMacros />
-                </BorderDiv>
-                <BorderDiv style={{ padding: '10px' }}>
-                    <H3>Total Average Hours of Sleep</H3>
-                    <GraphSleep />
-                </BorderDiv>
-            </FlexRow>
+            {isReady ? (
+                <>
+                    <FlexRow mobileColumn>
+                        <GraphDiv>
+                            <GraphMacros title="Total Hand Portions Eaten" />
+                        </GraphDiv>
+                        <GraphDiv>
+                            <GraphSleep title="Total Average Hours of Sleep" />
+                        </GraphDiv>
+                    </FlexRow>
+                    <FlexRow style={{ display: 'inline-block' }}>
+                        <hr />
+                        <H1>Stress</H1>
+                        <Div>
+                            When you think about your stress, do any of the graphs below correlate with your stress? If
+                            you sleep more or drink more, does that help? Is there any correlation? Is there a pattern
+                            you notice?
+                        </Div>
+                        <Div style={{ color: colors.typography, marginTop: '20px', fontSize: 'smaller' }}>
+                            The Food graphs compare your overall consistency for meeting your food goals for the day.
+                            It's the ability to hit each of the goals given to you (proteins, carbs, fats, veggies) and
+                            quantifies that as a single value. If there is a number over 100%, it represents you getting
+                            more food than the goal specified.
+                        </Div>
+                    </FlexRow>
+                    <FlexRow mobileColumn>
+                        <GraphDiv>
+                            <GraphLine line1="sleep" line2="stress" title="Sleep vs. Stress" isReady={isReady} />
+                            Does sleep help moderate your stress?
+                        </GraphDiv>
+                        <GraphDiv>
+                            <GraphLine line1="water" line2="stress" title="Water vs. Stress" isReady={isReady} />
+                            Water may not have a direct correlation with stress. Is there anything you notice? Do you
+                            tend to drink more or less when stressed?
+                        </GraphDiv>
+                    </FlexRow>
+                    <FlexRow mobileColumn>
+                        <GraphDiv>
+                            <GraphLine line1="food" line2="stress" title="Food vs. Stress" isReady={isReady} />
+                            Do you eat more or less when stressed? The same?
+                        </GraphDiv>
+                        <GraphDiv>
+                            <GraphLine line1="workout" line2="stress" title="Workout vs. Stress" isReady={isReady} />
+                            Exercise is said to reduce stress. Is there any correlation between the two in your data?
+                        </GraphDiv>
+                    </FlexRow>
+                    <FlexRow style={{ display: 'inline-block' }}>
+                        <hr />
+                        <H1>Recovery</H1>
+                        <Div>
+                            Similar to stress, our recovery is greatly affected by our food choices, sleep, and other
+                            factors that we can control. Do any of the graphs below correlate with your recovery? If you
+                            sleep more or drink more, does that help? Is there any correlation? Is there a pattern you
+                            notice?
+                        </Div>
+                    </FlexRow>
+                    <FlexRow mobileColumn>
+                        <GraphDiv>
+                            <GraphLine line1="sleep" line2="recovery" title="Sleep vs. Recovery" isReady={isReady} />
+                            When you sleep well, is your recovery better? same? worse?
+                        </GraphDiv>
+                        <GraphDiv>
+                            <GraphLine line1="water" line2="recovery" title="Water vs. Recovery" isReady={isReady} />
+                            How is your water intake affecting your recovery?
+                        </GraphDiv>
+                    </FlexRow>
+                    <FlexRow mobileColumn>
+                        <GraphDiv>
+                            <GraphLine line1="food" line2="recovery" title="Food vs. Recovery" isReady={isReady} />
+                            When you eat well, is your recovery better? same? worse?
+                        </GraphDiv>
+                        <GraphDiv>
+                            <GraphLine
+                                line1="workout"
+                                line2="recovery"
+                                title="Workout vs. Recovery"
+                                isReady={isReady}
+                            />
+                            How do you recover the day after a workout? Good? Bad? Same?
+                        </GraphDiv>
+                    </FlexRow>
+
+                    <FlexRow style={{ display: 'inline-block' }}>
+                        <hr />
+                        <H1>Misc</H1>
+                        <Div>
+                            These are random graphs that didn't fit the other categories. Contact me if you want to see
+                            additional comparisons.
+                        </Div>
+                    </FlexRow>
+                    <FlexRow mobileColumn>
+                        <GraphDiv>
+                            <GraphLine line1="workout" line2="sleep" title="Workout vs. Sleep" isReady={isReady} />
+                            Do workouts help you sleep better or no?
+                        </GraphDiv>
+                    </FlexRow>
+                    <FlexRow mobileColumn>
+                        <p style={{ color: colors.typographyGrayed, fontSize: 12, marginTop: '20px' }}>
+                            NOTICE: Correlation calculations are performed using the standard Pearson Correlation
+                            Coefficient. It's important to remember that <b>correlation does not imply causation</b>.
+                            Your results may vary and these numbers may or may not be helpful.
+                        </p>
+                    </FlexRow>
+                </>
+            ) : null}
         </Div>
     )
 }

@@ -20,6 +20,7 @@ const Ul = styled.ul`
     list-style: none;
     @media screen and (max-width: 480px) {
         margin-left: 0;
+        display: flex;
     }
 `
 const Li = styled.li`

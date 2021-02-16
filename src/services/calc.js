@@ -58,7 +58,10 @@ export const calcSleepPoints = actual => {
 }
 
 export const calculateEatSlowlyPoints = num => {
-    return num >= 3 ? 3 : num === 2 ? 2 : num === 1 ? 1 : 0
+    if (num >= 3) {
+        return 3
+    }
+    return num >= 1 ? num : 0
 }
 
 export const calculatePoints = (items, user) => {
@@ -90,4 +93,56 @@ export const inchesToFeet = inches => {
     const f = Math.floor(inches / 12)
     const i = inches - f * 12
     return [f, i]
+}
+
+const getPearsonCorrelationText = correlation => {
+    let text = ''
+    if (correlation >= -0.1 && correlation <= 0.1) {
+        text = 'No'
+    } else if (correlation >= -0.45 && correlation <= 0.45) {
+        text = 'Weak'
+    } else if (correlation >= -0.85 && correlation <= 0.85) {
+        text = 'Moderate'
+    } else {
+        text = 'Strong'
+    }
+
+    if (correlation < 0 && text !== 'No') {
+        text += ' negative'
+    } else if (correlation > 0 && text !== 'No') {
+        text += ' positive'
+    }
+    text += ' correlation'
+    return text
+}
+
+export const pearsonCorrelation = (x, y) => {
+    /**
+     * Both x and y are arrays of numbers.
+     *
+     * Calculate Pearson correlation coefficent of arrays of equal length.
+     * Numerator is sum of the multiplication of (x - x_avg) and (y - y_avg).
+     * Denominator is the squart root of the product between the sum of
+     * (x - x_avg)^2 and the sum of (y - y_avg)^2.
+     */
+
+    let n = x.length
+    let idx = Array.from({ length: n }, (z, i) => i)
+
+    // Averages
+    let avgX = x.reduce((a, b) => a + b) / n
+    let avgY = y.reduce((a, b) => a + b) / n
+
+    let numMult = idx.map(i => (x[i] - avgX) * (y[i] - avgY))
+    let numerator = numMult.reduce((a, b) => a + b)
+
+    let denomX = idx.map(i => Math.pow(x[i] - avgX, 2)).reduce((a, b) => a + b)
+    let denomY = idx.map(i => Math.pow(y[i] - avgY, 2)).reduce((a, b) => a + b)
+    let denominator = Math.sqrt(denomX * denomY)
+
+    const correlation = numerator / denominator
+
+    const txt = getPearsonCorrelationText(correlation)
+
+    return { value: correlation, text: txt }
 }
