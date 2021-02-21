@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Div, colors, FlexRow, FlexItem, H1, H4, Container } from '../utils/styles'
+import { FlexRow, FlexItem, H4, Container } from '../utils/styles'
 
 const ChallengeSummary = ({ data, isReady }) => {
     const [summary, setSummary] = useState({})

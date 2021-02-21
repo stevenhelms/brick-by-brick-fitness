@@ -5,7 +5,7 @@ import firebase from 'gatsby-plugin-firebase'
 
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-import { Button, Div, colors, FlexRow, FlexItem, H1, H4, Container } from '../utils/styles'
+import { Button, Div, colors, FlexRow, H1, Container } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
@@ -57,7 +57,7 @@ const DailyTips = () => {
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
     const { user } = state
-    const [profile, setProfile] = useState([])
+    const [myProfile, setMyProfile] = useState([])
     const [isReady, setIsReady] = useState(false)
     const [greeting, setGreeting] = useState(undefined)
     const [participants, setParticipants] = useState(undefined)
@@ -69,7 +69,7 @@ const Dashboard = () => {
                 navigate('/app/registration')
                 return null
             } else {
-                setProfile(profile)
+                setMyProfile(profile)
                 dispatch({ type: 'SET_PROFILE', value: profile })
                 setIsReady(true)
             }
@@ -77,12 +77,12 @@ const Dashboard = () => {
     }, [user.email, dispatch, isReady])
 
     useEffect(() => {
-        if (profile?.first) {
-            setGreeting(`, ${profile.first}`)
+        if (myProfile?.first) {
+            setGreeting(`, ${myProfile.first}`)
         } else if (user.displayName) {
             setGreeting(`, ${user.displayName}`)
         }
-    }, [profile]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [myProfile]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         firebase
@@ -120,7 +120,7 @@ const Dashboard = () => {
 
             <DailyTips />
             <Container style={{ marginTop: 0 }}>
-                <Goals user={user} profile={profile} />
+                <Goals user={user} profile={myProfile} />
             </Container>
             {/* <Container>
                 <ChallengeSummary data={participants} isReady={participantsReady} />
