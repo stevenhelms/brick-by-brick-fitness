@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Link, navigate } from 'gatsby'
 import styled from '@emotion/styled'
+import firebase from 'gatsby-plugin-firebase'
 
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
-import { Button, Div, colors, FlexRow, H1 } from '../utils/styles'
+import { Button, Div, colors, FlexRow, FlexItem, H1, H4, Container } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
+import LeadersWeight from './leadersweight'
 import GraphMacros from './graphmacros'
 import GraphSleep from './graphsleep'
 import GraphLine from './graphline'
+import ChallengeSummary from './challengesummary'
 
 const DailyTipsContainer = styled.div`
     display: flex;
@@ -21,15 +24,6 @@ const DailyTipsContainer = styled.div`
     padding: 20px;
     @media screen and (max-width: 480px) {
         margin-left: 0;
-    }
-`
-const LeaderGoalDiv = styled.div`
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-    @media screen and (max-width: 480px) {
-        display: block;
-        // padding-left: 30px;
     }
 `
 
@@ -47,8 +41,10 @@ const DailyTips = () => {
 
     useEffect(() => {
         // Add logic for tips display
-        setTodaysTips(undefined)
-        // setTodaysTips("I'm creating a set of frequently asked questions at http://bearstategym.com/winter21/")
+        // setTodaysTips(undefined)
+        setTodaysTips(
+            'Final results will be announced on Monday, February 22, 2021. Two winners for total points earned and two winners for total percent body fat lost will be awarded the top prizes. If you actively used this app, take a look at the graphs and charts below to see if anything stands out to you.'
+        )
     }, [])
 
     if (!todaysTips) {
@@ -57,12 +53,15 @@ const DailyTips = () => {
 
     return <DailyTipsContainer>{todaysTips} </DailyTipsContainer>
 }
+
 const Dashboard = () => {
     const { state, dispatch } = useAppContext()
     const { user } = state
     const [profile, setProfile] = useState([])
     const [isReady, setIsReady] = useState(false)
     const [greeting, setGreeting] = useState(undefined)
+    const [participants, setParticipants] = useState(undefined)
+    const [participantsReady, setParticipantsReady] = useState(false)
 
     useEffect(() => {
         getProfile(user.email).then(profile => {
@@ -85,6 +84,24 @@ const Dashboard = () => {
         }
     }, [profile]) // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        firebase
+            .database()
+            .ref('/users')
+            .get()
+            .then(snapshot => {
+                const items = []
+                snapshot.forEach(item => {
+                    items.push(item.val())
+                })
+                setParticipants(items)
+                if (items && typeof participants !== 'undefined') {
+                    console.log('participants', participants)
+                    setParticipantsReady(true)
+                }
+            })
+    }, [isReady])
+
     if (!isReady) {
         return <Loading displayText="Loading..." />
     }
@@ -102,25 +119,16 @@ const Dashboard = () => {
             </div>
 
             <DailyTips />
-            <LeaderGoalDiv>
-                {isReady ? (
-                    <>
-                        <Leaders />
-                        <Goals user={user} profile={profile} />
-                    </>
-                ) : (
-                    <p>Loading...</p>
-                )}
-            </LeaderGoalDiv>
-            {/* <Container style={{ display: 'block' }}>
-                {isReady ? (
-                    <>
-                        <Journal limit={5} user={user} style={{ flex: 1, flexDirection: 'column' }} />
-                    </>
-                ) : (
-                    <p>Loading...</p>
-                )}
+            <Container style={{ marginTop: 0 }}>
+                <Goals user={user} profile={profile} />
+            </Container>
+            {/* <Container>
+                <ChallengeSummary data={participants} isReady={participantsReady} />
             </Container> */}
+            <Container>
+                <Leaders data={participants} isReady={participantsReady} />
+                <LeadersWeight data={participants} isReady={participantsReady} />
+            </Container>
             {isReady ? (
                 <>
                     <FlexRow mobileColumn>

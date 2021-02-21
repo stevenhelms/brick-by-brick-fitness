@@ -8,6 +8,16 @@ export const sortByTotalPoints = (a, b) => {
     return y - x // Decending order
 }
 
+/*
+ * Sort leader board in decending order by points.
+ */
+export const sortByTotalWeightLoss = (a, b) => {
+    const x = a.weight_loss ? a.weight_loss : 0
+    const y = b.weight_loss ? b.weight_loss : 0
+
+    return y - x // Decending order
+}
+
 export const sortByFirst = (a, b) => {
     if (a.first === b.first) {
         return 0
