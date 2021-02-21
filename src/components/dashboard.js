@@ -243,10 +243,10 @@ const methods = {
                 if (items !== val) {
                     console.log('useEffect, snapshot, items', items)
                 }
-                if (items && typeof val !== 'undefined') {
-                    console.log('participants', val)
-                    // setParticipantsReady(true)
-                }
+                // if (items && typeof val !== 'undefined') {
+                //     console.log('participants', val)
+                //     // setParticipantsReady(true)
+                // }
             })
     },
 }
