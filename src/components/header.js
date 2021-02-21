@@ -19,10 +19,6 @@ const StyledHeader = styled.header`
 
 const Container = styled.div`
     float: left;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // padding: 1rem;
     @media screen and (max-width: 480px) {
         float: none;
     }
@@ -36,14 +32,14 @@ const Header = ({ siteTitle }) => {
         query logoImageQuery {
             logoImage: file(relativePath: { eq: "bear-state-logo-Sept2020-white.png" }) {
                 childImageSharp {
-                    fixed(width: 80, height: 80) {
+                    fixed(width: 60, height: 60) {
                         ...GatsbyImageSharpFixed
                     }
                 }
             }
             mobileImage: file(relativePath: { eq: "bear-state-logo-Sept2020-white.png" }) {
                 childImageSharp {
-                    fixed(width: 40, height: 40) {
+                    fixed(width: 30, height: 30) {
                         ...GatsbyImageSharpFixed
                     }
                 }

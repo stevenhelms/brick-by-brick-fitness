@@ -25,6 +25,9 @@ export const Container = styled.div`
     // border-radius: 3px;
     // padding: 20px;
     // margin-bottom: 20px;
+    @media screen and (max-width: 480px) {
+        display: block;
+    }
 `
 
 export const Heading = styled.div`
@@ -93,6 +96,9 @@ export const FlexRow = styled.div`
     @media screen and (max-width: 480px) {
         ${({ mobileColumn }) => mobileColumn && 'flex-direction: column; '}
     }
+`
+export const FlexItem = styled.div`
+    flex: 1;
 `
 
 export const Form = styled.form``

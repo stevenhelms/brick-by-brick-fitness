@@ -3,19 +3,15 @@ import styled from '@emotion/styled'
 
 import { useAppContext } from '../services/context'
 import { H2, Heading, FlexRow, Container, colors } from '../utils/styles'
-import { sortByTotalPoints } from '../services/sort'
+import { sortByTotalWeightLoss } from '../services/sort'
 
 const MyContainer = styled.div`
     flex: 1;
-    margin-right: 20px;
-    @media screen and (max-width: 480px) {
-        margin-right: 0px;
-    }
 `
 
-const Leaders = ({ data, isReady }) => {
+const LeadersWeight = ({ data, isReady }) => {
     const { state } = useAppContext()
-    const [leaders, setLeaders] = useState({})
+    const [leaderboard, setLeaderboard] = useState({})
     const [myRanking, setMyRanking] = useState(false)
 
     useEffect(() => {
@@ -25,46 +21,46 @@ const Leaders = ({ data, isReady }) => {
 
         const items = []
         data.forEach(person => {
-            if (person?.totals?.points) {
-                items.push(person)
-            }
+            // const person = item.val()
+            // Calculate weight loss here.
+            person['weight_loss'] = Number(person.weight - (person.weight_end || person.weight)).toFixed(1)
+            items.push(person)
+            // console.log(person)
         })
-        // console.log(items)
-        items.sort((a, b) => sortByTotalPoints(a, b)) // Sort decending
-
+        items.sort((a, b) => sortByTotalWeightLoss(a, b)) // Sort decending
         items.forEach((person, idx) => {
             if (person.email === state.profile.email) {
                 // My position in the group
                 setMyRanking(idx + 1)
             }
         })
-        setLeaders(items.slice(0, 10)) // Only the Top 10
+        setLeaderboard(items.slice(0, 10)) // Only the Top 10
     }, [state.profile.email, data, isReady])
+
+    // if (!isReady || typeof data === 'undefined' || Object.keys(leaderboard).length === 0) {
+    //     return null
+    // }
 
     return (
         <MyContainer>
             <Heading>
-                <H2>Leaders (total points)</H2>
+                <H2>Leaders (weight lost)</H2>
             </Heading>
             <Container style={{ flexDirection: 'column', padding: '0 20px' }}>
                 <FlexRow style={{ borderBottom: '1px solid ' + colors.veryLightGray }}>
                     <div style={{ flex: 1 }}>Rank</div>
                     <div style={{ flex: 2 }}>Name</div>
-                    <div style={{ flex: 2 }}>Total Points</div>
+                    <div style={{ flex: 2 }}>Weight Lost</div>
                 </FlexRow>
-                {isReady && typeof leaders !== 'undefined' && Object.keys(leaders).length > 0 ? (
-                    leaders.map((leader, i) => {
-                        if (!leader.totals) {
-                            // No journal entries yet which builds totals
-                            return null
-                        }
+                {isReady && typeof leaderboard !== 'undefined' && Object.keys(leaderboard).length > 0 ? (
+                    leaderboard.map((leader, i) => {
                         return (
                             <FlexRow key={i} style={{ borderBottom: '1px solid ' + colors.veryLightGray }}>
                                 <div style={{ flex: 1 }}>{i + 1}</div>
                                 <div style={{ flex: 2 }}>
                                     {i < 5 ? leader.first : myRanking === i + 1 ? leader.first : ''}
                                 </div>
-                                <div style={{ flex: 2 }}>{leader?.totals.points || 0}</div>
+                                <div style={{ flex: 2 }}>{leader.weight_loss || 0} lbs</div>
                             </FlexRow>
                         )
                     })
@@ -74,8 +70,12 @@ const Leaders = ({ data, isReady }) => {
                 {state.profile?.totals?.points && myRanking > 10 ? (
                     <FlexRow style={{ borderBottom: '1px solid ' + colors.veryLightGray, paddingTop: '20px' }}>
                         <div style={{ flex: 1 }}>{myRanking}</div>
-                        <div style={{ flex: 2 }}>My Points</div>
-                        <div style={{ flex: 2 }}>{state.profile?.totals.points}</div>
+                        <div style={{ flex: 2 }}>
+                            My Weight {state.profile?.weight - state.profile?.weight_end < 0 ? 'Gain' : 'Loss'}
+                        </div>
+                        <div style={{ flex: 2 }}>
+                            {Math.abs(state.profile?.weight - state.profile?.weight_end).toFixed(1)} lbs
+                        </div>
                     </FlexRow>
                 ) : null}
             </Container>
@@ -83,4 +83,4 @@ const Leaders = ({ data, isReady }) => {
     )
 }
 
-export default Leaders
+export default LeadersWeight

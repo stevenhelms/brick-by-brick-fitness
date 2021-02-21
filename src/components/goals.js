@@ -4,12 +4,13 @@ import { css } from '@emotion/react'
 import { getProfile } from '../utils/firebase'
 import { useAppContext } from '../services/context'
 
-import { colors, H2, Heading } from '../utils/styles'
+import { colors } from '../utils/styles'
 
 const goalcss = css`
     flex: 1;
     white-space: nowrap;
     display: inline-flex;
+    padding: 10px;
     @media screen and (max-width: 480px) {
         display: block;
         padding-left: 30px;
@@ -18,7 +19,8 @@ const goalcss = css`
 
 const MyContainer = styled.div`
     flex: 1;
-    margin-left: 20px;
+    border: 1px solid ${colors.lightGray};
+    border-radius: 3px;
     @media screen and (max-width: 480px) {
         margin-left: 0px;
         margin-top: 30px;
@@ -62,36 +64,29 @@ const Goals = ({ user, profile, ...rest }) => {
 
     return (
         <MyContainer>
-            <Heading>
-                <H2>Daily Goals</H2>
-            </Heading>
             <div style={{ display: 'flex' }}>
                 <div css={goalcss}>
                     <GoalLabel>Protein:</GoalLabel>
                     <GoalItem>
-                        {localProfile.goal_protein || 'X'} servings ({localProfile.goal_protein_grams || 'X'}g)
+                        {localProfile.goal_protein || 'X'} palms ({localProfile.goal_protein_grams || 'X'}g)
                     </GoalItem>
                 </div>
                 <div css={goalcss}>
                     <GoalLabel>Veggies:</GoalLabel>
-                    <GoalItem>{localProfile.goal_veggies || 'X'} servings</GoalItem>
+                    <GoalItem>{localProfile.goal_veggies || 'X'} fists</GoalItem>
                 </div>
-            </div>
-            <div style={{ display: 'flex' }}>
                 <div css={goalcss}>
                     <GoalLabel>Carbs:</GoalLabel>
                     <GoalItem>
-                        {localProfile.goal_carbs || 'X'} servings ({localProfile.goal_carbs_grams || 'X'}g)
+                        {localProfile.goal_carbs || 'X'} hands ({localProfile.goal_carbs_grams || 'X'}g)
                     </GoalItem>
                 </div>
                 <div css={goalcss}>
                     <GoalLabel>Fats:</GoalLabel>
                     <GoalItem>
-                        {localProfile.goal_fats || 'X'} servings ({localProfile.goal_fats_grams || 'X'}g)
+                        {localProfile.goal_fats || 'X'} thumbs ({localProfile.goal_fats_grams || 'X'}g)
                     </GoalItem>
                 </div>
-            </div>
-            <div style={{ display: 'flex', marginBottom: '12px' }}>
                 <div css={goalcss}>
                     <GoalLabel>Water:</GoalLabel>
                     <GoalItem>{localProfile.weight / 2 || '0'} oz.</GoalItem>
