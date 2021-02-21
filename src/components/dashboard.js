@@ -85,22 +85,10 @@ const Dashboard = () => {
     }, [myProfile]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        firebase
-            .database()
-            .ref('/users')
-            .get()
-            .then(snapshot => {
-                const items = []
-                snapshot.forEach(item => {
-                    items.push(item.val())
-                })
-                setParticipants(items)
-                if (items && typeof participants !== 'undefined') {
-                    console.log('participants', participants)
-                    setParticipantsReady(true)
-                }
-            })
-    }, [isReady])
+        methods.getUsers(setParticipants, participants).then(() => {
+            setParticipantsReady(true)
+        })
+    }, [])
 
     if (!isReady) {
         return <Loading displayText="Loading..." />
@@ -239,3 +227,26 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+const methods = {
+    getUsers: async (setter, val) => {
+        await firebase
+            .database()
+            .ref('/users')
+            .get()
+            .then(snapshot => {
+                const items = []
+                snapshot.forEach(item => {
+                    items.push(item.val())
+                })
+                setter(items)
+                if (items !== val) {
+                    console.log('useEffect, snapshot, items', items)
+                }
+                if (items && typeof val !== 'undefined') {
+                    console.log('participants', val)
+                    // setParticipantsReady(true)
+                }
+            })
+    },
+}

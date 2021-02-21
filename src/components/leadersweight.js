@@ -35,7 +35,7 @@ const LeadersWeight = ({ data, isReady }) => {
             }
         })
         setLeaderboard(items.slice(0, 10)) // Only the Top 10
-    }, [data, isReady])
+    }, [state.profile.email, data, isReady])
 
     // if (!isReady || typeof data === 'undefined' || Object.keys(leaderboard).length === 0) {
     //     return null
@@ -58,7 +58,7 @@ const LeadersWeight = ({ data, isReady }) => {
                             <FlexRow key={i} style={{ borderBottom: '1px solid ' + colors.veryLightGray }}>
                                 <div style={{ flex: 1 }}>{i + 1}</div>
                                 <div style={{ flex: 2 }}>
-                                    {i < 5 ? leader.first : myRanking == i + 1 ? leader.first : ''}
+                                    {i < 5 ? leader.first : myRanking === i + 1 ? leader.first : ''}
                                 </div>
                                 <div style={{ flex: 2 }}>{leader.weight_loss || 0} lbs</div>
                             </FlexRow>
