@@ -66,6 +66,12 @@ const Profile = ({ user, profile }) => {
                         <ItemLabel>End Weight:</ItemLabel>
                         <ItemValue>{localProfile.weight_end}</ItemValue>
                     </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Difference:</ItemLabel>
+                        <ItemValue>
+                            {(localProfile.weight - (localProfile.weight_end || localProfile.weight)).toFixed(1)}
+                        </ItemValue>
+                    </ItemRow>
 
                     <hr />
                     <ItemRow extraSpace>
@@ -75,6 +81,44 @@ const Profile = ({ user, profile }) => {
                     <ItemRow extraSpace>
                         <ItemLabel>End Percent Body Fat:</ItemLabel>
                         <ItemValue>{localProfile.pbf_end}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Difference:</ItemLabel>
+                        <ItemValue>
+                            {(localProfile.pbf_start - (localProfile.pbf_end || localProfile.pbf_start)).toFixed(1)}
+                        </ItemValue>
+                    </ItemRow>
+
+                    <hr />
+                    <ItemRow extraSpace>
+                        <ItemLabel>Starting Skeletal Muscle Mass:</ItemLabel>
+                        <ItemValue>{localProfile.smm_start}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>End Skeletal Muscle Mass:</ItemLabel>
+                        <ItemValue>{localProfile.smm_end}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Difference:</ItemLabel>
+                        <ItemValue>
+                            {(localProfile.smm_start - (localProfile.smm_end || localProfile.smm_start)).toFixed(1)}
+                        </ItemValue>
+                    </ItemRow>
+
+                    <hr />
+                    <ItemRow extraSpace>
+                        <ItemLabel>Starting Body Mass Index (BMI):</ItemLabel>
+                        <ItemValue>{localProfile.bmi_start}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>End Body Mass Index (BMI):</ItemLabel>
+                        <ItemValue>{localProfile.bmi_end}</ItemValue>
+                    </ItemRow>
+                    <ItemRow extraSpace>
+                        <ItemLabel>Difference:</ItemLabel>
+                        <ItemValue>
+                            {(localProfile.bmi_start - (localProfile.bmi_end || localProfile.bmi_start)).toFixed(1)}
+                        </ItemValue>
                     </ItemRow>
 
                     <hr />
