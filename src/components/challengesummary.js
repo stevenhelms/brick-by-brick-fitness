@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlexRow, FlexItem, H4, Container } from '../utils/styles'
+import { colors, H4, Container } from '../utils/styles'
 
 const ChallengeSummary = ({ data, isReady }) => {
     const [summary, setSummary] = useState({})
@@ -13,6 +13,7 @@ const ChallengeSummary = ({ data, isReady }) => {
             weight_loss: 0,
             muscle_gained: 0,
             muscle_lost: 0,
+            pbf_lost: 0,
             hours_slept: 0,
             water_consumed: 0,
             app_participants: 0,
@@ -20,6 +21,7 @@ const ChallengeSummary = ({ data, isReady }) => {
             goal_not_wl: 0,
             total_participants: data.length,
         }
+
         data.forEach(person => {
             // Classify people into two camps. Weight Loss or Other
             if (person.goal_challenge === 'Lose Weight') {
@@ -46,18 +48,23 @@ const ChallengeSummary = ({ data, isReady }) => {
                 } else {
                     stats['muscle_lost'] += Number(person.smm_end - person.smm_start)
                 }
-                if (person?.totals && person.totals.sleep) {
-                    stats['hours_slept'] += Number(person.totals.sleep)
-                }
-                if (person?.totals && person.totals.water) {
-                    stats['water_consumed'] += Number(person.totals.water)
-                }
-                if (typeof person.totals !== 'undefined' && Object.keys(person.journal).length > 21) {
-                    stats['app_participants'] += 1
-                }
             }
 
-            console.log(stats)
+            if (person?.pbf_end && person.pbf_start - person.pbf_end > 0) {
+                stats['pbf_lost'] += person.pbf_start - person.pbf_end
+            }
+
+            if (person?.totals && person.totals.sleep) {
+                stats['hours_slept'] += Number(person.totals.sleep)
+            }
+            if (person?.totals && person.totals.water) {
+                stats['water_consumed'] += Number(person.totals.water)
+            }
+            if (typeof person.totals !== 'undefined' && Object.keys(person.journal).length >= 18) {
+                stats['app_participants'] += 1
+            }
+
+            // console.log(stats)
             setSummary(stats)
         })
     }, [data, isReady])
@@ -67,31 +74,30 @@ const ChallengeSummary = ({ data, isReady }) => {
     }
 
     return (
-        <Container>
-            <FlexRow>
-                <FlexItem>
-                    <H4>Participant Info</H4>
+        <>
+            <H4>Challenge Statistics</H4>
+            <div>
+                <div>
                     <p>
                         Total: {summary['total_participants']}
                         <br />
-                        App Users: {summary['app_participants']}
+                        Active App Users: {summary['app_participants']}
                     </p>
-                </FlexItem>
-                <FlexItem>Total Pounds Lost: {summary['weight_loss'].toFixed(1)}</FlexItem>
-                <FlexItem>
-                    Total Muscle Gained: {summary['muscle_gained'].toFixed(1)} {summary['muscle_lost'].toFixed(1)}
-                </FlexItem>
-                <FlexItem>Total Hours Slept: {summary['hours_slept'].toFixed(1)}</FlexItem>
-                <FlexItem>Total Water Consumed: {summary['water_consumed'].toFixed(0)} ounces.</FlexItem>{' '}
-            </FlexRow>
-            <FlexRow>
-                <FlexItem>
-                    As with anything, results are only as good as the data. Despite incomplete data, the results are
-                    impressive and indicate the willingness and ability to work towards a specific goal. Additionally,
-                    the underlying success is result of having a clear plan of action to reach the goal.
-                </FlexItem>
-            </FlexRow>
-        </Container>
+                </div>
+                <div>Total Pounds Lost: {summary['weight_loss'].toFixed(1)} lbs.</div>
+                <div>Total Muscle Gained: {summary['muscle_gained'].toFixed(1)} lbs.</div>
+                <div>Total % Body Fat Lost: {summary['pbf_lost'].toFixed(1)}%</div>
+                <div>*Total Hours Slept: {summary['hours_slept'].toFixed(1)}</div>
+                <div>*Total Water Consumed: {summary['water_consumed'].toFixed(0)} ounces.</div>
+            </div>
+            <div style={{ width: '100%' }}>
+                <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>
+                    * Incomplete data. As with anything, results are only as good as the data. Despite incomplete data,
+                    the results are impressive and indicate the willingness and ability to work towards a specific goal.
+                    Additionally, the underlying success is result of having a clear plan of action to reach the goal.
+                </div>
+            </div>
+        </>
     )
 }
 

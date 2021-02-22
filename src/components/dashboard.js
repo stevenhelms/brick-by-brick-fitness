@@ -9,7 +9,8 @@ import { Button, Div, colors, FlexRow, H1, Container } from '../utils/styles'
 import Loading from './loading'
 import Goals from './goals'
 import Leaders from './leaders'
-import LeadersWeight from './leadersweight'
+// import LeadersWeight from './leadersweight'
+import LeadersPBF from './leaderspbf'
 import GraphMacros from './graphmacros'
 import GraphSleep from './graphsleep'
 import GraphLine from './graphline'
@@ -110,12 +111,13 @@ const Dashboard = () => {
             <Container style={{ marginTop: 0 }}>
                 <Goals user={user} profile={myProfile} />
             </Container>
-            {/* <Container>
+            <Container style={{ display: 'block' }}>
                 <ChallengeSummary data={participants} isReady={participantsReady} />
-            </Container> */}
+            </Container>
             <Container>
                 <Leaders data={participants} isReady={participantsReady} />
-                <LeadersWeight data={participants} isReady={participantsReady} />
+                {/* <LeadersWeight data={participants} isReady={participantsReady} /> */}
+                <LeadersPBF data={participants} isReady={participantsReady} />
             </Container>
             {isReady ? (
                 <>
