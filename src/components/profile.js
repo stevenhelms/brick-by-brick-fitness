@@ -101,7 +101,7 @@ const Profile = ({ user, profile }) => {
                     <ItemRow extraSpace>
                         <ItemLabel>Difference:</ItemLabel>
                         <ItemValue>
-                            {(localProfile.smm_start - (localProfile.smm_end || localProfile.smm_start)).toFixed(1)}
+                            {((localProfile.smm_end || localProfile.smm_start) - localProfile.smm_start).toFixed(1)}
                         </ItemValue>
                     </ItemRow>
 
