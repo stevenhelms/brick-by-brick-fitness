@@ -33,13 +33,13 @@ const Leaders = ({ data, isReady }) => {
         items.sort((a, b) => sortByTotalPoints(a, b)) // Sort decending
 
         items.forEach((person, idx) => {
-            if (person.email === state.profile.email) {
+            if (person.email === state?.profile.email) {
                 // My position in the group
                 setMyRanking(idx + 1)
             }
         })
         setLeaders(items.slice(0, 10)) // Only the Top 10
-    }, [state.profile.email, data, isReady])
+    }, [state?.profile?.email, data, isReady])
 
     return (
         <MyContainer>

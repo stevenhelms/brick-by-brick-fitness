@@ -29,13 +29,13 @@ const LeadersPBF = ({ data, isReady }) => {
         })
         items.sort((a, b) => sortByTotalPBFLoss(a, b)) // Sort decending
         items.forEach((person, idx) => {
-            if (person.email === state.profile.email) {
+            if (person.email === state?.profile.email) {
                 // My position in the group
                 setMyRanking(idx + 1)
             }
         })
         setLeaderboard(items.slice(0, 10)) // Only the Top 10
-    }, [state.profile.email, data, isReady])
+    }, [state?.profile?.email, data, isReady])
 
     // if (!isReady || typeof data === 'undefined' || Object.keys(leaderboard).length === 0) {
     //     return null

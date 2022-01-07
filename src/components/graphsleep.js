@@ -50,7 +50,7 @@ const GraphSleep = ({ title = undefined }) => {
                         dataset.overall[journalDate]['dow'] = dow
                     }
 
-                    if (profile.email === user.email) {
+                    if (profile?.email === user.email) {
                         // graph our own data also.
                         dataset.personal[journalDate]['total'] = user.journal[item]?.sleep
                             ? user.journal[item].sleep
