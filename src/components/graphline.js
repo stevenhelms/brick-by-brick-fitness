@@ -48,24 +48,26 @@ const GraphLine = ({
     let maxX = new Date(2000, 1, 1)
     let maxY1 = -1
     let maxY2 = -1
-    Object.keys(profile.journal).forEach((date, idx) => {
-        const jDate = date.split('-')
-        const dt = new Date(jDate[0], jDate[1] - 1, jDate[2])
-        const graphDate = dt.toLocaleString('default', { month: 'short' }) + '-' + ('0' + jDate[2]).slice(-2)
-        const dow = weekday[dt.getDay()]
-        const y = methods.calculateY(profile, date, line1)
-        const y2 =
-            typeof line2 !== 'undefined' && profile.journal[date][line2] ? Number(profile.journal[date][line2]) : 0
+    if (profile?.journal) {
+        Object.keys(profile.journal).forEach((date, idx) => {
+            const jDate = date.split('-')
+            const dt = new Date(jDate[0], jDate[1] - 1, jDate[2])
+            const graphDate = dt.toLocaleString('default', { month: 'short' }) + '-' + ('0' + jDate[2]).slice(-2)
+            const dow = weekday[dt.getDay()]
+            const y = methods.calculateY(profile, date, line1)
+            const y2 =
+                typeof line2 !== 'undefined' && profile.journal[date][line2] ? Number(profile.journal[date][line2]) : 0
 
-        maxX = dt > maxX ? graphDate : maxX
-        minX = dt < minX ? graphDate : minX
-        maxY1 = y > maxY1 ? y : maxY1
-        if (typeof line2 !== 'undefined') {
-            maxY2 = Number(profile.journal[date][line2]) > maxY2 ? Number(profile.journal[date][line2]) : maxY2
-        }
+            maxX = dt > maxX ? graphDate : maxX
+            minX = dt < minX ? graphDate : minX
+            maxY1 = y > maxY1 ? y : maxY1
+            if (typeof line2 !== 'undefined') {
+                maxY2 = Number(profile.journal[date][line2]) > maxY2 ? Number(profile.journal[date][line2]) : maxY2
+            }
 
-        plot.push({ i: idx, x: idx, y1: y, y2: y2, date: graphDate, dow: dow })
-    })
+            plot.push({ i: idx, x: idx, y1: y, y2: y2, date: graphDate, dow: dow })
+        })
+    }
 
     const xTickValues = []
     for (let i = 0; i < plot.length; i += 2) {
@@ -79,7 +81,10 @@ const GraphLine = ({
         pX.push(plot[i]['y1'])
         pY.push(plot[i]['y2'])
     }
-    const correlation = pearsonCorrelation(pX, pY)
+    let correlation = { value: 0, text: 'No correlation' }
+    if (pX.length > 0 && pY.length > 0) {
+        correlation = pearsonCorrelation(pX, pY)
+    }
 
     return (
         <VictoryChart
