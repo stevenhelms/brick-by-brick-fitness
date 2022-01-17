@@ -1,7 +1,7 @@
 {
-  "name": "bear-state-gym-winter21",
+  "name": "brick-by-brick-fitness",
   "private": true,
-  "description": "Bear State Gym Winter 2021 Challenge site",
+  "description": "Brick by Brick Fitness Nutrition Challenge",
   "version": "0.4.1",
   "author": "Steve Helms <steve@cadenrock.com>",
   "dependencies": {
@@ -78,6 +78,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stevenhelms/bear-state-winter21"
+    "url": "https://github.com/stevenhelms/brick-by-brick-fitness.git"
   }
 }

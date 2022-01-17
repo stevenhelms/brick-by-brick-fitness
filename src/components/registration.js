@@ -178,7 +178,7 @@ const Registration = () => {
             <BodyText>In order to create a challenge customized for you, we need some additional information.</BodyText>
             <RegistrationForm />
             <BodyText css={italics}>
-                * Your information will not be shared. Only you and select Bear State Gym nutrition staff can view it.
+                * Your information will not be shared. Only you and select Brick by Brick staff can view it.
             </BodyText>
         </BorderDiv>
     )

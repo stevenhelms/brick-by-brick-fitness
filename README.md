@@ -1,13 +1,13 @@
 <p align="center">
-  <a href="https://www.bearstategym.com">
-    <img alt="Bear State Gym" src="http://bearstategym.com/wp-content/uploads/2020/08/Bear-State-Gym-Logo-1.png" width="60" />
+  <a href="https://www.brickbybrickfitness.org">
+    <img alt="Brick by Brick Fitness" src="https://www.brickbybrickfitness.org/wp-content/uploads/2021/05/bb_logo.png" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Bear State Gym - Nutrition Challenge Winter 2021
+  Brick by Brick Fitness - Nutrition Challenge 2022
 </h1>
 
-![Build Status](https://github.com/stevenhelms/bear-state-winter21/workflows/Firebase%20Hosting%20on%20merge/badge.svg)
+![Build Status](https://github.com/stevenhelms/brick-by-brick/workflows/Firebase%20Hosting%20on%20merge/badge.svg)
 
 ## 🚀 Quick start
 

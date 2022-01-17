@@ -106,6 +106,10 @@ const GraphSleep = ({ title = undefined }) => {
         maxY1 = myData[idx].total > maxY1 ? myData[idx].total : maxY1
     })
 
+    if (!xTickValues.length) {
+        return null
+    }
+
     return (
         <VictoryChart
             animate={false}

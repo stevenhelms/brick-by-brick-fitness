@@ -30,14 +30,14 @@ const H1 = styled.h1`
 const Header = ({ siteTitle }) => {
     const logo = useStaticQuery(graphql`
         query logoImageQuery {
-            logoImage: file(relativePath: { eq: "bear-state-logo-Sept2020-white.png" }) {
+            logoImage: file(relativePath: { eq: "bb_logo.png" }) {
                 childImageSharp {
                     fixed(width: 60, height: 60) {
                         ...GatsbyImageSharpFixed
                     }
                 }
             }
-            mobileImage: file(relativePath: { eq: "bear-state-logo-Sept2020-white.png" }) {
+            mobileImage: file(relativePath: { eq: "bb_logo.png" }) {
                 childImageSharp {
                     fixed(width: 30, height: 30) {
                         ...GatsbyImageSharpFixed
@@ -59,7 +59,7 @@ const Header = ({ siteTitle }) => {
                             boxShadow: 0,
                         }}
                     >
-                        <Img fixed={logo.logoImage.childImageSharp.fixed} alt="Bear State Gym" title="Logo" />{' '}
+                        <Img fixed={logo.logoImage.childImageSharp.fixed} alt="Brick by Brick Fitness" title="Logo" />{' '}
                         {siteTitle}
                     </Link>
                 </H1>

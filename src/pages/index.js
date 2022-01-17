@@ -1,15 +1,14 @@
 import React from 'react'
 // import { graphql } from 'gatsby'
-
 import { AppProvider } from '../services/context'
 import Layout from '../components/layout'
 import Home from '../components/home'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 
 const Index = ({ data }) => (
     <AppProvider>
         <Layout>
-            <SEO title="Home" />
+            <Seo title="Home" />
             <Home data={data} />
         </Layout>
     </AppProvider>

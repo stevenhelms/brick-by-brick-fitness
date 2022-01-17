@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import firebase from 'gatsby-plugin-firebase'
+import React, { useState } from 'react'
+// import { useFirebase } from 'gatsby-plugin-firebase'
 import styled from '@emotion/styled'
 
 import { H2, Heading, H3, H4, H1, Button, colors } from '../utils/styles'
 import { Link } from 'gatsby'
+import config from '../../config'
 
 const TopBlock = styled.div`
     display: flex;
@@ -46,7 +47,7 @@ const Players = () => {
     const [players, setPlayers] = useState([])
     const [isReady, setIsReady] = useState(false)
 
-    useEffect(() => {
+    /* useFirebase(firebase => {
         firebase
             .database()
             .ref('/users')
@@ -60,7 +61,7 @@ const Players = () => {
                 setPlayers(p)
                 setIsReady(true)
             })
-    }, [])
+    }, []) */
 
     return (
         <PlayerContainer>
@@ -95,24 +96,37 @@ const Players = () => {
     )
 }
 
-const RegisterToday = () => (
-    <RegisterTodayContainer>
-        {/*<Link to="/app/login">
-        <Button disabled={true}>Register Today</Button>
-        </Link>
-        <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>Registration ends Jan-23-2021.</div>*/}
-        <Link to="/app/login">
-            <Button>Login</Button>
-        </Link>
-        <div style={{ fontSize: 'smaller', color: colors.typographyGrayed, marginBottom: 0 }}>
-            Login to track your progress.
-        </div>
-    </RegisterTodayContainer>
-)
+const RegisterToday = () => {
+    const rdate = config.registrationEndDate
+
+    if (new Date() < rdate) {
+        return (
+            <RegisterTodayContainer>
+                <Link to="/app/login">
+                    <Button>Register Today</Button>
+                </Link>
+                <div style={{ fontSize: 'smaller', color: colors.typographyGrayed }}>
+                    Registration ends Jan-30-2022.
+                </div>
+            </RegisterTodayContainer>
+        )
+    } else {
+        return (
+            <RegisterTodayContainer>
+                <Link to="/app/login">
+                    <Button>Login</Button>
+                </Link>
+                <div style={{ fontSize: 'smaller', color: colors.typographyGrayed, marginBottom: 0 }}>
+                    Login to track your progress.
+                </div>
+            </RegisterTodayContainer>
+        )
+    }
+}
 
 const Home = () => (
     <>
-        <H1>Bear State Winter 2021 Nutrition Challenge</H1>
+        <H1>Brick By Brick Fitness Nutrition Challenge</H1>
         <TopBlock>
             <Players />
             <RegisterToday />
@@ -120,10 +134,11 @@ const Home = () => (
         <div style={{ marginTop: '30px' }}>
             <H3>Overview</H3>
             <p>
-                Welcome! 2020 left many people disconnected from friends and family, depressed, full of anxiety, and
-                with long work hours from home or no work at all. Some may have discovered the "COVID 15" and found an
-                extra 15 lbs they didn't have a year ago. With 2021 full of some of the same uncertanties, it's time to
-                find better healthy habits that will carry us through the year.
+                Welcome! The neverending pandemic has left many people disconnected from friends and family, depressed,
+                full of anxiety, and with long work hours from home or no work at all. Some may have discovered the
+                "COVID 15" and found an extra 15 lbs they didn't have at the beginning. With 2022 full of some of the
+                same uncertanties as the past two years, and it's time to find better healthy habits that will carry us
+                through the year.
             </p>
             <p>
                 Our challenge this year involves adding to your lifestyle, and not restricting. By finding sustainable
@@ -167,12 +182,11 @@ const Home = () => (
             </ul>
             <H4>Challenge Details</H4>
             <ul>
-                <li>Registration is from Monday, January 11, 2021 to Saturday, January 23, 2021</li>
+                <li>Registration is from Monday, January 17, 2022 to Sunday, January 30, 2022.</li>
                 <li>
-                    There will be a kick-off meeting (live and via Zoom) on{' '}
-                    <strong>Saturday, January 23, 2021 at 10:30 a.m.</strong>
+                    There will be a kick-off meeting on <strong>Sunday, January 20, 2022</strong>.
                 </li>
-                <li>The challenge runs from Sunday, January 24, 2021 to Saturday, February 20, 2021.</li>
+                <li>The challenge runs from Monday, January 31, 2022 to Sunday, February 27, 2022.</li>
                 <li>Participants are expected to enter their daily progress into the journal for maximum points.</li>
                 <li>The calculations supporting the point system will not be made available.</li>
                 <li>Multiple prizes will be awarded at the end of the challenge.</li>

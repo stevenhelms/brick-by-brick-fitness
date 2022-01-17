@@ -1,8 +1,8 @@
 module.exports = {
-    siteTitle: 'Bear State Gym', // <title>
-    siteDescription: 'Bear State Winter 2021 Nutrition Challenge.',
-    manifestName: 'bear-state-gym-winter21',
-    manifestShortName: 'BearStateGym', // max 12 characters
+    siteTitle: 'Brick by Brick Fitness', // <title>
+    siteDescription: 'Brick by Brick Fitness Nutrition Challenge.',
+    manifestName: 'brick-by-brick-nutrition',
+    manifestShortName: 'BBBFitness', // max 12 characters
     manifestStartUrl: '/',
     manifestBackgroundColor: '#aeaeae',
     manifestThemeColor: '#e25a2d',
@@ -10,35 +10,33 @@ module.exports = {
     manifestIcon: 'src/images/bear-state-logo-Sept2020.png',
     pathPrefix: '/', // This path is subpath of your hosting https://domain/portfolio
     author: 'Steve Helms',
-    heading: 'Bear State Gym',
-    subHeading: 'Fitness and Nutrition',
+    heading: 'Brick by Brick Fitness',
+    subHeading: 'Nutrition Challenge ',
+    registrationEndDate: '2022-01-30',
+    logoWhite: 'bear-state-logo-Sept2020-white.png',
+
     // social
     socialLinks: [
         {
             style: 'brands',
             icon: 'fa-facebook',
             name: 'Facebook',
-            url: 'https://www.facebook.com/Bear-State-Gym-686384604775823/',
+            url: 'https://www.facebook.com/BrickByBrickFitnessArkansas',
         },
         {
             style: 'brands',
             icon: 'fa-instagram',
             name: 'Instagram',
-            url: 'https://www.instagram.com/bear_state/',
-        },
-        {
-            style: 'solid',
-            icon: 'fa-envelope',
-            name: 'Email',
-            url: 'mailto:bearstatecf@gmail.com',
+            url: 'https://www.instagram.com/brick_by_brick_fitness/',
         },
         {
             style: 'solid',
             icon: 'fa-envelope',
             name: 'Website',
-            url: 'https://bearstategym.com',
+            url: 'https://brickbybrickfitness.org/',
         },
     ],
+
     stressScale: {
         1: 'None',
         2: 'Minimal',

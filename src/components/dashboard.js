@@ -42,10 +42,10 @@ const DailyTips = () => {
 
     useEffect(() => {
         // Add logic for tips display
-        // setTodaysTips(undefined)
-        setTodaysTips(
-            'Final results will be announced on Monday, February 22, 2021. Two winners for total points earned and two winners for total percent body fat lost will be awarded the top prizes. If you actively used this app, take a look at the graphs and charts below to see if anything stands out to you.'
-        )
+        setTodaysTips(undefined)
+        // setTodaysTips(
+        //     'Final results will be announced on Monday, February 22, 2021. Two winners for total points earned and two winners for total percent body fat lost will be awarded the top prizes. If you actively used this app, take a look at the graphs and charts below to see if anything stands out to you.'
+        // )
     }, [])
 
     if (!todaysTips) {
