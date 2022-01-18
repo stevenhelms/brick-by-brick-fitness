@@ -9,6 +9,23 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - run: npm ci && npm run build && npm test
+
+            - name: Make envfile
+              uses: SpicyPizza/create-envfile@v1
+              with:
+                  envkey_GATSBY_FIREBASE_API_KEY: ${{ secrets.GATSBY_FIREBASE_API_KEY }}
+                  envkey_GATSBY_FIREBASE_AUTH_DOMAIN: ${{ secrets.GATSBY_FIREBASE_AUTH_DOMAIN }}
+                  envkey_GATSBY_FIREBASE_DATABASE_URL: ${{ secrets.GATSBY_FIREBASE_DATABASE_URL }}
+                  envkey_GATSBY_FIREBASE_PROJECT_ID: ${{ secrets.GATSBY_FIREBASE_PROJECT_ID }}
+                  envkey_GATSBY_FIREBASE_STORAGE_BUCKET: ${{ secrets.GATSBY_FIREBASE_STORAGE_BUCKET }}
+                  envkey_GATSBY_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.GATSBY_FIREBASE_MESSAGING_SENDER_ID }}
+                  envkey_GATSBY_FIREBASE_APP_ID: ${{ secrets.GATSBY_FIREBASE_APP_ID }}
+                  envkey_GATSBY_FIREBASE_MEASUREMENT_ID: ${{ secrets.GATSBY_FIREBASE_MEASUREMENT_ID }}
+                  file_name: .env.production
+
+            - name: Duplicate .env.production to .env
+              run: cp .env.production .env
+
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: '${{ secrets.GITHUB_TOKEN }}'

@@ -98,6 +98,9 @@ const Players = () => {
 
 const RegisterToday = () => {
     const rdate = config.registrationEndDate
+    if (!config.siteOpen) {
+        return null
+    }
 
     if (new Date() < rdate) {
         return (
@@ -128,7 +131,7 @@ const Home = () => (
     <>
         <H1>Brick By Brick Fitness Nutrition Challenge</H1>
         <TopBlock>
-            <Players />
+            {config.siteOpen ? <Players /> : null}
             <RegisterToday />
         </TopBlock>
         <div style={{ marginTop: '30px' }}>

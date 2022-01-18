@@ -12,6 +12,7 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v2
+
             - name: Build and Test
               run: cd functions && npm ci && npm run lint
             # Firebase stuff below
@@ -43,6 +44,9 @@ jobs:
                   envkey_GATSBY_FIREBASE_APP_ID: ${{ secrets.GATSBY_FIREBASE_APP_ID }}
                   envkey_GATSBY_FIREBASE_MEASUREMENT_ID: ${{ secrets.GATSBY_FIREBASE_MEASUREMENT_ID }}
                   file_name: .env.production
+
+            - name: Duplicate .env.production to .env
+              run: cp .env.production .env
 
             - name: Deploy to Firebase Hosting
               uses: FirebaseExtended/action-hosting-deploy@v0
