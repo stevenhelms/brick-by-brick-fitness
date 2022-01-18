@@ -13,7 +13,7 @@ module.exports = {
     heading: 'Brick by Brick Fitness',
     subHeading: 'Nutrition Challenge ',
     registrationEndDate: '2022-01-30',
-    siteOpen: false,
+    siteOpen: true,
     logoWhite: 'bear-state-logo-Sept2020-white.png',
 
     // social
