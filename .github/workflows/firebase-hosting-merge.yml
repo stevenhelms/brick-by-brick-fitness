@@ -29,9 +29,6 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v2
 
-            - name: Build and Test
-              run: npm ci && npm run build && npm test
-
             - name: Make envfile
               uses: SpicyPizza/create-envfile@v1
               with:
@@ -47,6 +44,9 @@ jobs:
 
             - name: Duplicate .env.production to .env
               run: cp .env.production .env
+
+            - name: Build and Test
+              run: npm ci && npm run build && npm test
 
             - name: Deploy to Firebase Hosting
               uses: FirebaseExtended/action-hosting-deploy@v0

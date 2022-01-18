@@ -187,7 +187,7 @@ const Home = () => (
             <ul>
                 <li>Registration is from Monday, January 17, 2022 to Sunday, January 30, 2022.</li>
                 <li>
-                    There will be a kick-off meeting on <strong>Sunday, January 20, 2022</strong>.
+                    There will be a kick-off meeting on <strong>Sunday, January 30, 2022</strong>.
                 </li>
                 <li>The challenge runs from Monday, January 31, 2022 to Sunday, February 27, 2022.</li>
                 <li>Participants are expected to enter their daily progress into the journal for maximum points.</li>

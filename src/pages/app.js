@@ -15,6 +15,8 @@ import Registration from '../components/registration'
 import Admin from '../components/admin'
 
 const App = ({ location }) => {
+    console.log('node_env', process.env.NODE_ENV)
+
     if (!isLoggedIn() && isBrowser() && location.pathname !== `/app/login`) {
         navigate('/app/login', { replace: true })
         return null
