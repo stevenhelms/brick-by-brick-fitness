@@ -102,7 +102,7 @@ const RegisterToday = () => {
         return null
     }
 
-    if (new Date() < rdate) {
+    if (new Date() < new Date(rdate)) {
         return (
             <RegisterTodayContainer>
                 <Link to="/app/login">
