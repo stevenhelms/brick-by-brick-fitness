@@ -24,11 +24,17 @@ const JournalRow = ({ data }) => {
             <ItemRow>
                 <ItemGroup>
                     <ItemLabel>Protein:</ItemLabel>
-                    <ItemValue>{data.protein || 0}</ItemValue>
+                    <ItemValue>
+                        {data.protein || 0}
+                        {data?.protein_grams ? ' (' + data.protein_grams + 'g)' : null}
+                    </ItemValue>
                 </ItemGroup>
                 <ItemGroup>
                     <ItemLabel>Carbs:</ItemLabel>
-                    <ItemValue>{data.carbs || 0}</ItemValue>
+                    <ItemValue>
+                        {data.carbs || 0}
+                        {data?.carbs_grams ? ' (' + data.carbs_grams + 'g)' : null}
+                    </ItemValue>
                 </ItemGroup>
                 <ItemGroup>
                     <ItemLabel>Veggies:</ItemLabel>
@@ -36,20 +42,23 @@ const JournalRow = ({ data }) => {
                 </ItemGroup>
                 <ItemGroup>
                     <ItemLabel>Fats:</ItemLabel>
-                    <ItemValue>{data.fats || 0}</ItemValue>
+                    <ItemValue>
+                        {data.fats || 0}
+                        {data?.fats_grams ? ' (' + data.fats_grams + 'g)' : null}
+                    </ItemValue>
                 </ItemGroup>
             </ItemRow>
             <ItemRow>
                 <ItemGroup>
                     <ItemLabel>Water:</ItemLabel>
-                    <ItemValue>{data.water || 0}</ItemValue>
+                    <ItemValue>{data.water || 0} oz</ItemValue>
                 </ItemGroup>
                 <ItemGroup>
                     <ItemLabel>Sleep:</ItemLabel>
-                    <ItemValue>{data.sleep || 0}</ItemValue>
+                    <ItemValue>{data.sleep || 0} hrs</ItemValue>
                 </ItemGroup>
                 <ItemGroup>
-                    <ItemLabel>Eating Slowly:</ItemLabel>
+                    <ItemLabel>Eat Slowly:</ItemLabel>
                     <ItemValue>{data.eat_slowly || 0}</ItemValue>
                 </ItemGroup>
                 <ItemGroup>

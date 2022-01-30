@@ -17,11 +17,25 @@ export const calcWaterPoints = (actual, weight) => {
     }
 }
 
-export const calcFoodPoints = (actual, goal, veggies = false) => {
+export const convertGramsToHands = (hands, grams, value) => {
+    if (!hands || !grams || !value) return 0
+
+    const gramsPerHand = grams / hands
+    const handsPerValue = value / gramsPerHand
+    console.log(handsPerValue)
+    return Math.round(handsPerValue)
+}
+
+export const calcFoodPoints = (actual, goal, goal_grams, veggies = false) => {
     if (!goal) return 0
 
     const vegMultiplier = veggies ? 1.25 : 1
-    const p = (actual / goal) * 100
+    let p = 0
+    if (actual > goal + 3) {
+        p = convertGramsToHands(goal, goal_grams, actual)
+    } else {
+        p = (actual / goal) * 100
+    }
 
     if (p <= 25) {
         return 1 * vegMultiplier
@@ -69,11 +83,13 @@ export const calculatePoints = (items, user) => {
 
     points += items?.workout ? 1 : 0
 
-    points += calcFoodPoints(items?.carbs || 0, user.goal_carbs)
+    points += calcFoodPoints(items?.carbs || 0, user.goal_carbs, user.goal_carbs_grams)
 
-    points += calcFoodPoints(items?.protein || 0, user.goal_protein)
+    points += calcFoodPoints(items?.protein || 0, user.goal_protein, user.goal_protein_grams)
 
-    points += calcFoodPoints(items?.veggies || 0, user.goal_veggies, true)
+    points += calcFoodPoints(items?.fats || 0, user.goal_fats, user.goal_fats_grams)
+
+    points += calcFoodPoints(items?.veggies || 0, user.goal_veggies, user.goal_veggies, true)
 
     points += calcWaterPoints(items?.water || 0, user.weight)
 
