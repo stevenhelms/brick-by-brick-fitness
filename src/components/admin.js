@@ -64,10 +64,13 @@ const AdminLeaderBoard = () => {
                                 style={{ flexWrap: 'wrap', borderBottom: '1px solid ' + colors.veryLightGray }}
                             >
                                 <div style={{ flex: 1 }}>{i + 1}.</div>
-                                <div style={{ flex: 4 }}>{leader.first}</div>
+                                <div style={{ flex: 4 }}>
+                                    {leader.first} {leader?.goal_calories ? '*' : ''}
+                                    {leader?.weight ? '+' : ''}
+                                </div>
                                 <div style={{ flex: 2 }}>{leader?.totals?.points || 0}</div>
                                 <div style={{ flex: '4 0 0%' }}>{Object.keys(journal).length} entries</div>
-                                <div style={{ flex: '6 0 0%' }}>{leader.email}</div>
+                                <div style={{ flex: '6 0 0%' }}>{leader?.email}</div>
                             </FlexRow>
                         )
                     })
@@ -75,6 +78,7 @@ const AdminLeaderBoard = () => {
                     <p>Loading...</p>
                 )}
             </Container>
+            <p style={{ fontSize: 'smaller' }}>* Nutrition plan entered. + InBody data entered.</p>
         </BorderDiv>
     )
 }
