@@ -9,7 +9,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import { utcToLocal } from '../utils/datetime'
-import { calculatePoints } from '../services/calc'
+import { calculatePoints, convertGramsToHands } from '../services/calc'
 import config from '../../config'
 import {
     BorderDiv,
@@ -50,6 +50,23 @@ const JournalForm = () => {
         const journalDate =
             utcToLocal(startDate).toISOString().substr(0, 10) || utcToLocal(new Date()).toISOString().substr(0, 10)
 
+        // Allow people to enter their P/C/F in grams or in hands
+        if (values.carbs > state.profile.goal_carbs + 3) {
+            values.carbs_grams = values.carbs
+            values.carbs = convertGramsToHands(state.profile.goal_carbs, state.profile.goal_carbs_grams, values?.carbs)
+        }
+        if (values.protein > state.profile.goal_protein + 3) {
+            values.protein_grams = values.protein
+            values.protein = convertGramsToHands(
+                state.profile.goal_protein,
+                state.profile.goal_protein_grams,
+                values?.protein
+            )
+        }
+        if (values.fats > state.profile.goal_fats + 3) {
+            values.fats_grams = values.fats
+            values.fats = convertGramsToHands(state.profile.goal_fats, state.profile.goal_fats_grams, values?.fats)
+        }
         values.total_points = calculatePoints(values, state.profile)
         values.journalDate = journalDate
         values.updatedAt = new Date().toISOString()
@@ -88,10 +105,10 @@ const JournalForm = () => {
                 workout: false,
             }}
             validationSchema={yup.object().shape({
-                carbs: yup.number().required().integer().max(15),
+                carbs: yup.number().required().integer().max(500),
                 eat_slowly: yup.number().required().integer().max(3),
-                fats: yup.number().required().integer().max(20),
-                protein: yup.number().required().integer().max(12),
+                fats: yup.number().required().integer().max(500),
+                protein: yup.number().required().integer().max(500),
                 recovery: yup.string().required(),
                 sleep: yup.number().required().max(12),
                 stress: yup.string().required(),
@@ -142,7 +159,9 @@ const JournalForm = () => {
                             <FormLabel htmlFor="protein">Protein</FormLabel>
                             <Field name="protein" type="number" />
                             <ErrorMessage component={Error} name="protein" />
-                            <FormSubText>Using the hand portions guide, enter hand portions eaten today.</FormSubText>
+                            <FormSubText>
+                                Using the hand portions guide, enter hand portions or grams eaten today.
+                            </FormSubText>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="veggies">Veggies</FormLabel>
@@ -154,13 +173,17 @@ const JournalForm = () => {
                             <FormLabel htmlFor="carbs">Carbs</FormLabel>
                             <Field type="number" name="carbs" />
                             <ErrorMessage component={Error} name="carbs" />
-                            <FormSubText>Using the hand portions guide, enter hand portions eaten today.</FormSubText>
+                            <FormSubText>
+                                Using the hand portions guide, enter hand portions or grams eaten today.
+                            </FormSubText>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="fats">Fats</FormLabel>
                             <Field type="number" name="fats" />
                             <ErrorMessage component={Error} name="fats" />
-                            <FormSubText>Using the hand portions guide, enter hand portions eaten today.</FormSubText>
+                            <FormSubText>
+                                Using the hand portions guide, enter hand portions or grams eaten today.
+                            </FormSubText>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel htmlFor="sleep">Hours Sleep</FormLabel>
