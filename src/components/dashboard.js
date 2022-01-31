@@ -111,15 +111,15 @@ const Dashboard = () => {
             <Container style={{ marginTop: 0 }}>
                 <Goals user={user} profile={myProfile} />
             </Container>
-            <Container style={{ display: 'block' }}>
+            {/* <Container style={{ display: 'block' }}>
                 <ChallengeSummary data={participants} isReady={participantsReady} />
-            </Container>
+            </Container> */}
             <Container>
                 <Leaders data={participants} isReady={participantsReady} />
                 {/* <LeadersWeight data={participants} isReady={participantsReady} /> */}
                 <LeadersPBF data={participants} isReady={participantsReady} />
             </Container>
-            {isReady ? (
+            {false && isReady ? (
                 <>
                     <FlexRow mobileColumn>
                         <GraphDiv>
