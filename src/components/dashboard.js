@@ -117,7 +117,7 @@ const Dashboard = () => {
             <Container>
                 <Leaders data={participants} isReady={participantsReady} />
                 {/* <LeadersWeight data={participants} isReady={participantsReady} /> */}
-                <LeadersPBF data={participants} isReady={participantsReady} />
+                {/* <LeadersPBF data={participants} isReady={participantsReady} /> */}
             </Container>
             {false && isReady ? (
                 <>
