@@ -3,6 +3,7 @@ import { navigate } from 'gatsby'
 import firebase from 'gatsby-plugin-firebase'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
+import { css } from '@emotion/react'
 
 import { useAppContext } from '../services/context'
 import { isAdmin } from '../utils/auth'
@@ -22,6 +23,23 @@ import {
 import { toTitleCase } from '../utils/strings'
 import { sortByTotalPoints } from '../services/sort'
 
+const lightAltText = css`
+    flex: 1;
+    // float: right;
+    white-space: nowrap;
+    display: inline-flex;
+    padding: 10px;
+    color: ${colors.lightGray};
+    font-size: 0.8em;
+    @media screen and (max-width: 480px) {
+        display: block;
+        padding-left: 30px;
+    }
+`
+const lightSmallText = css`
+    color: ${colors.lightGray};
+    font-size: 0.8em;
+`
 const AdminLeaderBoard = () => {
     const [users, setUsers] = useState(undefined)
     const [isReady, setIsReady] = useState(false)
@@ -65,8 +83,17 @@ const AdminLeaderBoard = () => {
                             >
                                 <div style={{ flex: 1 }}>{i + 1}.</div>
                                 <div style={{ flex: 4 }}>
-                                    {leader.first} {leader?.goal_calories ? '*' : ''}
-                                    {leader?.weight ? '+' : ''}
+                                    {leader.first}{' '}
+                                    <span css={lightSmallText}>
+                                        {leader?.goal_calories ? '*' : ''}
+                                        {leader?.weight ? '+' : ''}
+                                    </span>
+                                    <div css={lightAltText}>
+                                        Goal: {leader?.goal_challenge}{' '}
+                                        {leader?.goal_challenge == 'Lose Weight' && leader?.goal_weight
+                                            ? '(goal: ' + leader?.goal_weight + ' lbs)'
+                                            : ''}
+                                    </div>
                                 </div>
                                 <div style={{ flex: 2 }}>{leader?.totals?.points || 0}</div>
                                 <div style={{ flex: '4 0 0%' }}>{Object.keys(journal).length} entries</div>
