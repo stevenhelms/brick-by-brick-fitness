@@ -89,9 +89,9 @@ const AdminLeaderBoard = () => {
                                         {leader?.weight ? '+' : ''}
                                     </span>
                                     <div css={lightAltText}>
-                                        Goal: {leader?.goal_challenge}{' '}
+                                        {leader?.goal_challenge}{' '}
                                         {leader?.goal_challenge == 'Lose Weight' && leader?.goal_weight
-                                            ? '(goal: ' + leader?.goal_weight + ' lbs)'
+                                            ? '(' + leader?.goal_weight + ' lbs)'
                                             : ''}
                                     </div>
                                 </div>
