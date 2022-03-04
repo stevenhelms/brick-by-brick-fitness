@@ -79,9 +79,9 @@ const ChallengeSummary = ({ data, isReady }) => {
             <div>
                 <div>
                     <p>
-                        Total: {summary['total_participants']}
-                        <br />
-                        Active App Users: {summary['app_participants']}
+                        Total Participants: {summary['total_participants']}
+                        {/* <br />
+                        Active App Users: {summary['app_participants']} */}
                     </p>
                 </div>
                 <div>Total Pounds Lost: {summary['weight_loss'].toFixed(1)} lbs.</div>
