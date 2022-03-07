@@ -60,8 +60,8 @@ def main():
         # if key != "steven-helms@gmail-com":
         #     continue
 
-        if not "journal" in data:
-            continue
+        # if not "journal" in data:
+        #     continue
 
         row = []
         for f in fields:
@@ -73,9 +73,14 @@ def main():
                 continue
 
             if f.startswith("totals"):
-                row.append(data["totals"]["points"])
+                if "totals" in data:
+                    row.append(data["totals"]["points"])
+                else:
+                    row.append(0)
                 continue
 
+            # This is our fail-safe if we don't have the data.
+            # Keepin' it simple for now.
             row.append("")
 
         results.append(row)
