@@ -6,7 +6,7 @@
   "author": "Steve Helms <steve@cadenrock.com>",
   "dependencies": {
     "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
+    "@emotion/styled": "^11.10.0",
     "firebase": "^8.10.1",
     "formik": "^2.2.9",
     "gatsby": "^2.32.13",
